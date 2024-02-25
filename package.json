@@ -1,0 +1,28 @@
+{
+  "name": "refine-amplify",
+  "version": "1.0.0",
+  "description": "AWS Amplify data provider for Refine.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matsueushi/refine-amplify.git"
+  },
+  "author": "matsueushi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matsueushi/refine-amplify/issues"
+  },
+  "homepage": "https://github.com/matsueushi/refine-amplify#readme",
+  "dependencies": {
+    "@refinedev/core": "^4.47.2",
+    "aws-amplify": "^6.0.17",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  }
+}
