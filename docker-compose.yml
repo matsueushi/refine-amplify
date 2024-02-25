@@ -1,0 +1,12 @@
+version: "3.9"
+volumes:
+  db-store:
+services:
+  refine-amplify:
+    container_name: "refine-amplify"
+    build: ./
+    volumes:
+      - ./:/refine-amplify:delegated
+    ports:
+      - 3000:3000
+    tty: true
