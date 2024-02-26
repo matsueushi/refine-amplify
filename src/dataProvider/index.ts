@@ -12,7 +12,7 @@ import {
     DeleteOneResponse,
     GetOneResponse,
 } from '@refinedev/core';
-import { Client, GraphQLResult, get } from 'aws-amplify/api';
+import { Client, GraphQLResult } from 'aws-amplify/api';
 
 export interface Operations {
     queries: Record<string, string>;
@@ -61,9 +61,9 @@ const dataProvider = (client: Client, operations: Operations): DataProviderInter
         return queryResult.data;
     }
 
-    const getList = async (
+    const getList = async <TData extends BaseRecord = BaseRecord>(
         { resource, pagination, sorters, filters, meta }: GetListParams
-    ): Promise<GetListResponse> => {
+    ): Promise<GetListResponse<TData>> => {
         const queryName = getQueryName("list", resource);
         const query = getQuery(queryName);
         const response = await graphql(query, {});
@@ -76,9 +76,9 @@ const dataProvider = (client: Client, operations: Operations): DataProviderInter
         }
     };
 
-    const create = async (
-        { resource, variables, meta }: CreateParams<BaseRecord>
-    ): Promise<CreateResponse<BaseRecord>> => {
+    const create = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
+        { resource, variables, meta }: CreateParams<TVariables>
+    ): Promise<CreateResponse<TData>> => {
         const queryName = getQueryName("create", resource);
         const query = getQuery(queryName);
 
@@ -87,27 +87,29 @@ const dataProvider = (client: Client, operations: Operations): DataProviderInter
         return { data };
     };
 
-    const update = async (
-        { resource, id, variables, meta }: UpdateParams<BaseRecord>
-    ): Promise<UpdateResponse> => {
+    const update = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
+        { resource, id, variables, meta }: UpdateParams<TVariables>
+    ): Promise<UpdateResponse<TData>> => {
         const queryName = getQueryName("update", resource);
         const query = getQuery(queryName);
 
-        delete variables.__typename;
-        delete variables._deleted;
-        delete variables._lastChangedAt;
-        delete variables.createdAt;
-        delete variables.updatedAt;
-        delete variables.owner;
+        const input = variables as BaseRecord;
 
-        const response = await graphql(query, { input: variables });
+        delete input.__typename;
+        delete input._deleted;
+        delete input._lastChangedAt;
+        delete input.createdAt;
+        delete input.updatedAt;
+        delete input.owner;
+
+        const response = await graphql(query, { input });
         const data = response.data[queryName];
         return { data };
     };
 
-    const deleteOne = async (
-        { resource, id, variables, meta }: DeleteOneParams<BaseRecord>
-    ): Promise<DeleteOneResponse> => {
+    const deleteOne = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
+        { resource, id, variables, meta }: DeleteOneParams<TVariables>
+    ): Promise<DeleteOneResponse<TData>> => {
         const queryName = getQueryName("delete", resource);
         const query = getQuery(queryName);
 
@@ -116,9 +118,9 @@ const dataProvider = (client: Client, operations: Operations): DataProviderInter
         return { data };
     };
 
-    const getOne = async (
+    const getOne = async <TData extends BaseRecord = BaseRecord>(
         { resource, id, meta }: GetOneParams
-    ): Promise<GetOneResponse> => {
+    ): Promise<GetOneResponse<TData>> => {
         const queryName = getQueryName("get", resource);
         const query = getQuery(queryName);
 
