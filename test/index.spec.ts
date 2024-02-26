@@ -8,6 +8,7 @@ const operations = {
     mutations: {
         createResource: "createResourceMutation",
         updateResource: "updateResourceMutation",
+        deleteResource: "deleteResourceMutation",
     },
 };
 
@@ -157,6 +158,48 @@ test("update resource", async () => {
         data: {
             id: "1",
             name: "Resource 2",
+            createdAt: "2024-02-26T09:26:44.908Z",
+            updatedAt: "2024-02-26T09:26:44.908Z",
+            owner: "ownerId",
+            __typename: "Resource",
+        },
+    });
+});
+
+test("delete resource", async () => {
+    const mockGraphql = jest.fn(async () => {
+        return {
+            deleteResource: {
+                id: "1",
+                name: "Resource 1",
+                createdAt: "2024-02-26T09:26:44.908Z",
+                updatedAt: "2024-02-26T09:26:44.908Z",
+                owner: "ownerId",
+                __typename: "Resource",
+            },
+        };
+    });
+
+    const client = generateClient();
+
+    jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
+    const provider = dataProvider(client, operations);
+
+    const result = await provider.deleteOne({
+        resource: "resources",
+        id: "1",
+    });
+
+    const calls = mockGraphql.mock.calls;
+    const call = calls[0] as Array<unknown>;
+
+    expect(call[0]).toBe("deleteResourceMutation");
+    expect(call[1]).toEqual({ input: { id: "1" } });
+
+    expect(result).toEqual({
+        data: {
+            id: "1",
+            name: "Resource 1",
             createdAt: "2024-02-26T09:26:44.908Z",
             updatedAt: "2024-02-26T09:26:44.908Z",
             owner: "ownerId",

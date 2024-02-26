@@ -149,7 +149,7 @@ export class DataProvider {
         const queryName = this.getQueryName("delete", resource);
         const query = this.getQuery(queryName);
 
-        const response = await this.graphql(query, { input: variables });
+        const response = await this.graphql(query, { input: { id } });
         const data = response[queryName];
         return { data };
     };
