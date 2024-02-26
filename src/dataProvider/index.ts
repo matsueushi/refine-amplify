@@ -1,10 +1,16 @@
 import {
+    BaseRecord,
     DataProvider as DataProviderInterface,
     GetListParams,
     CreateParams,
     UpdateParams,
     DeleteOneParams,
     GetOneParams,
+    GetListResponse,
+    CreateResponse,
+    UpdateResponse,
+    DeleteOneResponse,
+    GetOneResponse,
 } from '@refinedev/core';
 import { Client, GraphQLResult, get } from 'aws-amplify/api';
 
@@ -55,31 +61,79 @@ const dataProvider = (client: Client, operations: Operations): DataProviderInter
         return queryResult.data;
     }
 
-    const getList = async ({ resource, pagination, sorters, filters, meta }: GetListParams) => {
+    const getList = async (
+        { resource, pagination, sorters, filters, meta }: GetListParams
+    ): Promise<GetListResponse> => {
         const queryName = getQueryName("list", resource);
         const query = getQuery(queryName);
-        const queryData = await graphql(query, {});
+        const response = await graphql(query, {});
 
+        const { items, nextToken } = response.data[queryName]
+
+        return {
+            data: items,
+            total: items.length,
+        }
     };
 
-    const create = async ({ resource, variables, meta }: CreateParams) => {
+    const create = async (
+        { resource, variables, meta }: CreateParams<BaseRecord>
+    ): Promise<CreateResponse<BaseRecord>> => {
+        const queryName = getQueryName("create", resource);
+        const query = getQuery(queryName);
 
+        const response = await graphql(query, { input: variables });
+        const data = response.data[queryName];
+        return { data };
     };
 
-    const update = async ({ resource, id, variables, meta }: UpdateParams) => {
+    const update = async (
+        { resource, id, variables, meta }: UpdateParams<BaseRecord>
+    ): Promise<UpdateResponse> => {
+        const queryName = getQueryName("update", resource);
+        const query = getQuery(queryName);
 
+        delete variables.__typename;
+        delete variables._deleted;
+        delete variables._lastChangedAt;
+        delete variables.createdAt;
+        delete variables.updatedAt;
+        delete variables.owner;
+
+        const response = await graphql(query, { input: variables });
+        const data = response.data[queryName];
+        return { data };
     };
 
-    const deleteOne = async ({ resource, id, variables, meta }: DeleteOneParams) => {
+    const deleteOne = async (
+        { resource, id, variables, meta }: DeleteOneParams<BaseRecord>
+    ): Promise<DeleteOneResponse> => {
+        const queryName = getQueryName("delete", resource);
+        const query = getQuery(queryName);
 
+        const response = await graphql(query, { input: variables });
+        const data = response.data[queryName];
+        return { data };
     };
 
-    const getOne = async ({ resource, id, meta }: GetOneParams) => {
+    const getOne = async (
+        { resource, id, meta }: GetOneParams
+    ): Promise<GetOneResponse> => {
+        const queryName = getQueryName("get", resource);
+        const query = getQuery(queryName);
 
+        const response = await graphql(query, { id });
+        const data = response.data[queryName];
+
+        if (!data) {
+            throw new Error(`Resource ${resource} with id ${id} not found`);
+        }
+
+        return { data };
     };
 
-    const getApiUrl = () => {
-
+    const getApiUrl = (): string => {
+        return ""
     };
 
     return {
