@@ -11,14 +11,13 @@ import {
     UpdateResponse,
     DeleteOneResponse,
     GetOneResponse,
-} from '@refinedev/core';
-import { Client, GraphQLResult } from 'aws-amplify/api';
+} from "@refinedev/core";
+import { Client, GraphQLResult } from "aws-amplify/api";
 
 export interface Operations {
     queries: Record<string, string>;
     mutations: Record<string, string>;
 }
-
 
 export class DataProvider {
     public client: Client;
@@ -31,35 +30,50 @@ export class DataProvider {
         this.mutations = operations.mutations;
     }
 
-    public getList = async <TData extends BaseRecord = BaseRecord>(
-        { resource, pagination, sorters, filters, meta }: GetListParams
-    ): Promise<GetListResponse<TData>> => {
+    public getList = async <TData extends BaseRecord = BaseRecord>({
+        resource,
+        pagination,
+        sorters,
+        filters,
+        meta,
+    }: GetListParams): Promise<GetListResponse<TData>> => {
         const queryName = this.getQueryName("list", resource);
         const query = this.getQuery(queryName);
         const response = await this.graphql(query, {});
 
-        const { items, nextToken } = response.data[queryName]
+        const { items, nextToken } = response[queryName];
 
         return {
             data: items,
             total: items.length,
-        }
-    }
+        };
+    };
 
-    public create = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
-        { resource, variables, meta }: CreateParams<TVariables>
-    ): Promise<CreateResponse<TData>> => {
+    public create = async <
+        TData extends BaseRecord = BaseRecord,
+        TVariables = {},
+    >({
+        resource,
+        variables,
+        meta,
+    }: CreateParams<TVariables>): Promise<CreateResponse<TData>> => {
         const queryName = this.getQueryName("create", resource);
         const query = this.getQuery(queryName);
 
         const response = await this.graphql(query, { input: variables });
-        const data = response.data[queryName];
+        const data = response[queryName];
         return { data };
-    }
+    };
 
-    public update = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
-        { resource, id, variables, meta }: UpdateParams<TVariables>
-    ): Promise<UpdateResponse<TData>> => {
+    public update = async <
+        TData extends BaseRecord = BaseRecord,
+        TVariables = {},
+    >({
+        resource,
+        id,
+        variables,
+        meta,
+    }: UpdateParams<TVariables>): Promise<UpdateResponse<TData>> => {
         const queryName = this.getQueryName("update", resource);
         const query = this.getQuery(queryName);
 
@@ -73,39 +87,47 @@ export class DataProvider {
         delete input.owner;
 
         const response = await this.graphql(query, { input });
-        const data = response.data[queryName];
+        const data = response[queryName];
         return { data };
-    }
+    };
 
-    public deleteOne = async <TData extends BaseRecord = BaseRecord, TVariables = {}>(
-        { resource, id, variables, meta }: DeleteOneParams<TVariables>
-    ): Promise<DeleteOneResponse<TData>> => {
+    public deleteOne = async <
+        TData extends BaseRecord = BaseRecord,
+        TVariables = {},
+    >({
+        resource,
+        id,
+        variables,
+        meta,
+    }: DeleteOneParams<TVariables>): Promise<DeleteOneResponse<TData>> => {
         const queryName = this.getQueryName("delete", resource);
         const query = this.getQuery(queryName);
 
         const response = await this.graphql(query, { input: variables });
-        const data = response.data[queryName];
+        const data = response[queryName];
         return { data };
-    }
+    };
 
-    public getOne = async <TData extends BaseRecord = BaseRecord>(
-        { resource, id, meta }: GetOneParams
-    ): Promise<GetOneResponse<TData>> => {
+    public getOne = async <TData extends BaseRecord = BaseRecord>({
+        resource,
+        id,
+        meta,
+    }: GetOneParams): Promise<GetOneResponse<TData>> => {
         const queryName = this.getQueryName("get", resource);
         const query = this.getQuery(queryName);
 
         const response = await this.graphql(query, { id });
-        const data = response.data[queryName];
+        const data = response[queryName];
 
         if (!data) {
             throw new Error(`Resource ${resource} with id ${id} not found`);
         }
 
         return { data };
-    }
+    };
 
     public getApiUrl(): string {
-        return ""
+        return "";
     }
 
     public getQuery(queryName: string): string {
@@ -132,12 +154,12 @@ export class DataProvider {
 
     public async graphql(
         query: string,
-        variables: Record<string, unknown>
+        variables: Record<string, unknown>,
     ): Promise<any> {
-        const queryResult = await this.client.graphql({
+        const queryResult = (await this.client.graphql({
             query,
             variables,
-        }) as GraphQLResult;
+        })) as GraphQLResult;
 
         if (queryResult.errors || !queryResult.data) {
             console.error(queryResult.errors);
@@ -148,7 +170,10 @@ export class DataProvider {
     }
 }
 
-const dataProvider = (client: Client, operations: Operations): DataProviderInterface => {
+const dataProvider = (
+    client: Client,
+    operations: Operations,
+): DataProviderInterface => {
     const provider = new DataProvider(client, operations);
     return {
         getList: provider.getList,
