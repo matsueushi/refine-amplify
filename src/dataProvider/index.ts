@@ -14,6 +14,42 @@ import {
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
 
+
+interface Tokens {
+    [index: string]: Array<string | null | undefined>
+}
+
+export class Pagination {
+    static tokens: Tokens = {};
+
+    static getNextToken(
+        signature: string,
+        page: number,
+    ): string | null | undefined {
+        if (!this.tokens[signature]) {
+            this.tokens[signature] = [];
+        }
+
+        if (page > 1 && !this.tokens[signature][page - 1]) {
+            return undefined;
+        }
+
+        return this.tokens[signature][page - 1] ?? null;
+    }
+
+    static setNextToken(
+        nextToken: string | null,
+        signature: string,
+        page: number,
+    ): void {
+        if (!this.tokens[signature]) {
+            this.tokens[signature] = [];
+        }
+
+        this.tokens[signature][page] = nextToken;
+    }
+}
+
 export interface Operations {
     queries: Record<string, string>;
     mutations: Record<string, string>;
@@ -37,15 +73,25 @@ export class DataProvider {
         filters,
         meta,
     }: GetListParams): Promise<GetListResponse<TData>> => {
+        const {
+            current = 1,
+            pageSize = 10,
+        } = pagination ?? {};
+
         const queryName = this.getQueryName("list", resource);
         const query = this.getQuery(queryName);
         const response = await this.graphql(query, {});
 
         const { items, nextToken } = response[queryName];
 
+        let total = (current - 1) * pageSize + items.length;
+        if (nextToken) {
+            total++;
+        }
+
         return {
             data: items,
-            total: items.length,
+            total,
         };
     };
 
