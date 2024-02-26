@@ -4,6 +4,7 @@ import dataProvider, { DataProvider } from "../src/dataProvider";
 const operations = {
     queries: {
         listResources: "listResourcesQuery",
+        getResource: "getResourceQuery",
     },
     mutations: {
         createResource: "createResourceMutation",
@@ -54,7 +55,6 @@ test("get list", async () => {
     const calls = mockGraphql.mock.calls;
     const call = calls[0] as Array<unknown>;
 
-    console.log(calls);
     expect(call[0]).toBe("listResourcesQuery");
     // expect(call[1]).toEqual({ limit: 10, nextToken: null });
 
@@ -195,6 +195,48 @@ test("delete resource", async () => {
 
     expect(call[0]).toBe("deleteResourceMutation");
     expect(call[1]).toEqual({ input: { id: "1" } });
+
+    expect(result).toEqual({
+        data: {
+            id: "1",
+            name: "Resource 1",
+            createdAt: "2024-02-26T09:26:44.908Z",
+            updatedAt: "2024-02-26T09:26:44.908Z",
+            owner: "ownerId",
+            __typename: "Resource",
+        },
+    });
+});
+
+test("get resource", async () => {
+    const mockGraphql = jest.fn(async () => {
+        return {
+            getResource: {
+                id: "1",
+                name: "Resource 1",
+                createdAt: "2024-02-26T09:26:44.908Z",
+                updatedAt: "2024-02-26T09:26:44.908Z",
+                owner: "ownerId",
+                __typename: "Resource",
+            },
+        };
+    });
+
+    const client = generateClient();
+
+    jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
+    const provider = dataProvider(client, operations);
+
+    const result = await provider.getOne({
+        resource: "resources",
+        id: "1",
+    });
+
+    const calls = mockGraphql.mock.calls;
+    const call = calls[0] as Array<unknown>;
+
+    expect(call[0]).toBe("getResourceQuery");
+    expect(call[1]).toEqual({ id: "1" });
 
     expect(result).toEqual({
         data: {
