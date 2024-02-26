@@ -123,16 +123,16 @@ export class DataProvider {
         const queryName = this.getQueryName("update", resource);
         const query = this.getQuery(queryName);
 
-        const input = variables as BaseRecord;
+        const details = { id, ...variables } as BaseRecord;
 
-        delete input.__typename;
-        delete input._deleted;
-        delete input._lastChangedAt;
-        delete input.createdAt;
-        delete input.updatedAt;
-        delete input.owner;
+        delete details.__typename;
+        delete details._deleted;
+        delete details._lastChangedAt;
+        delete details.createdAt;
+        delete details.updatedAt;
+        delete details.owner;
 
-        const response = await this.graphql(query, { input });
+        const response = await this.graphql(query, { input: details });
         const data = response[queryName];
         return { data };
     };
