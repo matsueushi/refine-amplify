@@ -1,5 +1,5 @@
 import { generateClient } from 'aws-amplify/api';
-import dataProvider from "../src/dataProvider";
+import dataProvider, { DataProvider } from "../src/dataProvider";
 
 const operations = {
     queries: {
@@ -38,12 +38,20 @@ test("get list", async () => {
 
     const client = generateClient();
 
-    jest.spyOn(dataProvider, "graphql").mockImplementation(mockGraphql);
+    jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
     const provider = dataProvider(client, operations);
 
     const result = await provider.getList({ resource: "resources" });
 
     const calls = mockGraphql.mock.calls;
+    const call = calls[0] as Array<unknown>;
 
-    expect(calls.length).toBe(2);
+    console.log(calls);
+    expect(call[0]).toBe("listResourcesQuery");
+    expect(call[1]).toEqual({ limit: 10, nextToken: null });
+
+    expect(result).toEqual({
+        data: [{ id: '1', name: 'Resource 1' }, { id: '2', name: 'Resource 2' }],
+        total: 2
+    });
 });
