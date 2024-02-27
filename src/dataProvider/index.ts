@@ -80,7 +80,10 @@ export class DataProvider {
 
         const queryName = this.getQueryName("list", resource);
         const query = this.getQuery(queryName);
-        const response = await this.graphql(query, {});
+
+        const variables = { limit: pageSize };
+
+        const response = await this.graphql(query, variables);
 
         const { items, nextToken } = response[queryName];
 
