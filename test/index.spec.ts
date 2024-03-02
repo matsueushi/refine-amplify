@@ -1,52 +1,36 @@
+import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
-import dataProvider, { DataProvider } from "../src/dataProvider";
+
+import amplifyconfig from "../src/amplifyconfiguration.json"
+
 import * as mutations from "../src/graphql/mutations";
 import * as queries from "../src/graphql/queries";
+
+import dataProvider, { DataProvider } from "../src/dataProvider";
+
 
 afterAll(() => {
     jest.restoreAllMocks();
 });
 
 describe("dataProvider", () => {
-    const operations = { queries, mutations };
 
     test("create todo", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                createTodo: {
-                    id: "1",
-                    name: "Todo 1",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Todo",
-                },
-            };
-        });
-
+        Amplify.configure(amplifyconfig);
         const client = generateClient();
 
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
+        const provider = dataProvider(client, { queries, mutations });
         const result = await provider.create({
             resource: "Todos",
             variables: { name: "Todo 1" },
         });
 
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe(mutations.createTodo);
-        expect(call[1]).toEqual({ input: { name: "Todo 1" } });
-
         expect(result).toEqual({
             data: {
-                id: "1",
+                id: expect.any(String),
                 name: "Todo 1",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
                 __typename: "Todo",
             },
         });
@@ -83,7 +67,7 @@ describe("dataProvider", () => {
         const client = generateClient();
 
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.getList({ resource: "Todos" });
 
@@ -139,7 +123,7 @@ describe("dataProvider", () => {
         const client = generateClient();
 
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.getList({ resource: "Todos", pagination: { current: 1, pageSize: 1 } });
 
@@ -182,7 +166,7 @@ describe("dataProvider", () => {
         const client = generateClient();
 
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.update({
             resource: "Todos",
@@ -225,7 +209,7 @@ describe("dataProvider", () => {
         const client = generateClient();
 
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.deleteOne({
             resource: "Todos",
@@ -267,7 +251,7 @@ describe("dataProvider", () => {
         const client = generateClient();
 
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.getOne({
             resource: "Todos",
