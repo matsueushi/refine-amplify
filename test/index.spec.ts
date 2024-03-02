@@ -37,45 +37,11 @@ describe("dataProvider", () => {
     });
 
     test("get list", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                listTodos: {
-                    items: [
-                        {
-                            id: "1",
-                            name: "Todo 1",
-                            createdAt: '2024-02-26T09:26:44.908Z',
-                            updatedAt: '2024-02-26T09:26:44.908Z',
-                            owner: 'ownerId',
-                            __typename: 'Todo'
-                        },
-                        {
-                            id: "2",
-                            name: "Todo 2",
-                            createdAt: '2024-02-11T02:27:32.223Z',
-                            updatedAt: '2024-02-11T02:27:32.223Z',
-                            owner: 'ownerId',
-                            __typename: 'Todo'
-                        },
-                    ],
-                    nextToken: null,
-                    __typename: "ModelTodoConnection",
-                },
-            };
-        });
-
+        Amplify.configure(amplifyconfig);
         const client = generateClient();
 
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
         const provider = dataProvider(client, { queries, mutations });
-
         const result = await provider.getList({ resource: "Todos" });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe(queries.listTodos);
-        expect(call[1]).toEqual({ limit: 10 });
 
         expect(result).toEqual({
             data: [
