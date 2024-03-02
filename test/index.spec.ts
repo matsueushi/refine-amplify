@@ -1,59 +1,39 @@
-import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
 import dataProvider, { DataProvider } from "../src/dataProvider";
-
-const operations = {
-    queries: {
-        listResources: "listResourcesQuery",
-        getResource: "getResourceQuery",
-    },
-    mutations: {
-        createResource: "createResourceMutation",
-        updateResource: "updateResourceMutation",
-        deleteResource: "deleteResourceMutation",
-    },
-};
+import * as mutations from "../src/graphql/mutations";
+import * as queries from "../src/graphql/queries";
 
 afterAll(() => {
     jest.restoreAllMocks();
 });
 
 describe("dataProvider", () => {
-    beforeAll(() => {
-        Amplify.configure({
-            API: {
-                GraphQL: {
-                    endpoint: 'http://localhost:8000/graphql',
-                    defaultAuthMode: 'userPool',
-                }
-            }
-        });
-    });
+    const operations = { queries, mutations };
 
     test("get list", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                listResources: {
+                listTodos: {
                     items: [
                         {
                             id: "1",
-                            name: "Resource 1",
+                            name: "Todo 1",
                             createdAt: '2024-02-26T09:26:44.908Z',
                             updatedAt: '2024-02-26T09:26:44.908Z',
                             owner: 'ownerId',
-                            __typename: 'Resource'
+                            __typename: 'Todo'
                         },
                         {
                             id: "2",
-                            name: "Resource 2",
+                            name: "Todo 2",
                             createdAt: '2024-02-11T02:27:32.223Z',
                             updatedAt: '2024-02-11T02:27:32.223Z',
                             owner: 'ownerId',
-                            __typename: 'Resource'
+                            __typename: 'Todo'
                         },
                     ],
                     nextToken: null,
-                    __typename: "ModelResourceConnection",
+                    __typename: "ModelTodoConnection",
                 },
             };
         });
@@ -63,31 +43,31 @@ describe("dataProvider", () => {
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
         const provider = dataProvider(client, operations);
 
-        const result = await provider.getList({ resource: "resources" });
+        const result = await provider.getList({ resource: "Todos" });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("listResourcesQuery");
+        expect(call[0]).toBe("listTodosQuery");
         expect(call[1]).toEqual({ limit: 10 });
 
         expect(result).toEqual({
             data: [
                 {
                     id: "1",
-                    name: "Resource 1",
+                    name: "Todo 1",
                     createdAt: '2024-02-26T09:26:44.908Z',
                     updatedAt: '2024-02-26T09:26:44.908Z',
                     owner: 'ownerId',
-                    __typename: 'Resource'
+                    __typename: 'Todo'
                 },
                 {
                     id: "2",
-                    name: "Resource 2",
+                    name: "Todo 2",
                     createdAt: '2024-02-11T02:27:32.223Z',
                     updatedAt: '2024-02-11T02:27:32.223Z',
                     owner: 'ownerId',
-                    __typename: 'Resource'
+                    __typename: 'Todo'
                 },
             ],
             total: 2,
@@ -97,19 +77,19 @@ describe("dataProvider", () => {
     test("get list with limit", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                listResources: {
+                listTodos: {
                     items: [
                         {
                             id: "1",
-                            name: "Resource 1",
+                            name: "Todo 1",
                             createdAt: '2024-02-26T09:26:44.908Z',
                             updatedAt: '2024-02-26T09:26:44.908Z',
                             owner: 'ownerId',
-                            __typename: 'Resource'
+                            __typename: 'Todo'
                         },
                     ],
                     nextToken: "nextToken",
-                    __typename: "ModelResourceConnection",
+                    __typename: "ModelTodoConnection",
                 },
             };
         });
@@ -119,23 +99,23 @@ describe("dataProvider", () => {
         jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
         const provider = dataProvider(client, operations);
 
-        const result = await provider.getList({ resource: "resources", pagination: { current: 1, pageSize: 1 } });
+        const result = await provider.getList({ resource: "Todos", pagination: { current: 1, pageSize: 1 } });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("listResourcesQuery");
+        expect(call[0]).toBe("listTodosQuery");
         expect(call[1]).toEqual({ limit: 1 });
 
         expect(result).toEqual({
             data: [
                 {
                     id: "1",
-                    name: "Resource 1",
+                    name: "Todo 1",
                     createdAt: '2024-02-26T09:26:44.908Z',
                     updatedAt: '2024-02-26T09:26:44.908Z',
                     owner: 'ownerId',
-                    __typename: 'Resource'
+                    __typename: 'Todo'
                 },
             ],
             total: 2,
@@ -143,16 +123,16 @@ describe("dataProvider", () => {
     }
     );
 
-    test("create resource", async () => {
+    test("create todo", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                createResource: {
+                createTodo: {
                     id: "1",
-                    name: "Resource 1",
+                    name: "Todo 1",
                     createdAt: "2024-02-26T09:26:44.908Z",
                     updatedAt: "2024-02-26T09:26:44.908Z",
                     owner: "ownerId",
-                    __typename: "Resource",
+                    __typename: "Todo",
                 },
             };
         });
@@ -163,38 +143,38 @@ describe("dataProvider", () => {
         const provider = dataProvider(client, operations);
 
         const result = await provider.create({
-            resource: "resources",
-            variables: { name: "Resource 1" },
+            resource: "Todos",
+            variables: { name: "Todo 1" },
         });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("createResourceMutation");
-        expect(call[1]).toEqual({ input: { name: "Resource 1" } });
+        expect(call[0]).toBe("createTodoMutation");
+        expect(call[1]).toEqual({ input: { name: "Todo 1" } });
 
         expect(result).toEqual({
             data: {
                 id: "1",
-                name: "Resource 1",
+                name: "Todo 1",
                 createdAt: "2024-02-26T09:26:44.908Z",
                 updatedAt: "2024-02-26T09:26:44.908Z",
                 owner: "ownerId",
-                __typename: "Resource",
+                __typename: "Todo",
             },
         });
     });
 
-    test("update resource", async () => {
+    test("update todo", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                updateResource: {
+                updateTodo: {
                     id: "1",
-                    name: "Resource 2",
+                    name: "Todo 2",
                     createdAt: "2024-02-26T09:26:44.908Z",
                     updatedAt: "2024-02-26T09:26:44.908Z",
                     owner: "ownerId",
-                    __typename: "Resource",
+                    __typename: "Todo",
                 },
             };
         });
@@ -205,39 +185,39 @@ describe("dataProvider", () => {
         const provider = dataProvider(client, operations);
 
         const result = await provider.update({
-            resource: "resources",
+            resource: "Todos",
             id: "1",
-            variables: { name: "Resource 2" },
+            variables: { name: "Todo 2" },
         });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("updateResourceMutation");
-        expect(call[1]).toEqual({ input: { id: "1", name: "Resource 2" } });
+        expect(call[0]).toBe("updateTodoMutation");
+        expect(call[1]).toEqual({ input: { id: "1", name: "Todo 2" } });
 
         expect(result).toEqual({
             data: {
                 id: "1",
-                name: "Resource 2",
+                name: "Todo 2",
                 createdAt: "2024-02-26T09:26:44.908Z",
                 updatedAt: "2024-02-26T09:26:44.908Z",
                 owner: "ownerId",
-                __typename: "Resource",
+                __typename: "Todo",
             },
         });
     });
 
-    test("delete resource", async () => {
+    test("delete todo", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                deleteResource: {
+                deleteTodo: {
                     id: "1",
-                    name: "Resource 1",
+                    name: "Todo 1",
                     createdAt: "2024-02-26T09:26:44.908Z",
                     updatedAt: "2024-02-26T09:26:44.908Z",
                     owner: "ownerId",
-                    __typename: "Resource",
+                    __typename: "Todo",
                 },
             };
         });
@@ -248,38 +228,38 @@ describe("dataProvider", () => {
         const provider = dataProvider(client, operations);
 
         const result = await provider.deleteOne({
-            resource: "resources",
+            resource: "Todos",
             id: "1",
         });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("deleteResourceMutation");
+        expect(call[0]).toBe("deleteTodoMutation");
         expect(call[1]).toEqual({ input: { id: "1" } });
 
         expect(result).toEqual({
             data: {
                 id: "1",
-                name: "Resource 1",
+                name: "Todo 1",
                 createdAt: "2024-02-26T09:26:44.908Z",
                 updatedAt: "2024-02-26T09:26:44.908Z",
                 owner: "ownerId",
-                __typename: "Resource",
+                __typename: "Todo",
             },
         });
     });
 
-    test("get resource", async () => {
+    test("get todo", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
-                getResource: {
+                getTodo: {
                     id: "1",
-                    name: "Resource 1",
+                    name: "Todo 1",
                     createdAt: "2024-02-26T09:26:44.908Z",
                     updatedAt: "2024-02-26T09:26:44.908Z",
                     owner: "ownerId",
-                    __typename: "Resource",
+                    __typename: "Todo",
                 },
             };
         });
@@ -290,24 +270,24 @@ describe("dataProvider", () => {
         const provider = dataProvider(client, operations);
 
         const result = await provider.getOne({
-            resource: "resources",
+            resource: "Todos",
             id: "1",
         });
 
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("getResourceQuery");
+        expect(call[0]).toBe("getTodoQuery");
         expect(call[1]).toEqual({ id: "1" });
 
         expect(result).toEqual({
             data: {
                 id: "1",
-                name: "Resource 1",
+                name: "Todo 1",
                 createdAt: "2024-02-26T09:26:44.908Z",
                 updatedAt: "2024-02-26T09:26:44.908Z",
                 owner: "ownerId",
-                __typename: "Resource",
+                __typename: "Todo",
             },
         });
     });

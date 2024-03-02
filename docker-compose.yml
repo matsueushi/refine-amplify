@@ -9,4 +9,5 @@ services:
       - ./:/refine-amplify:delegated
     ports:
       - 3000:3000
+      - 20002:20002
     tty: true
