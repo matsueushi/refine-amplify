@@ -10,6 +10,48 @@ afterAll(() => {
 describe("dataProvider", () => {
     const operations = { queries, mutations };
 
+    test("create todo", async () => {
+        const mockGraphql = jest.fn(async () => {
+            return {
+                createTodo: {
+                    id: "1",
+                    name: "Todo 1",
+                    createdAt: "2024-02-26T09:26:44.908Z",
+                    updatedAt: "2024-02-26T09:26:44.908Z",
+                    owner: "ownerId",
+                    __typename: "Todo",
+                },
+            };
+        });
+
+        const client = generateClient();
+
+        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
+        const provider = dataProvider(client, operations);
+
+        const result = await provider.create({
+            resource: "Todos",
+            variables: { name: "Todo 1" },
+        });
+
+        const calls = mockGraphql.mock.calls;
+        const call = calls[0] as Array<unknown>;
+
+        expect(call[0]).toBe(mutations.createTodo);
+        expect(call[1]).toEqual({ input: { name: "Todo 1" } });
+
+        expect(result).toEqual({
+            data: {
+                id: "1",
+                name: "Todo 1",
+                createdAt: "2024-02-26T09:26:44.908Z",
+                updatedAt: "2024-02-26T09:26:44.908Z",
+                owner: "ownerId",
+                __typename: "Todo",
+            },
+        });
+    });
+
     test("get list", async () => {
         const mockGraphql = jest.fn(async () => {
             return {
@@ -48,7 +90,7 @@ describe("dataProvider", () => {
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("listTodosQuery");
+        expect(call[0]).toBe(queries.listTodos);
         expect(call[1]).toEqual({ limit: 10 });
 
         expect(result).toEqual({
@@ -104,7 +146,7 @@ describe("dataProvider", () => {
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("listTodosQuery");
+        expect(call[0]).toBe(queries.listTodos);
         expect(call[1]).toEqual({ limit: 1 });
 
         expect(result).toEqual({
@@ -122,48 +164,6 @@ describe("dataProvider", () => {
         });
     }
     );
-
-    test("create todo", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                createTodo: {
-                    id: "1",
-                    name: "Todo 1",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Todo",
-                },
-            };
-        });
-
-        const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
-        const result = await provider.create({
-            resource: "Todos",
-            variables: { name: "Todo 1" },
-        });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("createTodoMutation");
-        expect(call[1]).toEqual({ input: { name: "Todo 1" } });
-
-        expect(result).toEqual({
-            data: {
-                id: "1",
-                name: "Todo 1",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
-                __typename: "Todo",
-            },
-        });
-    });
 
     test("update todo", async () => {
         const mockGraphql = jest.fn(async () => {
@@ -193,7 +193,7 @@ describe("dataProvider", () => {
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("updateTodoMutation");
+        expect(call[0]).toBe(mutations.updateTodo);
         expect(call[1]).toEqual({ input: { id: "1", name: "Todo 2" } });
 
         expect(result).toEqual({
@@ -235,7 +235,7 @@ describe("dataProvider", () => {
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("deleteTodoMutation");
+        expect(call[0]).toBe(mutations.deleteTodo);
         expect(call[1]).toEqual({ input: { id: "1" } });
 
         expect(result).toEqual({
@@ -277,7 +277,7 @@ describe("dataProvider", () => {
         const calls = mockGraphql.mock.calls;
         const call = calls[0] as Array<unknown>;
 
-        expect(call[0]).toBe("getTodoQuery");
+        expect(call[0]).toBe(queries.getTodo);
         expect(call[1]).toEqual({ id: "1" });
 
         expect(result).toEqual({
