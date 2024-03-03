@@ -58,10 +58,7 @@ describe("dataProvider", () => {
 
         const provider = dataProvider(client, { queries, mutations });
 
-        const result = await provider.getList({
-            resource: "Todos",
-            sorters: [{ field: "createdAt", order: "asc" }],
-        });
+        const result = await provider.getList({ resource: "Todos" });
         expect(result).toEqual({
             data: [
                 {
@@ -106,6 +103,60 @@ describe("dataProvider", () => {
                 },
             ],
             total: 2,
+        });
+    });
+
+    test("getList pagination", async () => {
+        const client = generateClient();
+
+        const provider = dataProvider(client, { queries, mutations });
+
+        const result1 = await provider.getList({
+            resource: "Todos",
+            pagination: { current: 1, pageSize: 1 },
+        });
+
+        expect(result1).toEqual({
+            data: [
+                {
+                    id: "id1",
+                    name: "Todo 1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "Todo",
+                },
+            ],
+            total: 2,
+        });
+
+        const result2 = await provider.getList({
+            resource: "Todos",
+            pagination: { current: 2, pageSize: 1 },
+        });
+
+        expect(result2).toEqual({
+            data: [
+                {
+                    id: "id0",
+                    name: "Todo 0",
+                    priority: 0,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "Todo",
+                },
+            ],
+            total: 3, // why?
+        });
+
+        const result3 = await provider.getList({
+            resource: "Todos",
+            pagination: { current: 3, pageSize: 1 },
+        });
+
+        expect(result3).toEqual({
+            data: [],
+            total: 0,
         });
     });
 

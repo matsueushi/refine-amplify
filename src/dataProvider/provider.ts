@@ -13,18 +13,17 @@ import {
     GetOneResponse,
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
+import { Pagination } from "./utils";
 
 export interface Operations {
     queries: Record<string, string>;
     mutations: Record<string, string>;
 }
 
-
 const dataProvider = (
     client: Client,
     operations: Operations,
 ): DataProviderInterface => {
-
     const graphql = async (
         query: string,
         variables: Record<string, unknown>,
@@ -40,7 +39,7 @@ const dataProvider = (
         }
 
         return queryResult.data;
-    }
+    };
 
     const getQuery = (queryName: string): string => {
         if (operations.queries[queryName]) {
@@ -53,7 +52,7 @@ const dataProvider = (
 
         console.log(`Query ${queryName} not found`);
         throw new Error(`Query ${queryName} not found`);
-    }
+    };
 
     const getQueryName = (operation: string, resource: string): string => {
         const pluralOperations = ["list"];
@@ -62,43 +61,62 @@ const dataProvider = (
         }
         // else singular operations ["create", "delete", "get", "update"]
         return `${operation}${resource.charAt(0).toUpperCase() + resource.slice(1, -1)}`;
-    }
+    };
 
     return {
-        getList: async <TData extends BaseRecord = BaseRecord>(
-            {
-                resource,
-                pagination,
-                sorters,
-                filters,
-                meta
-            }: GetListParams): Promise<GetListResponse<TData>> => {
-
+        getList: async <TData extends BaseRecord = BaseRecord>({
+            resource,
+            pagination,
+            sorters,
+            filters,
+            meta,
+        }: GetListParams): Promise<GetListResponse<TData>> => {
             const { current = 1, pageSize = 10 } = pagination ?? {};
 
             const queryName = getQueryName("list", resource);
             const query = getQuery(queryName);
 
-            const variables = { limit: pageSize };
+            // identifier for the pagination token
+            const signature = JSON.stringify({
+                queryName,
+                filters,
+                pageSize,
+            });
+
+            // get the next token for the current page
+            const nextToken = Pagination.getNextToken(signature, current);
+
+            console.log("nextToken", nextToken);
+
+            if (nextToken === undefined) {
+                return {
+                    data: [],
+                    total: 0,
+                };
+            }
+
+            const variables = {
+                limit: pageSize,
+                nextToken,
+            };
 
             const response = await graphql(query, variables);
+            const data = response[queryName];
 
-            const { items, nextToken } = response[queryName];
+            // set the next token for the next page
+            Pagination.setNextToken(data.nextToken, signature, current);
 
-            let total = (current - 1) * pageSize + items.length;
-            if (nextToken) {
+            let total = (current - 1) * pageSize + data.items.length;
+            if (data.nextToken) {
                 total++;
             }
 
             return {
-                data: items,
+                data: data.items,
                 total,
             };
         },
-        create: async <
-            TData extends BaseRecord = BaseRecord,
-            TVariables = {},
-        >({
+        create: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,
             variables,
             meta,
@@ -110,10 +128,7 @@ const dataProvider = (
             const data = response[queryName];
             return { data };
         },
-        update: async <
-            TData extends BaseRecord = BaseRecord,
-            TVariables = {},
-        >({
+        update: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,
             id,
             variables,
@@ -136,10 +151,7 @@ const dataProvider = (
 
             return { data };
         },
-        deleteOne: async <
-            TData extends BaseRecord = BaseRecord,
-            TVariables = {},
-        >({
+        deleteOne: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,
             id,
             variables,
@@ -176,6 +188,6 @@ const dataProvider = (
         },
         getApiUrl: () => "",
     };
-}
+};
 
 export default dataProvider;
