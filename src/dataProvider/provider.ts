@@ -149,6 +149,11 @@ const dataProvider = (
 
             const response = await graphql(query, { input: { id } });
             const data = response[queryName];
+
+            if (!data) {
+                throw new Error(`Resource ${resource} with id "${id}" not found`);
+            }
+
             return { data };
         },
         getOne: async <TData extends BaseRecord = BaseRecord>({
@@ -163,7 +168,7 @@ const dataProvider = (
             const data = response[queryName];
 
             if (!data) {
-                throw new Error(`Resource ${resource} with id ${id} not found`);
+                throw new Error(`Resource ${resource} with id "${id}" not found`);
             }
 
             return { data };
