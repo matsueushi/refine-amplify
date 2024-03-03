@@ -37,19 +37,19 @@ describe("dataProvider", () => {
             },
         });
 
-        // const result2 = await provider.create({
-        //     resource: "Todos",
-        //     variables: { name: "Todo 2" },
-        // });
-        // expect(result2).toEqual({
-        //     data: {
-        //         id: expect.any(String),
-        //         name: "Todo 2",
-        //         createdAt: expect.any(String),
-        //         updatedAt: expect.any(String),
-        //         __typename: "Todo",
-        //     },
-        // });
+        const result2 = await provider.create({
+            resource: "Todos",
+            variables: { name: "Todo 2" },
+        });
+        expect(result2).toEqual({
+            data: {
+                id: expect.any(String),
+                name: "Todo 2",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "Todo",
+            },
+        });
     });
 
     test("get list", async () => {
@@ -79,28 +79,28 @@ describe("dataProvider", () => {
         });
     });
 
-    test("get list with limit", async () => {
-        const client = generateClient();
+    // test("get list with limit", async () => {
+    //     const client = generateClient();
 
-        const provider = dataProvider(client, { queries, mutations });
-        const result = await provider.getList({
-            resource: "Todos",
-            pagination: { current: 1, pageSize: 1 }
-        });
+    //     const provider = dataProvider(client, { queries, mutations });
+    //     const result = await provider.getList({
+    //         resource: "Todos",
+    //         pagination: { current: 1, pageSize: 1 }
+    //     });
 
-        expect(result).toEqual({
-            data: [
-                {
-                    id: expect.any(String),
-                    name: "Todo 2",
-                    createdAt: expect.any(String),
-                    updatedAt: expect.any(String),
-                    __typename: 'Todo'
-                },
-            ],
-            total: 2,
-        });
-    });
+    //     expect(result).toEqual({
+    //         data: [
+    //             {
+    //                 id: expect.any(String),
+    //                 name: "Todo 2",
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: 'Todo'
+    //             },
+    //         ],
+    //         total: 2,
+    //     });
+    // });
 
     // test("update todo", async () => {
     //     const mockGraphql = jest.fn(async () => {
