@@ -133,6 +133,7 @@ const dataProvider = (
 
             const response = await graphql(query, { input: details });
             const data = response[queryName];
+
             return { data };
         },
         deleteOne: async <

@@ -24,12 +24,13 @@ describe("dataProvider", () => {
 
         const result0 = await provider.create({
             resource: "Todos",
-            variables: { id: "id0", name: "Todo 0" },
+            variables: { id: "id0", name: "Todo 0", priority: 0 },
         });
         expect(result0).toEqual({
             data: {
                 id: "id0",
                 name: "Todo 0",
+                priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "Todo",
@@ -38,12 +39,13 @@ describe("dataProvider", () => {
 
         const result1 = await provider.create({
             resource: "Todos",
-            variables: { id: "id1", name: "Todo 1" },
+            variables: { id: "id1", name: "Todo 1", priority: 1 },
         });
         expect(result1).toEqual({
             data: {
                 id: "id1",
                 name: "Todo 1",
+                priority: 1,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "Todo",
@@ -65,6 +67,7 @@ describe("dataProvider", () => {
                 {
                     id: "id1",
                     name: "Todo 1",
+                    priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
                     __typename: "Todo",
@@ -72,6 +75,7 @@ describe("dataProvider", () => {
                 {
                     id: "id0",
                     name: "Todo 0",
+                    priority: 0,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
                     __typename: "Todo",
@@ -95,6 +99,7 @@ describe("dataProvider", () => {
                 {
                     id: "id1",
                     name: "Todo 1",
+                    priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
                     __typename: "Todo",
@@ -118,6 +123,7 @@ describe("dataProvider", () => {
             data: {
                 id: "id1",
                 name: "Updated Todo 1",
+                priority: 1,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "Todo",
@@ -131,7 +137,7 @@ describe("dataProvider", () => {
         const provider = dataProvider(client, { queries, mutations });
         await provider.create({
             resource: "Todos",
-            variables: { id: "id2", name: "Todo for deletion" },
+            variables: { id: "id2", name: "Todo for deletion", priority: 2 },
         });
         const result = await provider.deleteOne({
             resource: "Todos",
@@ -142,6 +148,7 @@ describe("dataProvider", () => {
             data: {
                 id: "id2",
                 name: "Todo for deletion",
+                priority: 2,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "Todo",
@@ -169,6 +176,7 @@ describe("dataProvider", () => {
             data: {
                 id: "id0",
                 name: "Todo 0",
+                priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "Todo",
