@@ -86,7 +86,7 @@ const dataProvider = (
             // get the next token for the current page
             const nextToken = Pagination.getNextToken(signature, current);
 
-            console.log("nextToken", nextToken);
+            // console.log("nextToken", nextToken);
 
             if (nextToken === undefined) {
                 return {

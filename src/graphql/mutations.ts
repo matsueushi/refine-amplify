@@ -59,3 +59,99 @@ export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
   APITypes.DeleteTodoMutationVariables,
   APITypes.DeleteTodoMutation
 >;
+export const createResourceForDeleteOne = /* GraphQL */ `mutation CreateResourceForDeleteOne(
+  $input: CreateResourceForDeleteOneInput!
+  $condition: ModelResourceForDeleteOneConditionInput
+) {
+  createResourceForDeleteOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForDeleteOneMutationVariables,
+  APITypes.CreateResourceForDeleteOneMutation
+>;
+export const updateResourceForDeleteOne = /* GraphQL */ `mutation UpdateResourceForDeleteOne(
+  $input: UpdateResourceForDeleteOneInput!
+  $condition: ModelResourceForDeleteOneConditionInput
+) {
+  updateResourceForDeleteOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForDeleteOneMutationVariables,
+  APITypes.UpdateResourceForDeleteOneMutation
+>;
+export const deleteResourceForDeleteOne = /* GraphQL */ `mutation DeleteResourceForDeleteOne(
+  $input: DeleteResourceForDeleteOneInput!
+  $condition: ModelResourceForDeleteOneConditionInput
+) {
+  deleteResourceForDeleteOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForDeleteOneMutationVariables,
+  APITypes.DeleteResourceForDeleteOneMutation
+>;
+export const createResourceForGetOne = /* GraphQL */ `mutation CreateResourceForGetOne(
+  $input: CreateResourceForGetOneInput!
+  $condition: ModelResourceForGetOneConditionInput
+) {
+  createResourceForGetOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetOneMutationVariables,
+  APITypes.CreateResourceForGetOneMutation
+>;
+export const updateResourceForGetOne = /* GraphQL */ `mutation UpdateResourceForGetOne(
+  $input: UpdateResourceForGetOneInput!
+  $condition: ModelResourceForGetOneConditionInput
+) {
+  updateResourceForGetOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetOneMutationVariables,
+  APITypes.UpdateResourceForGetOneMutation
+>;
+export const deleteResourceForGetOne = /* GraphQL */ `mutation DeleteResourceForGetOne(
+  $input: DeleteResourceForGetOneInput!
+  $condition: ModelResourceForGetOneConditionInput
+) {
+  deleteResourceForGetOne(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetOneMutationVariables,
+  APITypes.DeleteResourceForGetOneMutation
+>;
