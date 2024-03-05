@@ -8,27 +8,32 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getTodo = /* GraphQL */ `query GetTodo($id: ID!) {
-  getTodo(id: $id) {
+export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
+  getResourceForCreate(id: $id) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
-` as GeneratedQuery<APITypes.GetTodoQueryVariables, APITypes.GetTodoQuery>;
-export const listTodos = /* GraphQL */ `query ListTodos(
-  $filter: ModelTodoFilterInput
+` as GeneratedQuery<
+  APITypes.GetResourceForCreateQueryVariables,
+  APITypes.GetResourceForCreateQuery
+>;
+export const listResourceForCreates = /* GraphQL */ `query ListResourceForCreates(
+  $filter: ModelResourceForCreateFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listResourceForCreates(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
     items {
       id
       name
-      priority
       createdAt
       updatedAt
       __typename
@@ -37,7 +42,48 @@ export const listTodos = /* GraphQL */ `query ListTodos(
     __typename
   }
 }
-` as GeneratedQuery<APITypes.ListTodosQueryVariables, APITypes.ListTodosQuery>;
+` as GeneratedQuery<
+  APITypes.ListResourceForCreatesQueryVariables,
+  APITypes.ListResourceForCreatesQuery
+>;
+export const getResourceForUpdate = /* GraphQL */ `query GetResourceForUpdate($id: ID!) {
+  getResourceForUpdate(id: $id) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForUpdateQueryVariables,
+  APITypes.GetResourceForUpdateQuery
+>;
+export const listResourceForUpdates = /* GraphQL */ `query ListResourceForUpdates(
+  $filter: ModelResourceForUpdateFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForUpdates(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForUpdatesQueryVariables,
+  APITypes.ListResourceForUpdatesQuery
+>;
 export const getResourceForDeleteOne = /* GraphQL */ `query GetResourceForDeleteOne($id: ID!) {
   getResourceForDeleteOne(id: $id) {
     id

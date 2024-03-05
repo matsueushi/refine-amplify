@@ -2,18 +2,16 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateTodoInput = {
+export type CreateResourceForCreateInput = {
   id?: string | null,
   name: string,
-  priority?: number | null,
 };
 
-export type ModelTodoConditionInput = {
+export type ModelResourceForCreateConditionInput = {
   name?: ModelStringInput | null,
-  priority?: ModelIntInput | null,
-  and?: Array< ModelTodoConditionInput | null > | null,
-  or?: Array< ModelTodoConditionInput | null > | null,
-  not?: ModelTodoConditionInput | null,
+  and?: Array< ModelResourceForCreateConditionInput | null > | null,
+  or?: Array< ModelResourceForCreateConditionInput | null > | null,
+  not?: ModelResourceForCreateConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -56,34 +54,49 @@ export type ModelSizeInput = {
   between?: Array< number | null > | null,
 };
 
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
-export type Todo = {
-  __typename: "Todo",
+export type ResourceForCreate = {
+  __typename: "ResourceForCreate",
   id: string,
   name: string,
-  priority?: number | null,
   createdAt: string,
   updatedAt: string,
 };
 
-export type UpdateTodoInput = {
+export type UpdateResourceForCreateInput = {
   id: string,
   name?: string | null,
-  priority?: number | null,
 };
 
-export type DeleteTodoInput = {
+export type DeleteResourceForCreateInput = {
+  id: string,
+};
+
+export type CreateResourceForUpdateInput = {
+  id?: string | null,
+  name: string,
+};
+
+export type ModelResourceForUpdateConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelResourceForUpdateConditionInput | null > | null,
+  or?: Array< ModelResourceForUpdateConditionInput | null > | null,
+  not?: ModelResourceForUpdateConditionInput | null,
+};
+
+export type ResourceForUpdate = {
+  __typename: "ResourceForUpdate",
+  id: string,
+  name: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForUpdateInput = {
+  id: string,
+  name?: string | null,
+};
+
+export type DeleteResourceForUpdateInput = {
   id: string,
 };
 
@@ -145,13 +158,12 @@ export type DeleteResourceForGetOneInput = {
   id: string,
 };
 
-export type ModelTodoFilterInput = {
+export type ModelResourceForCreateFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  priority?: ModelIntInput | null,
-  and?: Array< ModelTodoFilterInput | null > | null,
-  or?: Array< ModelTodoFilterInput | null > | null,
-  not?: ModelTodoFilterInput | null,
+  and?: Array< ModelResourceForCreateFilterInput | null > | null,
+  or?: Array< ModelResourceForCreateFilterInput | null > | null,
+  not?: ModelResourceForCreateFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -170,9 +182,23 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelTodoConnection = {
-  __typename: "ModelTodoConnection",
-  items:  Array<Todo | null >,
+export type ModelResourceForCreateConnection = {
+  __typename: "ModelResourceForCreateConnection",
+  items:  Array<ResourceForCreate | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForUpdateFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelResourceForUpdateFilterInput | null > | null,
+  or?: Array< ModelResourceForUpdateFilterInput | null > | null,
+  not?: ModelResourceForUpdateFilterInput | null,
+};
+
+export type ModelResourceForUpdateConnection = {
+  __typename: "ModelResourceForUpdateConnection",
+  items:  Array<ResourceForUpdate | null >,
   nextToken?: string | null,
 };
 
@@ -204,12 +230,11 @@ export type ModelResourceForGetOneConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionTodoFilterInput = {
+export type ModelSubscriptionResourceForCreateFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  priority?: ModelSubscriptionIntInput | null,
-  and?: Array< ModelSubscriptionTodoFilterInput | null > | null,
-  or?: Array< ModelSubscriptionTodoFilterInput | null > | null,
+  and?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -242,16 +267,11 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
-export type ModelSubscriptionIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
+export type ModelSubscriptionResourceForUpdateFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionResourceForUpdateFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForUpdateFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForDeleteOneFilterInput = {
@@ -268,49 +288,91 @@ export type ModelSubscriptionResourceForGetOneFilterInput = {
   or?: Array< ModelSubscriptionResourceForGetOneFilterInput | null > | null,
 };
 
-export type CreateTodoMutationVariables = {
-  input: CreateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type CreateResourceForCreateMutationVariables = {
+  input: CreateResourceForCreateInput,
+  condition?: ModelResourceForCreateConditionInput | null,
 };
 
-export type CreateTodoMutation = {
-  createTodo?:  {
-    __typename: "Todo",
+export type CreateResourceForCreateMutation = {
+  createResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type UpdateTodoMutationVariables = {
-  input: UpdateTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type UpdateResourceForCreateMutationVariables = {
+  input: UpdateResourceForCreateInput,
+  condition?: ModelResourceForCreateConditionInput | null,
 };
 
-export type UpdateTodoMutation = {
-  updateTodo?:  {
-    __typename: "Todo",
+export type UpdateResourceForCreateMutation = {
+  updateResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type DeleteTodoMutationVariables = {
-  input: DeleteTodoInput,
-  condition?: ModelTodoConditionInput | null,
+export type DeleteResourceForCreateMutationVariables = {
+  input: DeleteResourceForCreateInput,
+  condition?: ModelResourceForCreateConditionInput | null,
 };
 
-export type DeleteTodoMutation = {
-  deleteTodo?:  {
-    __typename: "Todo",
+export type DeleteResourceForCreateMutation = {
+  deleteResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForUpdateMutationVariables = {
+  input: CreateResourceForUpdateInput,
+  condition?: ModelResourceForUpdateConditionInput | null,
+};
+
+export type CreateResourceForUpdateMutation = {
+  createResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForUpdateMutationVariables = {
+  input: UpdateResourceForUpdateInput,
+  condition?: ModelResourceForUpdateConditionInput | null,
+};
+
+export type UpdateResourceForUpdateMutation = {
+  updateResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForUpdateMutationVariables = {
+  input: DeleteResourceForUpdateInput,
+  condition?: ModelResourceForUpdateConditionInput | null,
+};
+
+export type DeleteResourceForUpdateMutation = {
+  deleteResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -406,35 +468,67 @@ export type DeleteResourceForGetOneMutation = {
   } | null,
 };
 
-export type GetTodoQueryVariables = {
+export type GetResourceForCreateQueryVariables = {
   id: string,
 };
 
-export type GetTodoQuery = {
-  getTodo?:  {
-    __typename: "Todo",
+export type GetResourceForCreateQuery = {
+  getResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type ListTodosQueryVariables = {
-  filter?: ModelTodoFilterInput | null,
+export type ListResourceForCreatesQueryVariables = {
+  filter?: ModelResourceForCreateFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListTodosQuery = {
-  listTodos?:  {
-    __typename: "ModelTodoConnection",
+export type ListResourceForCreatesQuery = {
+  listResourceForCreates?:  {
+    __typename: "ModelResourceForCreateConnection",
     items:  Array< {
-      __typename: "Todo",
+      __typename: "ResourceForCreate",
       id: string,
       name: string,
-      priority?: number | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResourceForUpdateQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForUpdateQuery = {
+  getResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForUpdatesQueryVariables = {
+  filter?: ModelResourceForUpdateFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForUpdatesQuery = {
+  listResourceForUpdates?:  {
+    __typename: "ModelResourceForUpdateConnection",
+    items:  Array< {
+      __typename: "ResourceForUpdate",
+      id: string,
+      name: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -510,46 +604,85 @@ export type ListResourceForGetOnesQuery = {
   } | null,
 };
 
-export type OnCreateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnCreateResourceForCreateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateFilterInput | null,
 };
 
-export type OnCreateTodoSubscription = {
-  onCreateTodo?:  {
-    __typename: "Todo",
+export type OnCreateResourceForCreateSubscription = {
+  onCreateResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnUpdateTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnUpdateResourceForCreateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateFilterInput | null,
 };
 
-export type OnUpdateTodoSubscription = {
-  onUpdateTodo?:  {
-    __typename: "Todo",
+export type OnUpdateResourceForCreateSubscription = {
+  onUpdateResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnDeleteTodoSubscriptionVariables = {
-  filter?: ModelSubscriptionTodoFilterInput | null,
+export type OnDeleteResourceForCreateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateFilterInput | null,
 };
 
-export type OnDeleteTodoSubscription = {
-  onDeleteTodo?:  {
-    __typename: "Todo",
+export type OnDeleteResourceForCreateSubscription = {
+  onDeleteResourceForCreate?:  {
+    __typename: "ResourceForCreate",
     id: string,
     name: string,
-    priority?: number | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForUpdateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateFilterInput | null,
+};
+
+export type OnCreateResourceForUpdateSubscription = {
+  onCreateResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForUpdateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateFilterInput | null,
+};
+
+export type OnUpdateResourceForUpdateSubscription = {
+  onUpdateResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForUpdateSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateFilterInput | null,
+};
+
+export type OnDeleteResourceForUpdateSubscription = {
+  onDeleteResourceForUpdate?:  {
+    __typename: "ResourceForUpdate",
+    id: string,
+    name: string,
     createdAt: string,
     updatedAt: string,
   } | null,

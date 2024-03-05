@@ -17,41 +17,24 @@ describe("dataProvider", () => {
         Amplify.configure(amplifyconfig);
     });
 
-    // test("create", async () => {
-    //     const client = generateClient();
+    test("create", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
 
-    //     const provider = dataProvider(client, { queries, mutations });
-
-    //     const result0 = await provider.create({
-    //         resource: "Todos",
-    //         variables: { id: "id0", name: "Todo 0", priority: 0 },
-    //     });
-    //     expect(result0).toEqual({
-    //         data: {
-    //             id: "id0",
-    //             name: "Todo 0",
-    //             priority: 0,
-    //             createdAt: expect.any(String),
-    //             updatedAt: expect.any(String),
-    //             __typename: "Todo",
-    //         },
-    //     });
-
-    //     const result1 = await provider.create({
-    //         resource: "Todos",
-    //         variables: { id: "id1", name: "Todo 1", priority: 1 },
-    //     });
-    //     expect(result1).toEqual({
-    //         data: {
-    //             id: "id1",
-    //             name: "Todo 1",
-    //             priority: 1,
-    //             createdAt: expect.any(String),
-    //             updatedAt: expect.any(String),
-    //             __typename: "Todo",
-    //         },
-    //     });
-    // });
+        const result = await provider.create({
+            resource: "ResourceForCreates",
+            variables: { id: "id0", name: "a" },
+        });
+        expect(result).toEqual({
+            data: {
+                id: "id0",
+                name: "a",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreate",
+            },
+        });
+    });
 
     // test("getList", async () => {
     //     const client = generateClient();
@@ -190,68 +173,75 @@ describe("dataProvider", () => {
     // //     });
     // // });
 
-    // test("update", async () => {
-    //     const client = generateClient();
+    test("update", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
 
-    //     const provider = dataProvider(client, { queries, mutations });
-    //     const result = await provider.update({
-    //         resource: "Todos",
-    //         id: "id1",
-    //         variables: { name: "Updated Todo 1" },
-    //     });
+        // create resource
+        await provider.create({
+            resource: "ResourceForUpdates",
+            variables: { id: "id0", name: "Original name" },
+        });
 
-    //     expect(result).toEqual({
-    //         data: {
-    //             id: "id1",
-    //             name: "Updated Todo 1",
-    //             priority: 1,
-    //             createdAt: expect.any(String),
-    //             updatedAt: expect.any(String),
-    //             __typename: "Todo",
-    //         },
-    //     });
-    // });
+        // update resource
+        const result = await provider.update({
+            resource: "ResourceForUpdates",
+            id: "id0",
+            variables: { name: "Modified name" },
+        });
 
-    // test("deleteOne", async () => {
-    //     const client = generateClient();
+        expect(result).toEqual({
+            data: {
+                id: "id0",
+                name: "Modified name",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdate",
+            },
+        });
+    });
 
-    //     const provider = dataProvider(client, { queries, mutations });
-    //     await provider.create({
-    //         resource: "Todos",
-    //         variables: { id: "id2", name: "Todo for deletion", priority: 2 },
-    //     });
-    //     const result = await provider.deleteOne({
-    //         resource: "Todos",
-    //         id: "id2",
-    //     });
+    test("deleteOne", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
 
-    //     expect(result).toEqual({
-    //         data: {
-    //             id: "id2",
-    //             name: "Todo for deletion",
-    //             priority: 2,
-    //             createdAt: expect.any(String),
-    //             updatedAt: expect.any(String),
-    //             __typename: "Todo",
-    //         },
-    //     });
+        // create resource
+        await provider.create({
+            resource: "ResourceForDeleteOnes",
+            variables: { id: "id0", name: "a" },
+        });
 
-    //     // after deletion, the resource should not be found
-    //     expect(async () => {
-    //         await provider.getOne({
-    //             resource: "Todos",
-    //             id: "id2",
-    //         });
-    //     }).rejects.toThrow();
-    // });
+        // delete resource
+        const result = await provider.deleteOne({
+            resource: "ResourceForDeleteOnes",
+            id: "id0",
+        });
+
+        expect(result).toEqual({
+            data: {
+                id: "id0",
+                name: "a",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteOne",
+            },
+        });
+
+        // after deletion, the resource should not be found
+        expect(async () => {
+            await provider.getOne({
+                resource: "ResourceForDeleteOne",
+                id: "id0",
+            });
+        }).rejects.toThrow();
+    });
 
     test("getOne", async () => {
         const client = generateClient();
-
         const provider = dataProvider(client, { queries, mutations });
 
         // resource not found
-        expect(async () => {
+        await expect(async () => {
             await provider.getOne({
                 resource: "ResourceForGetOnes",
                 id: "id0",
@@ -269,7 +259,7 @@ describe("dataProvider", () => {
             resource: "ResourceForGetOnes",
             id: "id0",
         });
-        expect(result).toEqual({
+        await expect(result).toEqual({
             data: {
                 id: "id0",
                 name: "a",
@@ -278,7 +268,5 @@ describe("dataProvider", () => {
                 __typename: "ResourceForGetOne",
             },
         });
-
-
     });
 });

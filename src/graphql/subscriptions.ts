@@ -8,47 +8,95 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
-export const onCreateTodo = /* GraphQL */ `subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onCreateTodo(filter: $filter) {
+export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
+  $filter: ModelSubscriptionResourceForCreateFilterInput
+) {
+  onCreateResourceForCreate(filter: $filter) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateTodoSubscriptionVariables,
-  APITypes.OnCreateTodoSubscription
+  APITypes.OnCreateResourceForCreateSubscriptionVariables,
+  APITypes.OnCreateResourceForCreateSubscription
 >;
-export const onUpdateTodo = /* GraphQL */ `subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onUpdateTodo(filter: $filter) {
+export const onUpdateResourceForCreate = /* GraphQL */ `subscription OnUpdateResourceForCreate(
+  $filter: ModelSubscriptionResourceForCreateFilterInput
+) {
+  onUpdateResourceForCreate(filter: $filter) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateTodoSubscriptionVariables,
-  APITypes.OnUpdateTodoSubscription
+  APITypes.OnUpdateResourceForCreateSubscriptionVariables,
+  APITypes.OnUpdateResourceForCreateSubscription
 >;
-export const onDeleteTodo = /* GraphQL */ `subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-  onDeleteTodo(filter: $filter) {
+export const onDeleteResourceForCreate = /* GraphQL */ `subscription OnDeleteResourceForCreate(
+  $filter: ModelSubscriptionResourceForCreateFilterInput
+) {
+  onDeleteResourceForCreate(filter: $filter) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteTodoSubscriptionVariables,
-  APITypes.OnDeleteTodoSubscription
+  APITypes.OnDeleteResourceForCreateSubscriptionVariables,
+  APITypes.OnDeleteResourceForCreateSubscription
+>;
+export const onCreateResourceForUpdate = /* GraphQL */ `subscription OnCreateResourceForUpdate(
+  $filter: ModelSubscriptionResourceForUpdateFilterInput
+) {
+  onCreateResourceForUpdate(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForUpdateSubscriptionVariables,
+  APITypes.OnCreateResourceForUpdateSubscription
+>;
+export const onUpdateResourceForUpdate = /* GraphQL */ `subscription OnUpdateResourceForUpdate(
+  $filter: ModelSubscriptionResourceForUpdateFilterInput
+) {
+  onUpdateResourceForUpdate(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForUpdateSubscriptionVariables,
+  APITypes.OnUpdateResourceForUpdateSubscription
+>;
+export const onDeleteResourceForUpdate = /* GraphQL */ `subscription OnDeleteResourceForUpdate(
+  $filter: ModelSubscriptionResourceForUpdateFilterInput
+) {
+  onDeleteResourceForUpdate(filter: $filter) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForUpdateSubscriptionVariables,
+  APITypes.OnDeleteResourceForUpdateSubscription
 >;
 export const onCreateResourceForDeleteOne = /* GraphQL */ `subscription OnCreateResourceForDeleteOne(
   $filter: ModelSubscriptionResourceForDeleteOneFilterInput

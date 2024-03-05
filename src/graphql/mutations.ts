@@ -8,56 +8,101 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const createTodo = /* GraphQL */ `mutation CreateTodo(
-  $input: CreateTodoInput!
-  $condition: ModelTodoConditionInput
+export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
+  $input: CreateResourceForCreateInput!
+  $condition: ModelResourceForCreateConditionInput
 ) {
-  createTodo(input: $input, condition: $condition) {
+  createResourceForCreate(input: $input, condition: $condition) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateTodoMutationVariables,
-  APITypes.CreateTodoMutation
+  APITypes.CreateResourceForCreateMutationVariables,
+  APITypes.CreateResourceForCreateMutation
 >;
-export const updateTodo = /* GraphQL */ `mutation UpdateTodo(
-  $input: UpdateTodoInput!
-  $condition: ModelTodoConditionInput
+export const updateResourceForCreate = /* GraphQL */ `mutation UpdateResourceForCreate(
+  $input: UpdateResourceForCreateInput!
+  $condition: ModelResourceForCreateConditionInput
 ) {
-  updateTodo(input: $input, condition: $condition) {
+  updateResourceForCreate(input: $input, condition: $condition) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateTodoMutationVariables,
-  APITypes.UpdateTodoMutation
+  APITypes.UpdateResourceForCreateMutationVariables,
+  APITypes.UpdateResourceForCreateMutation
 >;
-export const deleteTodo = /* GraphQL */ `mutation DeleteTodo(
-  $input: DeleteTodoInput!
-  $condition: ModelTodoConditionInput
+export const deleteResourceForCreate = /* GraphQL */ `mutation DeleteResourceForCreate(
+  $input: DeleteResourceForCreateInput!
+  $condition: ModelResourceForCreateConditionInput
 ) {
-  deleteTodo(input: $input, condition: $condition) {
+  deleteResourceForCreate(input: $input, condition: $condition) {
     id
     name
-    priority
     createdAt
     updatedAt
     __typename
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteTodoMutationVariables,
-  APITypes.DeleteTodoMutation
+  APITypes.DeleteResourceForCreateMutationVariables,
+  APITypes.DeleteResourceForCreateMutation
+>;
+export const createResourceForUpdate = /* GraphQL */ `mutation CreateResourceForUpdate(
+  $input: CreateResourceForUpdateInput!
+  $condition: ModelResourceForUpdateConditionInput
+) {
+  createResourceForUpdate(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForUpdateMutationVariables,
+  APITypes.CreateResourceForUpdateMutation
+>;
+export const updateResourceForUpdate = /* GraphQL */ `mutation UpdateResourceForUpdate(
+  $input: UpdateResourceForUpdateInput!
+  $condition: ModelResourceForUpdateConditionInput
+) {
+  updateResourceForUpdate(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForUpdateMutationVariables,
+  APITypes.UpdateResourceForUpdateMutation
+>;
+export const deleteResourceForUpdate = /* GraphQL */ `mutation DeleteResourceForUpdate(
+  $input: DeleteResourceForUpdateInput!
+  $condition: ModelResourceForUpdateConditionInput
+) {
+  deleteResourceForUpdate(input: $input, condition: $condition) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForUpdateMutationVariables,
+  APITypes.DeleteResourceForUpdateMutation
 >;
 export const createResourceForDeleteOne = /* GraphQL */ `mutation CreateResourceForDeleteOne(
   $input: CreateResourceForDeleteOneInput!
