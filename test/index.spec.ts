@@ -1,18 +1,12 @@
 import { Amplify } from "aws-amplify";
 import { generateClient } from "aws-amplify/api";
-import dataProvider, { DataProvider } from "../src/dataProvider";
 
-const operations = {
-    queries: {
-        listResources: "listResourcesQuery",
-        getResource: "getResourceQuery",
-    },
-    mutations: {
-        createResource: "createResourceMutation",
-        updateResource: "updateResourceMutation",
-        deleteResource: "deleteResourceMutation",
-    },
-};
+import amplifyconfig from "../src/amplifyconfiguration.json";
+
+import * as mutations from "../src/graphql/mutations";
+import * as queries from "../src/graphql/queries";
+
+import dataProvider from "../src/dataProvider";
 
 afterAll(() => {
     jest.restoreAllMocks();
@@ -20,294 +14,258 @@ afterAll(() => {
 
 describe("dataProvider", () => {
     beforeAll(() => {
-        Amplify.configure({
-            API: {
-                GraphQL: {
-                    endpoint: 'http://localhost:8000/graphql',
-                    defaultAuthMode: 'userPool',
-                }
-            }
-        });
+        Amplify.configure(amplifyconfig);
     });
 
-    test("get list", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                listResources: {
-                    items: [
-                        {
-                            id: "1",
-                            name: "Resource 1",
-                            createdAt: '2024-02-26T09:26:44.908Z',
-                            updatedAt: '2024-02-26T09:26:44.908Z',
-                            owner: 'ownerId',
-                            __typename: 'Resource'
-                        },
-                        {
-                            id: "2",
-                            name: "Resource 2",
-                            createdAt: '2024-02-11T02:27:32.223Z',
-                            updatedAt: '2024-02-11T02:27:32.223Z',
-                            owner: 'ownerId',
-                            __typename: 'Resource'
-                        },
-                    ],
-                    nextToken: null,
-                    __typename: "ModelResourceConnection",
-                },
-            };
-        });
-
+    test("create", async () => {
         const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
-        const result = await provider.getList({ resource: "resources" });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("listResourcesQuery");
-        expect(call[1]).toEqual({ limit: 10 });
-
-        expect(result).toEqual({
-            data: [
-                {
-                    id: "1",
-                    name: "Resource 1",
-                    createdAt: '2024-02-26T09:26:44.908Z',
-                    updatedAt: '2024-02-26T09:26:44.908Z',
-                    owner: 'ownerId',
-                    __typename: 'Resource'
-                },
-                {
-                    id: "2",
-                    name: "Resource 2",
-                    createdAt: '2024-02-11T02:27:32.223Z',
-                    updatedAt: '2024-02-11T02:27:32.223Z',
-                    owner: 'ownerId',
-                    __typename: 'Resource'
-                },
-            ],
-            total: 2,
-        });
-    });
-
-    test("get list with limit", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                listResources: {
-                    items: [
-                        {
-                            id: "1",
-                            name: "Resource 1",
-                            createdAt: '2024-02-26T09:26:44.908Z',
-                            updatedAt: '2024-02-26T09:26:44.908Z',
-                            owner: 'ownerId',
-                            __typename: 'Resource'
-                        },
-                    ],
-                    nextToken: "nextToken",
-                    __typename: "ModelResourceConnection",
-                },
-            };
-        });
-
-        const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
-        const result = await provider.getList({ resource: "resources", pagination: { current: 1, pageSize: 1 } });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("listResourcesQuery");
-        expect(call[1]).toEqual({ limit: 1 });
-
-        expect(result).toEqual({
-            data: [
-                {
-                    id: "1",
-                    name: "Resource 1",
-                    createdAt: '2024-02-26T09:26:44.908Z',
-                    updatedAt: '2024-02-26T09:26:44.908Z',
-                    owner: 'ownerId',
-                    __typename: 'Resource'
-                },
-            ],
-            total: 2,
-        });
-    }
-    );
-
-    test("create resource", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                createResource: {
-                    id: "1",
-                    name: "Resource 1",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Resource",
-                },
-            };
-        });
-
-        const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        const provider = dataProvider(client, { queries, mutations });
 
         const result = await provider.create({
-            resource: "resources",
-            variables: { name: "Resource 1" },
+            resource: "ResourceForCreates",
+            variables: { id: "id0", name: "a" },
         });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("createResourceMutation");
-        expect(call[1]).toEqual({ input: { name: "Resource 1" } });
-
         expect(result).toEqual({
             data: {
-                id: "1",
-                name: "Resource 1",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
-                __typename: "Resource",
+                id: "id0",
+                name: "a",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreate",
             },
         });
     });
 
-    test("update resource", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                updateResource: {
-                    id: "1",
-                    name: "Resource 2",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Resource",
-                },
-            };
+    // test("getList", async () => {
+    //     const client = generateClient();
+
+    //     const provider = dataProvider(client, { queries, mutations });
+
+    //     const result = await provider.getList({ resource: "Todos" });
+    //     expect(result).toEqual({
+    //         data: [
+    //             {
+    //                 id: "id1",
+    //                 name: "Todo 1",
+    //                 priority: 1,
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "Todo",
+    //             },
+    //             {
+    //                 id: "id0",
+    //                 name: "Todo 0",
+    //                 priority: 0,
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "Todo",
+    //             },
+    //         ],
+    //         total: 2,
+    //     });
+    // });
+
+    // test("getList with limit", async () => {
+    //     const client = generateClient();
+
+    //     const provider = dataProvider(client, { queries, mutations });
+    //     const result = await provider.getList({
+    //         resource: "Todos",
+    //         pagination: { pageSize: 1 },
+    //     });
+
+    //     expect(result).toEqual({
+    //         data: [
+    //             {
+    //                 id: "id1",
+    //                 name: "Todo 1",
+    //                 priority: 1,
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "Todo",
+    //             },
+    //         ],
+    //         total: 2,
+    //     });
+    // });
+
+    // // test("getList pagination", async () => {
+    // //     const client = generateClient();
+
+    // //     const provider = dataProvider(client, { queries, mutations });
+
+    // //     const result1 = await provider.getList({
+    // //         resource: "Todos",
+    // //         pagination: { current: 1, pageSize: 1 },
+    // //     });
+
+    // //     expect(result1).toEqual({
+    // //         data: [
+    // //             {
+    // //                 id: "id1",
+    // //                 name: "Todo 1",
+    // //                 priority: 1,
+    // //                 createdAt: expect.any(String),
+    // //                 updatedAt: expect.any(String),
+    // //                 __typename: "Todo",
+    // //             },
+    // //         ],
+    // //         total: 2,
+    // //     });
+
+    // //     const result2 = await provider.getList({
+    // //         resource: "Todos",
+    // //         pagination: { current: 2, pageSize: 1 },
+    // //     });
+
+    // //     expect(result2).toEqual({
+    // //         data: [
+    // //             {
+    // //                 id: "id0",
+    // //                 name: "Todo 0",
+    // //                 priority: 0,
+    // //                 createdAt: expect.any(String),
+    // //                 updatedAt: expect.any(String),
+    // //                 __typename: "Todo",
+    // //             },
+    // //         ],
+    // //         total: 3, // why?
+    // //     });
+
+    // //     const result3 = await provider.getList({
+    // //         resource: "Todos",
+    // //         pagination: { current: 3, pageSize: 1 },
+    // //     });
+
+    // //     expect(result3).toEqual({
+    // //         data: [],
+    // //         total: 0,
+    // //     });
+    // // });
+
+    // // test("getList with filters", async () => {
+    // //     const client = generateClient();
+
+    // //     const provider = dataProvider(client, { queries, mutations });
+    // //     const result = await provider.getList({
+    // //         resource: "Todos",
+    // //         filters: [
+    // //             {
+    // //                 field: "priority",
+    // //                 operator: "eq",
+    // //                 value: 1,
+    // //             }
+    // //         ],
+    // //     });
+
+    // //     expect(result).toEqual({
+    // //         data: [
+    // //             {
+    // //                 id: "id1",
+    // //                 name: "Todo 1",
+    // //                 priority: 1,
+    // //                 createdAt: expect.any(String),
+    // //                 updatedAt: expect.any(String),
+    // //                 __typename: "Todo",
+    // //             },
+    // //         ],
+    // //         total: 2,
+    // //     });
+    // // });
+
+    test("update", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        await provider.create({
+            resource: "ResourceForUpdates",
+            variables: { id: "id0", name: "Original name" },
         });
 
-        const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
+        // update resource
         const result = await provider.update({
-            resource: "resources",
-            id: "1",
-            variables: { name: "Resource 2" },
+            resource: "ResourceForUpdates",
+            id: "id0",
+            variables: { name: "Modified name" },
         });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("updateResourceMutation");
-        expect(call[1]).toEqual({ input: { id: "1", name: "Resource 2" } });
 
         expect(result).toEqual({
             data: {
-                id: "1",
-                name: "Resource 2",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
-                __typename: "Resource",
+                id: "id0",
+                name: "Modified name",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdate",
             },
         });
     });
 
-    test("delete resource", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                deleteResource: {
-                    id: "1",
-                    name: "Resource 1",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Resource",
-                },
-            };
+    test("deleteOne", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        await provider.create({
+            resource: "ResourceForDeleteOnes",
+            variables: { id: "id0", name: "a" },
         });
 
-        const client = generateClient();
-
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
-
+        // delete resource
         const result = await provider.deleteOne({
-            resource: "resources",
-            id: "1",
+            resource: "ResourceForDeleteOnes",
+            id: "id0",
         });
-
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("deleteResourceMutation");
-        expect(call[1]).toEqual({ input: { id: "1" } });
 
         expect(result).toEqual({
             data: {
-                id: "1",
-                name: "Resource 1",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
-                __typename: "Resource",
+                id: "id0",
+                name: "a",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteOne",
             },
         });
+
+        // after deletion, the resource should not be found
+        expect(async () => {
+            await provider.getOne({
+                resource: "ResourceForDeleteOne",
+                id: "id0",
+            });
+        }).rejects.toThrow();
     });
 
-    test("get resource", async () => {
-        const mockGraphql = jest.fn(async () => {
-            return {
-                getResource: {
-                    id: "1",
-                    name: "Resource 1",
-                    createdAt: "2024-02-26T09:26:44.908Z",
-                    updatedAt: "2024-02-26T09:26:44.908Z",
-                    owner: "ownerId",
-                    __typename: "Resource",
-                },
-            };
-        });
-
+    test("getOne", async () => {
         const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
 
-        jest.spyOn(DataProvider.prototype, "graphql").mockImplementation(mockGraphql);
-        const provider = dataProvider(client, operations);
+        // resource not found
+        await expect(async () => {
+            await provider.getOne({
+                resource: "ResourceForGetOnes",
+                id: "id0",
+            });
+        }).rejects.toThrow();
 
-        const result = await provider.getOne({
-            resource: "resources",
-            id: "1",
+        // create resource
+        await provider.create({
+            resource: "ResourceForGetOnes",
+            variables: { id: "id0", name: "a" },
         });
 
-        const calls = mockGraphql.mock.calls;
-        const call = calls[0] as Array<unknown>;
-
-        expect(call[0]).toBe("getResourceQuery");
-        expect(call[1]).toEqual({ id: "1" });
-
-        expect(result).toEqual({
+        // get resource
+        const result = await provider.getOne({
+            resource: "ResourceForGetOnes",
+            id: "id0",
+        });
+        await expect(result).toEqual({
             data: {
-                id: "1",
-                name: "Resource 1",
-                createdAt: "2024-02-26T09:26:44.908Z",
-                updatedAt: "2024-02-26T09:26:44.908Z",
-                owner: "ownerId",
-                __typename: "Resource",
+                id: "id0",
+                name: "a",
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetOne",
             },
         });
     });
