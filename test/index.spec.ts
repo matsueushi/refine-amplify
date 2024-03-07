@@ -36,34 +36,50 @@ describe("dataProvider", () => {
         });
     });
 
-    // test("getList", async () => {
-    //     const client = generateClient();
+    test("getList", async () => {
+        const client = generateClient();
 
-    //     const provider = dataProvider(client, { queries, mutations });
+        const provider = dataProvider(client, { queries, mutations });
 
-    //     const result = await provider.getList({ resource: "Todos" });
-    //     expect(result).toEqual({
-    //         data: [
-    //             {
-    //                 id: "id1",
-    //                 name: "Todo 1",
-    //                 priority: 1,
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "Todo",
-    //             },
-    //             {
-    //                 id: "id0",
-    //                 name: "Todo 0",
-    //                 priority: 0,
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "Todo",
-    //             },
-    //         ],
-    //         total: 2,
-    //     });
-    // });
+        // create resource
+        for (let i = 0; i < 3; i++) {
+            await provider.create({
+                resource: "ResourceForGetLists",
+                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+            });
+        }
+
+        const result = await provider.getList({ resource: "ResourceForGetLists" });
+        expect(result.total).toEqual(3);
+        expect(Array.from(result.data).sort((a, b) => (a.id?.toString() || "0").localeCompare(b.id?.toString() || "0"))).toEqual(
+            [
+                {
+                    id: "id0",
+                    name: "resource-0",
+                    priority: 0,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetList",
+                },
+                {
+                    id: "id1",
+                    name: "resource-1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetList",
+                },
+                {
+                    id: "id2",
+                    name: "resource-2",
+                    priority: 2,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetList",
+                },
+            ]
+        );
+    });
 
     // test("getList with limit", async () => {
     //     const client = generateClient();
@@ -208,7 +224,7 @@ describe("dataProvider", () => {
         // create resource
         await provider.create({
             resource: "ResourceForDeleteOnes",
-            variables: { id: "id0", name: "a" },
+            variables: { id: "id0", name: "resource-0" },
         });
 
         // delete resource
@@ -220,7 +236,7 @@ describe("dataProvider", () => {
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "a",
+                name: "resource-0",
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForDeleteOne",
@@ -251,7 +267,7 @@ describe("dataProvider", () => {
         // create resource
         await provider.create({
             resource: "ResourceForGetOnes",
-            variables: { id: "id0", name: "a" },
+            variables: { id: "id0", name: "resource-0" },
         });
 
         // get resource
@@ -262,7 +278,7 @@ describe("dataProvider", () => {
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "a",
+                name: "resource-0",
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForGetOne",

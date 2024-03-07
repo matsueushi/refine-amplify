@@ -8,6 +8,57 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
+export const createResourceForGetList = /* GraphQL */ `mutation CreateResourceForGetList(
+  $input: CreateResourceForGetListInput!
+  $condition: ModelResourceForGetListConditionInput
+) {
+  createResourceForGetList(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetListMutationVariables,
+  APITypes.CreateResourceForGetListMutation
+>;
+export const updateResourceForGetList = /* GraphQL */ `mutation UpdateResourceForGetList(
+  $input: UpdateResourceForGetListInput!
+  $condition: ModelResourceForGetListConditionInput
+) {
+  updateResourceForGetList(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetListMutationVariables,
+  APITypes.UpdateResourceForGetListMutation
+>;
+export const deleteResourceForGetList = /* GraphQL */ `mutation DeleteResourceForGetList(
+  $input: DeleteResourceForGetListInput!
+  $condition: ModelResourceForGetListConditionInput
+) {
+  deleteResourceForGetList(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetListMutationVariables,
+  APITypes.DeleteResourceForGetListMutation
+>;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!
   $condition: ModelResourceForCreateConditionInput

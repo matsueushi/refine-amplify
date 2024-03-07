@@ -2,16 +2,18 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateResourceForCreateInput = {
+export type CreateResourceForGetListInput = {
   id?: string | null,
   name: string,
+  priority: number,
 };
 
-export type ModelResourceForCreateConditionInput = {
+export type ModelResourceForGetListConditionInput = {
   name?: ModelStringInput | null,
-  and?: Array< ModelResourceForCreateConditionInput | null > | null,
-  or?: Array< ModelResourceForCreateConditionInput | null > | null,
-  not?: ModelResourceForCreateConditionInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListConditionInput | null > | null,
+  or?: Array< ModelResourceForGetListConditionInput | null > | null,
+  not?: ModelResourceForGetListConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -52,6 +54,49 @@ export type ModelSizeInput = {
   ge?: number | null,
   gt?: number | null,
   between?: Array< number | null > | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type ResourceForGetList = {
+  __typename: "ResourceForGetList",
+  id: string,
+  name: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForGetListInput = {
+  id: string,
+  name?: string | null,
+  priority?: number | null,
+};
+
+export type DeleteResourceForGetListInput = {
+  id: string,
+};
+
+export type CreateResourceForCreateInput = {
+  id?: string | null,
+  name: string,
+};
+
+export type ModelResourceForCreateConditionInput = {
+  name?: ModelStringInput | null,
+  and?: Array< ModelResourceForCreateConditionInput | null > | null,
+  or?: Array< ModelResourceForCreateConditionInput | null > | null,
+  not?: ModelResourceForCreateConditionInput | null,
 };
 
 export type ResourceForCreate = {
@@ -187,12 +232,13 @@ export type DeleteResourceForGetManyInput = {
   id: string,
 };
 
-export type ModelResourceForCreateFilterInput = {
+export type ModelResourceForGetListFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
-  and?: Array< ModelResourceForCreateFilterInput | null > | null,
-  or?: Array< ModelResourceForCreateFilterInput | null > | null,
-  not?: ModelResourceForCreateFilterInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListFilterInput | null > | null,
+  or?: Array< ModelResourceForGetListFilterInput | null > | null,
+  not?: ModelResourceForGetListFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -209,6 +255,20 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type ModelResourceForGetListConnection = {
+  __typename: "ModelResourceForGetListConnection",
+  items:  Array<ResourceForGetList | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForCreateFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  and?: Array< ModelResourceForCreateFilterInput | null > | null,
+  or?: Array< ModelResourceForCreateFilterInput | null > | null,
+  not?: ModelResourceForCreateFilterInput | null,
 };
 
 export type ModelResourceForCreateConnection = {
@@ -273,11 +333,12 @@ export type ModelResourceForGetManyConnection = {
   nextToken?: string | null,
 };
 
-export type ModelSubscriptionResourceForCreateFilterInput = {
+export type ModelSubscriptionResourceForGetListFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
-  or?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForGetListFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForGetListFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
@@ -310,6 +371,25 @@ export type ModelSubscriptionStringInput = {
   notIn?: Array< string | null > | null,
 };
 
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
+};
+
+export type ModelSubscriptionResourceForCreateFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
+};
+
 export type ModelSubscriptionResourceForUpdateFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
@@ -336,6 +416,54 @@ export type ModelSubscriptionResourceForGetManyFilterInput = {
   name?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
+};
+
+export type CreateResourceForGetListMutationVariables = {
+  input: CreateResourceForGetListInput,
+  condition?: ModelResourceForGetListConditionInput | null,
+};
+
+export type CreateResourceForGetListMutation = {
+  createResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForGetListMutationVariables = {
+  input: UpdateResourceForGetListInput,
+  condition?: ModelResourceForGetListConditionInput | null,
+};
+
+export type UpdateResourceForGetListMutation = {
+  updateResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForGetListMutationVariables = {
+  input: DeleteResourceForGetListInput,
+  condition?: ModelResourceForGetListConditionInput | null,
+};
+
+export type DeleteResourceForGetListMutation = {
+  deleteResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateResourceForCreateMutationVariables = {
@@ -563,6 +691,42 @@ export type DeleteResourceForGetManyMutation = {
   } | null,
 };
 
+export type GetResourceForGetListQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForGetListQuery = {
+  getResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForGetListsQueryVariables = {
+  filter?: ModelResourceForGetListFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListsQuery = {
+  listResourceForGetLists?:  {
+    __typename: "ModelResourceForGetListConnection",
+    items:  Array< {
+      __typename: "ResourceForGetList",
+      id: string,
+      name: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetResourceForCreateQueryVariables = {
   id: string,
 };
@@ -730,6 +894,51 @@ export type ListResourceForGetManiesQuery = {
       updatedAt: string,
     } | null >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreateResourceForGetListSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListFilterInput | null,
+};
+
+export type OnCreateResourceForGetListSubscription = {
+  onCreateResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForGetListSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListFilterInput | null,
+};
+
+export type OnUpdateResourceForGetListSubscription = {
+  onUpdateResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForGetListSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListFilterInput | null,
+};
+
+export type OnDeleteResourceForGetListSubscription = {
+  onDeleteResourceForGetList?:  {
+    __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 

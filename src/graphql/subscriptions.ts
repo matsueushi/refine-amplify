@@ -8,6 +8,54 @@ type GeneratedSubscription<InputType, OutputType> = string & {
   __generatedSubscriptionOutput: OutputType;
 };
 
+export const onCreateResourceForGetList = /* GraphQL */ `subscription OnCreateResourceForGetList(
+  $filter: ModelSubscriptionResourceForGetListFilterInput
+) {
+  onCreateResourceForGetList(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForGetListSubscriptionVariables,
+  APITypes.OnCreateResourceForGetListSubscription
+>;
+export const onUpdateResourceForGetList = /* GraphQL */ `subscription OnUpdateResourceForGetList(
+  $filter: ModelSubscriptionResourceForGetListFilterInput
+) {
+  onUpdateResourceForGetList(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForGetListSubscriptionVariables,
+  APITypes.OnUpdateResourceForGetListSubscription
+>;
+export const onDeleteResourceForGetList = /* GraphQL */ `subscription OnDeleteResourceForGetList(
+  $filter: ModelSubscriptionResourceForGetListFilterInput
+) {
+  onDeleteResourceForGetList(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForGetListSubscriptionVariables,
+  APITypes.OnDeleteResourceForGetListSubscription
+>;
 export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
   $filter: ModelSubscriptionResourceForCreateFilterInput
 ) {

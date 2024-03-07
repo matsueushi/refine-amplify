@@ -8,6 +8,46 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getResourceForGetList = /* GraphQL */ `query GetResourceForGetList($id: ID!) {
+  getResourceForGetList(id: $id) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListQueryVariables,
+  APITypes.GetResourceForGetListQuery
+>;
+export const listResourceForGetLists = /* GraphQL */ `query ListResourceForGetLists(
+  $filter: ModelResourceForGetListFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetLists(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListsQueryVariables,
+  APITypes.ListResourceForGetListsQuery
+>;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
     id
