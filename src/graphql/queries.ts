@@ -160,3 +160,41 @@ export const listResourceForGetOnes = /* GraphQL */ `query ListResourceForGetOne
   APITypes.ListResourceForGetOnesQueryVariables,
   APITypes.ListResourceForGetOnesQuery
 >;
+export const getResourceForGetMany = /* GraphQL */ `query GetResourceForGetMany($id: ID!) {
+  getResourceForGetMany(id: $id) {
+    id
+    name
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetManyQueryVariables,
+  APITypes.GetResourceForGetManyQuery
+>;
+export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetManies(
+  $filter: ModelResourceForGetManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetManiesQueryVariables,
+  APITypes.ListResourceForGetManiesQuery
+>;

@@ -21,3 +21,8 @@ type ResourceForGetOne @model {
   id: ID!
   name: String!
 }
+
+type ResourceForGetMany @model {
+  id: ID!
+  name: String!
+}

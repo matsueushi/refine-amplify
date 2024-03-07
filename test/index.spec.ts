@@ -230,7 +230,7 @@ describe("dataProvider", () => {
         // after deletion, the resource should not be found
         expect(async () => {
             await provider.getOne({
-                resource: "ResourceForDeleteOne",
+                resource: "ResourceForDeleteOnes",
                 id: "id0",
             });
         }).rejects.toThrow();
@@ -259,7 +259,7 @@ describe("dataProvider", () => {
             resource: "ResourceForGetOnes",
             id: "id0",
         });
-        await expect(result).toEqual({
+        expect(result).toEqual({
             data: {
                 id: "id0",
                 name: "a",
@@ -269,4 +269,49 @@ describe("dataProvider", () => {
             },
         });
     });
+
+    // test("getMany", async () => {
+    //     const client = generateClient();
+    //     const provider = dataProvider(client, { queries, mutations });
+
+    //     for (let i = 0; i < 5; i++) {
+    //         // create resource
+    //         await provider.create({
+    //             resource: "ResourceForGetManys",
+    //             variables: { id: `id${i}`, name: `a-${i}` },
+    //         });
+    //     }
+
+    //     // get resource
+    //     const result = await provider.getMany({
+    //         resource: "ResourceForGetManies", // Manys? Manies?
+    //         ids: ["id0", "id1", "id2"],
+    //     });
+    //     expect(result).toEqual({
+    //         data: [
+    //             {
+    //                 id: "id0",
+    //                 name: "a-0",
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "ResourceForGetMany",
+    //             },
+    //             {
+    //                 id: "id1",
+    //                 name: "a-1",
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "ResourceForGetMany",
+    //             },
+    //             {
+    //                 id: "id2",
+    //                 name: "a-2",
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "ResourceForGetMany",
+    //             },
+    //         ],
+    //     });
+    // });
+
 });
