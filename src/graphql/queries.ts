@@ -204,6 +204,7 @@ export const getResourceForGetMany = /* GraphQL */ `query GetResourceForGetMany(
   getResourceForGetMany(id: $id) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename
@@ -226,6 +227,7 @@ export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetM
     items {
       id
       name
+      priority
       createdAt
       updatedAt
       __typename

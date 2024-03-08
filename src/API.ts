@@ -206,10 +206,12 @@ export type DeleteResourceForGetOneInput = {
 export type CreateResourceForGetManyInput = {
   id?: string | null,
   name: string,
+  priority: number,
 };
 
 export type ModelResourceForGetManyConditionInput = {
   name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetManyConditionInput | null > | null,
   or?: Array< ModelResourceForGetManyConditionInput | null > | null,
   not?: ModelResourceForGetManyConditionInput | null,
@@ -219,6 +221,7 @@ export type ResourceForGetMany = {
   __typename: "ResourceForGetMany",
   id: string,
   name: string,
+  priority: number,
   createdAt: string,
   updatedAt: string,
 };
@@ -226,6 +229,7 @@ export type ResourceForGetMany = {
 export type UpdateResourceForGetManyInput = {
   id: string,
   name?: string | null,
+  priority?: number | null,
 };
 
 export type DeleteResourceForGetManyInput = {
@@ -322,6 +326,7 @@ export type ModelResourceForGetOneConnection = {
 export type ModelResourceForGetManyFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelResourceForGetManyFilterInput | null > | null,
   not?: ModelResourceForGetManyFilterInput | null,
@@ -414,6 +419,7 @@ export type ModelSubscriptionResourceForGetOneFilterInput = {
 export type ModelSubscriptionResourceForGetManyFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
 };
@@ -656,6 +662,7 @@ export type CreateResourceForGetManyMutation = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -671,6 +678,7 @@ export type UpdateResourceForGetManyMutation = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -686,6 +694,7 @@ export type DeleteResourceForGetManyMutation = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -872,6 +881,7 @@ export type GetResourceForGetManyQuery = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -890,6 +900,7 @@ export type ListResourceForGetManiesQuery = {
       __typename: "ResourceForGetMany",
       id: string,
       name: string,
+      priority: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1119,6 +1130,7 @@ export type OnCreateResourceForGetManySubscription = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1133,6 +1145,7 @@ export type OnUpdateResourceForGetManySubscription = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1147,6 +1160,7 @@ export type OnDeleteResourceForGetManySubscription = {
     __typename: "ResourceForGetMany",
     id: string,
     name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,

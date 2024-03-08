@@ -202,18 +202,23 @@ const dataProvider = (
             ids,
             meta,
         }: GetManyParams): Promise<GetManyResponse<TData>> => {
-            const queryName = getQueryName("list", resource);
+            const queryName = getQueryName("get", resource);
             const query = getQuery(queryName);
 
-            const filter = {
-                or: ids.map((id) => ({ id: { eq: id } })),
-            };
+            const queriesData = [];
 
-            const response = await graphql(query, { filter });
-            const data = response[queryName];
+            // Executes the queries
+            for (const id of ids) {
+                const response = await graphql(query, { id });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
 
             return {
-                data: data.items,
+                data: queriesData,
             };
         },
         createMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({

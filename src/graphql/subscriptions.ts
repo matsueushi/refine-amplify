@@ -242,6 +242,7 @@ export const onCreateResourceForGetMany = /* GraphQL */ `subscription OnCreateRe
   onCreateResourceForGetMany(filter: $filter) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename
@@ -257,6 +258,7 @@ export const onUpdateResourceForGetMany = /* GraphQL */ `subscription OnUpdateRe
   onUpdateResourceForGetMany(filter: $filter) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename
@@ -272,6 +274,7 @@ export const onDeleteResourceForGetMany = /* GraphQL */ `subscription OnDeleteRe
   onDeleteResourceForGetMany(filter: $filter) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename

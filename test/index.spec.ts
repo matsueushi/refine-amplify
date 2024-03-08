@@ -23,12 +23,12 @@ describe("dataProvider", () => {
 
         const result = await provider.create({
             resource: "ResourceForCreates",
-            variables: { id: "id0", name: "a" },
+            variables: { id: "id0", name: "resource-0" },
         });
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "a",
+                name: "resource-0",
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForCreate",
@@ -51,7 +51,7 @@ describe("dataProvider", () => {
 
         const result = await provider.getList({ resource: "ResourceForGetLists" });
         expect(result.total).toEqual(3);
-        expect(Array.from(result.data).sort((a, b) => (a.id?.toString() || "0").localeCompare(b.id?.toString() || "0"))).toEqual(
+        expect(Array.from(result.data).sort((a, b) => a.priority - b.priority)).toEqual(
             [
                 {
                     id: "id0",
@@ -80,6 +80,8 @@ describe("dataProvider", () => {
             ]
         );
     });
+
+
 
     // test("getList with limit", async () => {
     //     const client = generateClient();
@@ -286,48 +288,51 @@ describe("dataProvider", () => {
         });
     });
 
-    // test("getMany", async () => {
-    //     const client = generateClient();
-    //     const provider = dataProvider(client, { queries, mutations });
+    test("getMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
 
-    //     for (let i = 0; i < 5; i++) {
-    //         // create resource
-    //         await provider.create({
-    //             resource: "ResourceForGetManys",
-    //             variables: { id: `id${i}`, name: `a-${i}` },
-    //         });
-    //     }
+        for (let i = 0; i < 5; i++) {
+            // create resource
+            await provider.create({
+                resource: "ResourceForGetManys",
+                variables: { id: `id${i}`, name: `a-${i}`, priority: i },
+            });
+        }
 
-    //     // get resource
-    //     const result = await provider.getMany({
-    //         resource: "ResourceForGetManies", // Manys? Manies?
-    //         ids: ["id0", "id1", "id2"],
-    //     });
-    //     expect(result).toEqual({
-    //         data: [
-    //             {
-    //                 id: "id0",
-    //                 name: "a-0",
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "ResourceForGetMany",
-    //             },
-    //             {
-    //                 id: "id1",
-    //                 name: "a-1",
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "ResourceForGetMany",
-    //             },
-    //             {
-    //                 id: "id2",
-    //                 name: "a-2",
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "ResourceForGetMany",
-    //             },
-    //         ],
-    //     });
-    // });
+        // get resource
+        const result = await provider.getMany({
+            resource: "ResourceForGetManys", // Manys? Manies?
+            ids: ["id0", "id1", "id2"],
+        });
+        expect(result).toEqual({
+            data: [
+                {
+                    id: "id0",
+                    name: "a-0",
+                    priority: 0,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetMany",
+                },
+                {
+                    id: "id1",
+                    name: "a-1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetMany",
+                },
+                {
+                    id: "id2",
+                    name: "a-2",
+                    priority: 2,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetMany",
+                },
+            ],
+        });
+    });
 
 });

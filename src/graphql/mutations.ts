@@ -258,6 +258,7 @@ export const createResourceForGetMany = /* GraphQL */ `mutation CreateResourceFo
   createResourceForGetMany(input: $input, condition: $condition) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename
@@ -274,6 +275,7 @@ export const updateResourceForGetMany = /* GraphQL */ `mutation UpdateResourceFo
   updateResourceForGetMany(input: $input, condition: $condition) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename
@@ -290,6 +292,7 @@ export const deleteResourceForGetMany = /* GraphQL */ `mutation DeleteResourceFo
   deleteResourceForGetMany(input: $input, condition: $condition) {
     id
     name
+    priority
     createdAt
     updatedAt
     __typename

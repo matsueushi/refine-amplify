@@ -31,4 +31,5 @@ type ResourceForGetOne @model {
 type ResourceForGetMany @model {
   id: ID!
   name: String!
+  priority: Int!
 }
