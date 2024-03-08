@@ -87,6 +87,39 @@ export type DeleteResourceForGetListInput = {
   id: string,
 };
 
+export type CreateResourceForGetListWithLimitInput = {
+  id?: string | null,
+  name: string,
+  priority: number,
+};
+
+export type ModelResourceForGetListWithLimitConditionInput = {
+  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithLimitConditionInput | null > | null,
+  or?: Array< ModelResourceForGetListWithLimitConditionInput | null > | null,
+  not?: ModelResourceForGetListWithLimitConditionInput | null,
+};
+
+export type ResourceForGetListWithLimit = {
+  __typename: "ResourceForGetListWithLimit",
+  id: string,
+  name: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForGetListWithLimitInput = {
+  id: string,
+  name?: string | null,
+  priority?: number | null,
+};
+
+export type DeleteResourceForGetListWithLimitInput = {
+  id: string,
+};
+
 export type CreateResourceForCreateInput = {
   id?: string | null,
   name: string,
@@ -267,6 +300,21 @@ export type ModelResourceForGetListConnection = {
   nextToken?: string | null,
 };
 
+export type ModelResourceForGetListWithLimitFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithLimitFilterInput | null > | null,
+  or?: Array< ModelResourceForGetListWithLimitFilterInput | null > | null,
+  not?: ModelResourceForGetListWithLimitFilterInput | null,
+};
+
+export type ModelResourceForGetListWithLimitConnection = {
+  __typename: "ModelResourceForGetListWithLimitConnection",
+  items:  Array<ResourceForGetListWithLimit | null >,
+  nextToken?: string | null,
+};
+
 export type ModelResourceForCreateFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -388,6 +436,14 @@ export type ModelSubscriptionIntInput = {
   notIn?: Array< number | null > | null,
 };
 
+export type ModelSubscriptionResourceForGetListWithLimitFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForGetListWithLimitFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForGetListWithLimitFilterInput | null > | null,
+};
+
 export type ModelSubscriptionResourceForCreateFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   name?: ModelSubscriptionStringInput | null,
@@ -464,6 +520,54 @@ export type DeleteResourceForGetListMutationVariables = {
 export type DeleteResourceForGetListMutation = {
   deleteResourceForGetList?:  {
     __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForGetListWithLimitMutationVariables = {
+  input: CreateResourceForGetListWithLimitInput,
+  condition?: ModelResourceForGetListWithLimitConditionInput | null,
+};
+
+export type CreateResourceForGetListWithLimitMutation = {
+  createResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForGetListWithLimitMutationVariables = {
+  input: UpdateResourceForGetListWithLimitInput,
+  condition?: ModelResourceForGetListWithLimitConditionInput | null,
+};
+
+export type UpdateResourceForGetListWithLimitMutation = {
+  updateResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForGetListWithLimitMutationVariables = {
+  input: DeleteResourceForGetListWithLimitInput,
+  condition?: ModelResourceForGetListWithLimitConditionInput | null,
+};
+
+export type DeleteResourceForGetListWithLimitMutation = {
+  deleteResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
     id: string,
     name: string,
     priority: number,
@@ -736,6 +840,42 @@ export type ListResourceForGetListsQuery = {
   } | null,
 };
 
+export type GetResourceForGetListWithLimitQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForGetListWithLimitQuery = {
+  getResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForGetListWithLimitsQueryVariables = {
+  filter?: ModelResourceForGetListWithLimitFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithLimitsQuery = {
+  listResourceForGetListWithLimits?:  {
+    __typename: "ModelResourceForGetListWithLimitConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithLimit",
+      id: string,
+      name: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetResourceForCreateQueryVariables = {
   id: string,
 };
@@ -945,6 +1085,51 @@ export type OnDeleteResourceForGetListSubscriptionVariables = {
 export type OnDeleteResourceForGetListSubscription = {
   onDeleteResourceForGetList?:  {
     __typename: "ResourceForGetList",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForGetListWithLimitSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithLimitFilterInput | null,
+};
+
+export type OnCreateResourceForGetListWithLimitSubscription = {
+  onCreateResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForGetListWithLimitSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithLimitFilterInput | null,
+};
+
+export type OnUpdateResourceForGetListWithLimitSubscription = {
+  onUpdateResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForGetListWithLimitSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithLimitFilterInput | null,
+};
+
+export type OnDeleteResourceForGetListWithLimitSubscription = {
+  onDeleteResourceForGetListWithLimit?:  {
+    __typename: "ResourceForGetListWithLimit",
     id: string,
     name: string,
     priority: number,

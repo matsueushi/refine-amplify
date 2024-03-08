@@ -8,6 +8,12 @@ type ResourceForGetList @model {
   priority: Int!
 }
 
+type ResourceForGetListWithLimit @model {
+  id: ID!
+  name: String!
+  priority: Int!
+}
+
 type ResourceForCreate @model {
   id: ID!
   name: String!

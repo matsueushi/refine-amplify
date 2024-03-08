@@ -51,61 +51,83 @@ describe("dataProvider", () => {
 
         const result = await provider.getList({ resource: "ResourceForGetLists" });
         expect(result.total).toEqual(3);
-        expect(Array.from(result.data).sort((a, b) => a.priority - b.priority)).toEqual(
-            [
-                {
-                    id: "id0",
-                    name: "resource-0",
-                    priority: 0,
-                    createdAt: expect.any(String),
-                    updatedAt: expect.any(String),
-                    __typename: "ResourceForGetList",
-                },
-                {
-                    id: "id1",
-                    name: "resource-1",
-                    priority: 1,
-                    createdAt: expect.any(String),
-                    updatedAt: expect.any(String),
-                    __typename: "ResourceForGetList",
-                },
-                {
-                    id: "id2",
-                    name: "resource-2",
-                    priority: 2,
-                    createdAt: expect.any(String),
-                    updatedAt: expect.any(String),
-                    __typename: "ResourceForGetList",
-                },
-            ]
-        );
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                name: "resource-0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetList",
+            },
+            {
+                id: "id1",
+                name: "resource-1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetList",
+            },
+            {
+                id: "id2",
+                name: "resource-2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetList",
+            },
+        ]);
     });
 
+    test("getList with limit", async () => {
+        const client = generateClient();
 
+        const provider = dataProvider(client, { queries, mutations });
 
-    // test("getList with limit", async () => {
-    //     const client = generateClient();
+        // create resource
+        for (let i = 0; i < 5; i++) {
+            await provider.create({
+                resource: "ResourceForGetListWithLimits",
+                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+            });
+        }
 
-    //     const provider = dataProvider(client, { queries, mutations });
-    //     const result = await provider.getList({
-    //         resource: "Todos",
-    //         pagination: { pageSize: 1 },
-    //     });
-
-    //     expect(result).toEqual({
-    //         data: [
-    //             {
-    //                 id: "id1",
-    //                 name: "Todo 1",
-    //                 priority: 1,
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "Todo",
-    //             },
-    //         ],
-    //         total: 2,
-    //     });
-    // });
+        const result = await provider.getList({
+            resource: "ResourceForGetListWithLimits",
+            pagination: { pageSize: 3 },
+        });
+        expect(result.total).toEqual(4);
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                name: "resource-0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetListWithLimit",
+            },
+            {
+                id: "id1",
+                name: "resource-1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetListWithLimit",
+            },
+            {
+                id: "id2",
+                name: "resource-2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForGetListWithLimit",
+            },
+        ]);
+    });
 
     // // test("getList pagination", async () => {
     // //     const client = generateClient();
@@ -334,5 +356,4 @@ describe("dataProvider", () => {
             ],
         });
     });
-
 });

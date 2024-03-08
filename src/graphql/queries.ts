@@ -48,6 +48,46 @@ export const listResourceForGetLists = /* GraphQL */ `query ListResourceForGetLi
   APITypes.ListResourceForGetListsQueryVariables,
   APITypes.ListResourceForGetListsQuery
 >;
+export const getResourceForGetListWithLimit = /* GraphQL */ `query GetResourceForGetListWithLimit($id: ID!) {
+  getResourceForGetListWithLimit(id: $id) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithLimitQueryVariables,
+  APITypes.GetResourceForGetListWithLimitQuery
+>;
+export const listResourceForGetListWithLimits = /* GraphQL */ `query ListResourceForGetListWithLimits(
+  $filter: ModelResourceForGetListWithLimitFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithLimits(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithLimitsQueryVariables,
+  APITypes.ListResourceForGetListWithLimitsQuery
+>;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
     id

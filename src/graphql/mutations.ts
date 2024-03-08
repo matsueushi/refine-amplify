@@ -59,6 +59,57 @@ export const deleteResourceForGetList = /* GraphQL */ `mutation DeleteResourceFo
   APITypes.DeleteResourceForGetListMutationVariables,
   APITypes.DeleteResourceForGetListMutation
 >;
+export const createResourceForGetListWithLimit = /* GraphQL */ `mutation CreateResourceForGetListWithLimit(
+  $input: CreateResourceForGetListWithLimitInput!
+  $condition: ModelResourceForGetListWithLimitConditionInput
+) {
+  createResourceForGetListWithLimit(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetListWithLimitMutationVariables,
+  APITypes.CreateResourceForGetListWithLimitMutation
+>;
+export const updateResourceForGetListWithLimit = /* GraphQL */ `mutation UpdateResourceForGetListWithLimit(
+  $input: UpdateResourceForGetListWithLimitInput!
+  $condition: ModelResourceForGetListWithLimitConditionInput
+) {
+  updateResourceForGetListWithLimit(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetListWithLimitMutationVariables,
+  APITypes.UpdateResourceForGetListWithLimitMutation
+>;
+export const deleteResourceForGetListWithLimit = /* GraphQL */ `mutation DeleteResourceForGetListWithLimit(
+  $input: DeleteResourceForGetListWithLimitInput!
+  $condition: ModelResourceForGetListWithLimitConditionInput
+) {
+  deleteResourceForGetListWithLimit(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetListWithLimitMutationVariables,
+  APITypes.DeleteResourceForGetListWithLimitMutation
+>;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!
   $condition: ModelResourceForCreateConditionInput

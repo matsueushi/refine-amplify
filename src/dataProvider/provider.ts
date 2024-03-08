@@ -117,7 +117,7 @@ const dataProvider = (
 
             let total = (current - 1) * pageSize + data.items.length;
             if (data.nextToken) {
-                total++;
+                total++; // there is at least one more page
             }
 
             return {
