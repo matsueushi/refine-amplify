@@ -110,11 +110,14 @@ export const deleteResourceForGetListWithLimit = /* GraphQL */ `mutation DeleteR
   APITypes.DeleteResourceForGetListWithLimitMutationVariables,
   APITypes.DeleteResourceForGetListWithLimitMutation
 >;
-export const createResource0ForGetListWithFilter = /* GraphQL */ `mutation CreateResource0ForGetListWithFilter(
-  $input: CreateResource0ForGetListWithFilterInput!
-  $condition: ModelResource0ForGetListWithFilterConditionInput
+export const createResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation CreateResourceForGetListWithLogicalFilter(
+  $input: CreateResourceForGetListWithLogicalFilterInput!
+  $condition: ModelResourceForGetListWithLogicalFilterConditionInput
 ) {
-  createResource0ForGetListWithFilter(input: $input, condition: $condition) {
+  createResourceForGetListWithLogicalFilter(
+    input: $input
+    condition: $condition
+  ) {
     id
     name
     priority
@@ -124,14 +127,17 @@ export const createResource0ForGetListWithFilter = /* GraphQL */ `mutation Creat
   }
 }
 ` as GeneratedMutation<
-  APITypes.CreateResource0ForGetListWithFilterMutationVariables,
-  APITypes.CreateResource0ForGetListWithFilterMutation
+  APITypes.CreateResourceForGetListWithLogicalFilterMutationVariables,
+  APITypes.CreateResourceForGetListWithLogicalFilterMutation
 >;
-export const updateResource0ForGetListWithFilter = /* GraphQL */ `mutation UpdateResource0ForGetListWithFilter(
-  $input: UpdateResource0ForGetListWithFilterInput!
-  $condition: ModelResource0ForGetListWithFilterConditionInput
+export const updateResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation UpdateResourceForGetListWithLogicalFilter(
+  $input: UpdateResourceForGetListWithLogicalFilterInput!
+  $condition: ModelResourceForGetListWithLogicalFilterConditionInput
 ) {
-  updateResource0ForGetListWithFilter(input: $input, condition: $condition) {
+  updateResourceForGetListWithLogicalFilter(
+    input: $input
+    condition: $condition
+  ) {
     id
     name
     priority
@@ -141,14 +147,17 @@ export const updateResource0ForGetListWithFilter = /* GraphQL */ `mutation Updat
   }
 }
 ` as GeneratedMutation<
-  APITypes.UpdateResource0ForGetListWithFilterMutationVariables,
-  APITypes.UpdateResource0ForGetListWithFilterMutation
+  APITypes.UpdateResourceForGetListWithLogicalFilterMutationVariables,
+  APITypes.UpdateResourceForGetListWithLogicalFilterMutation
 >;
-export const deleteResource0ForGetListWithFilter = /* GraphQL */ `mutation DeleteResource0ForGetListWithFilter(
-  $input: DeleteResource0ForGetListWithFilterInput!
-  $condition: ModelResource0ForGetListWithFilterConditionInput
+export const deleteResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation DeleteResourceForGetListWithLogicalFilter(
+  $input: DeleteResourceForGetListWithLogicalFilterInput!
+  $condition: ModelResourceForGetListWithLogicalFilterConditionInput
 ) {
-  deleteResource0ForGetListWithFilter(input: $input, condition: $condition) {
+  deleteResourceForGetListWithLogicalFilter(
+    input: $input
+    condition: $condition
+  ) {
     id
     name
     priority
@@ -158,8 +167,8 @@ export const deleteResource0ForGetListWithFilter = /* GraphQL */ `mutation Delet
   }
 }
 ` as GeneratedMutation<
-  APITypes.DeleteResource0ForGetListWithFilterMutationVariables,
-  APITypes.DeleteResource0ForGetListWithFilterMutation
+  APITypes.DeleteResourceForGetListWithLogicalFilterMutationVariables,
+  APITypes.DeleteResourceForGetListWithLogicalFilterMutation
 >;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!

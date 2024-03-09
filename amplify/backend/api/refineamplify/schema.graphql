@@ -14,7 +14,7 @@ type ResourceForGetListWithLimit @model {
   priority: Int!
 }
 
-type Resource0ForGetListWithFilter @model {
+type ResourceForGetListWithLogicalFilter @model {
   id: ID!
   name: String!
   priority: Int!

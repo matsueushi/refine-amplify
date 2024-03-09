@@ -104,10 +104,10 @@ export const onDeleteResourceForGetListWithLimit = /* GraphQL */ `subscription O
   APITypes.OnDeleteResourceForGetListWithLimitSubscriptionVariables,
   APITypes.OnDeleteResourceForGetListWithLimitSubscription
 >;
-export const onCreateResource0ForGetListWithFilter = /* GraphQL */ `subscription OnCreateResource0ForGetListWithFilter(
-  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+export const onCreateResourceForGetListWithLogicalFilter = /* GraphQL */ `subscription OnCreateResourceForGetListWithLogicalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput
 ) {
-  onCreateResource0ForGetListWithFilter(filter: $filter) {
+  onCreateResourceForGetListWithLogicalFilter(filter: $filter) {
     id
     name
     priority
@@ -117,13 +117,13 @@ export const onCreateResource0ForGetListWithFilter = /* GraphQL */ `subscription
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnCreateResource0ForGetListWithFilterSubscriptionVariables,
-  APITypes.OnCreateResource0ForGetListWithFilterSubscription
+  APITypes.OnCreateResourceForGetListWithLogicalFilterSubscriptionVariables,
+  APITypes.OnCreateResourceForGetListWithLogicalFilterSubscription
 >;
-export const onUpdateResource0ForGetListWithFilter = /* GraphQL */ `subscription OnUpdateResource0ForGetListWithFilter(
-  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+export const onUpdateResourceForGetListWithLogicalFilter = /* GraphQL */ `subscription OnUpdateResourceForGetListWithLogicalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput
 ) {
-  onUpdateResource0ForGetListWithFilter(filter: $filter) {
+  onUpdateResourceForGetListWithLogicalFilter(filter: $filter) {
     id
     name
     priority
@@ -133,13 +133,13 @@ export const onUpdateResource0ForGetListWithFilter = /* GraphQL */ `subscription
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnUpdateResource0ForGetListWithFilterSubscriptionVariables,
-  APITypes.OnUpdateResource0ForGetListWithFilterSubscription
+  APITypes.OnUpdateResourceForGetListWithLogicalFilterSubscriptionVariables,
+  APITypes.OnUpdateResourceForGetListWithLogicalFilterSubscription
 >;
-export const onDeleteResource0ForGetListWithFilter = /* GraphQL */ `subscription OnDeleteResource0ForGetListWithFilter(
-  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+export const onDeleteResourceForGetListWithLogicalFilter = /* GraphQL */ `subscription OnDeleteResourceForGetListWithLogicalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput
 ) {
-  onDeleteResource0ForGetListWithFilter(filter: $filter) {
+  onDeleteResourceForGetListWithLogicalFilter(filter: $filter) {
     id
     name
     priority
@@ -149,8 +149,8 @@ export const onDeleteResource0ForGetListWithFilter = /* GraphQL */ `subscription
   }
 }
 ` as GeneratedSubscription<
-  APITypes.OnDeleteResource0ForGetListWithFilterSubscriptionVariables,
-  APITypes.OnDeleteResource0ForGetListWithFilterSubscription
+  APITypes.OnDeleteResourceForGetListWithLogicalFilterSubscriptionVariables,
+  APITypes.OnDeleteResourceForGetListWithLogicalFilterSubscription
 >;
 export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
   $filter: ModelSubscriptionResourceForCreateFilterInput

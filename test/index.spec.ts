@@ -129,7 +129,7 @@ describe("dataProvider", () => {
         ]);
     });
 
-    test("getList with filters", async () => {
+    test("getList - logical filter", async () => {
         const client = generateClient();
 
         const provider = dataProvider(client, { queries, mutations });
@@ -137,13 +137,13 @@ describe("dataProvider", () => {
         // create resource
         for (let i = 0; i < 5; i++) {
             await provider.create({
-                resource: "Resource0ForGetListWithFilters",
+                resource: "ResourceForGetListWithLogicalFilters",
                 variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
             });
         }
 
         const result = await provider.getList({
-            resource: "Resource0ForGetListWithFilters",
+            resource: "ResourceForGetListWithLogicalFilters",
             filters: [
                 {
                     field: "priority",
@@ -161,7 +161,7 @@ describe("dataProvider", () => {
                     priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
-                    __typename: "Resource0ForGetListWithFilter",
+                    __typename: "ResourceForGetListWithLogicalFilter",
                 },
             ],
             total: 1,

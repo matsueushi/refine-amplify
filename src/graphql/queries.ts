@@ -88,8 +88,8 @@ export const listResourceForGetListWithLimits = /* GraphQL */ `query ListResourc
   APITypes.ListResourceForGetListWithLimitsQueryVariables,
   APITypes.ListResourceForGetListWithLimitsQuery
 >;
-export const getResource0ForGetListWithFilter = /* GraphQL */ `query GetResource0ForGetListWithFilter($id: ID!) {
-  getResource0ForGetListWithFilter(id: $id) {
+export const getResourceForGetListWithLogicalFilter = /* GraphQL */ `query GetResourceForGetListWithLogicalFilter($id: ID!) {
+  getResourceForGetListWithLogicalFilter(id: $id) {
     id
     name
     priority
@@ -99,15 +99,15 @@ export const getResource0ForGetListWithFilter = /* GraphQL */ `query GetResource
   }
 }
 ` as GeneratedQuery<
-  APITypes.GetResource0ForGetListWithFilterQueryVariables,
-  APITypes.GetResource0ForGetListWithFilterQuery
+  APITypes.GetResourceForGetListWithLogicalFilterQueryVariables,
+  APITypes.GetResourceForGetListWithLogicalFilterQuery
 >;
-export const listResource0ForGetListWithFilters = /* GraphQL */ `query ListResource0ForGetListWithFilters(
-  $filter: ModelResource0ForGetListWithFilterFilterInput
+export const listResourceForGetListWithLogicalFilters = /* GraphQL */ `query ListResourceForGetListWithLogicalFilters(
+  $filter: ModelResourceForGetListWithLogicalFilterFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listResource0ForGetListWithFilters(
+  listResourceForGetListWithLogicalFilters(
     filter: $filter
     limit: $limit
     nextToken: $nextToken
@@ -125,8 +125,8 @@ export const listResource0ForGetListWithFilters = /* GraphQL */ `query ListResou
   }
 }
 ` as GeneratedQuery<
-  APITypes.ListResource0ForGetListWithFiltersQueryVariables,
-  APITypes.ListResource0ForGetListWithFiltersQuery
+  APITypes.ListResourceForGetListWithLogicalFiltersQueryVariables,
+  APITypes.ListResourceForGetListWithLogicalFiltersQuery
 >;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
