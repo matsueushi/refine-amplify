@@ -110,6 +110,57 @@ export const deleteResourceForGetListWithLimit = /* GraphQL */ `mutation DeleteR
   APITypes.DeleteResourceForGetListWithLimitMutationVariables,
   APITypes.DeleteResourceForGetListWithLimitMutation
 >;
+export const createResource0ForGetListWithFilter = /* GraphQL */ `mutation CreateResource0ForGetListWithFilter(
+  $input: CreateResource0ForGetListWithFilterInput!
+  $condition: ModelResource0ForGetListWithFilterConditionInput
+) {
+  createResource0ForGetListWithFilter(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResource0ForGetListWithFilterMutationVariables,
+  APITypes.CreateResource0ForGetListWithFilterMutation
+>;
+export const updateResource0ForGetListWithFilter = /* GraphQL */ `mutation UpdateResource0ForGetListWithFilter(
+  $input: UpdateResource0ForGetListWithFilterInput!
+  $condition: ModelResource0ForGetListWithFilterConditionInput
+) {
+  updateResource0ForGetListWithFilter(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResource0ForGetListWithFilterMutationVariables,
+  APITypes.UpdateResource0ForGetListWithFilterMutation
+>;
+export const deleteResource0ForGetListWithFilter = /* GraphQL */ `mutation DeleteResource0ForGetListWithFilter(
+  $input: DeleteResource0ForGetListWithFilterInput!
+  $condition: ModelResource0ForGetListWithFilterConditionInput
+) {
+  deleteResource0ForGetListWithFilter(input: $input, condition: $condition) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResource0ForGetListWithFilterMutationVariables,
+  APITypes.DeleteResource0ForGetListWithFilterMutation
+>;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!
   $condition: ModelResourceForCreateConditionInput

@@ -129,89 +129,98 @@ describe("dataProvider", () => {
         ]);
     });
 
-    // // test("getList pagination", async () => {
-    // //     const client = generateClient();
+    test("getList with filters", async () => {
+        const client = generateClient();
 
-    // //     const provider = dataProvider(client, { queries, mutations });
+        const provider = dataProvider(client, { queries, mutations });
 
-    // //     const result1 = await provider.getList({
-    // //         resource: "Todos",
-    // //         pagination: { current: 1, pageSize: 1 },
-    // //     });
+        // create resource
+        for (let i = 0; i < 5; i++) {
+            await provider.create({
+                resource: "Resource0ForGetListWithFilters",
+                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+            });
+        }
 
-    // //     expect(result1).toEqual({
-    // //         data: [
-    // //             {
-    // //                 id: "id1",
-    // //                 name: "Todo 1",
-    // //                 priority: 1,
-    // //                 createdAt: expect.any(String),
-    // //                 updatedAt: expect.any(String),
-    // //                 __typename: "Todo",
-    // //             },
-    // //         ],
-    // //         total: 2,
-    // //     });
+        const result = await provider.getList({
+            resource: "Resource0ForGetListWithFilters",
+            filters: [
+                {
+                    field: "priority",
+                    operator: "eq",
+                    value: 1,
+                }
+            ],
+        });
 
-    // //     const result2 = await provider.getList({
-    // //         resource: "Todos",
-    // //         pagination: { current: 2, pageSize: 1 },
-    // //     });
+        expect(result).toEqual({
+            data: [
+                {
+                    id: "id1",
+                    name: "resource-1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "Resource0ForGetListWithFilter",
+                },
+            ],
+            total: 1,
+        });
+    });
 
-    // //     expect(result2).toEqual({
-    // //         data: [
-    // //             {
-    // //                 id: "id0",
-    // //                 name: "Todo 0",
-    // //                 priority: 0,
-    // //                 createdAt: expect.any(String),
-    // //                 updatedAt: expect.any(String),
-    // //                 __typename: "Todo",
-    // //             },
-    // //         ],
-    // //         total: 3, // why?
-    // //     });
+    // test("getList pagination", async () => {
+    //     const client = generateClient();
 
-    // //     const result3 = await provider.getList({
-    // //         resource: "Todos",
-    // //         pagination: { current: 3, pageSize: 1 },
-    // //     });
+    //     const provider = dataProvider(client, { queries, mutations });
 
-    // //     expect(result3).toEqual({
-    // //         data: [],
-    // //         total: 0,
-    // //     });
-    // // });
+    //     const result1 = await provider.getList({
+    //         resource: "Todos",
+    //         pagination: { current: 1, pageSize: 1 },
+    //     });
 
-    // // test("getList with filters", async () => {
-    // //     const client = generateClient();
+    //     expect(result1).toEqual({
+    //         data: [
+    //             {
+    //                 id: "id1",
+    //                 name: "Todo 1",
+    //                 priority: 1,
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "Todo",
+    //             },
+    //         ],
+    //         total: 2,
+    //     });
 
-    // //     const provider = dataProvider(client, { queries, mutations });
-    // //     const result = await provider.getList({
-    // //         resource: "Todos",
-    // //         filters: [
-    // //             {
-    // //                 field: "priority",
-    // //                 operator: "eq",
-    // //                 value: 1,
-    // //             }
-    // //         ],
-    // //     });
+    //     const result2 = await provider.getList({
+    //         resource: "Todos",
+    //         pagination: { current: 2, pageSize: 1 },
+    //     });
 
-    // //     expect(result).toEqual({
-    // //         data: [
-    // //             {
-    // //                 id: "id1",
-    // //                 name: "Todo 1",
-    // //                 priority: 1,
-    // //                 createdAt: expect.any(String),
-    // //                 updatedAt: expect.any(String),
-    // //                 __typename: "Todo",
-    // //             },
-    // //         ],
-    // //         total: 2,
-    // //     });
-    // // });
+    //     expect(result2).toEqual({
+    //         data: [
+    //             {
+    //                 id: "id0",
+    //                 name: "Todo 0",
+    //                 priority: 0,
+    //                 createdAt: expect.any(String),
+    //                 updatedAt: expect.any(String),
+    //                 __typename: "Todo",
+    //             },
+    //         ],
+    //         total: 3, // why?
+    //     });
+
+    //     const result3 = await provider.getList({
+    //         resource: "Todos",
+    //         pagination: { current: 3, pageSize: 1 },
+    //     });
+
+    //     expect(result3).toEqual({
+    //         data: [],
+    //         total: 0,
+    //     });
+    // });
 
     test("update", async () => {
         const client = generateClient();

@@ -104,6 +104,54 @@ export const onDeleteResourceForGetListWithLimit = /* GraphQL */ `subscription O
   APITypes.OnDeleteResourceForGetListWithLimitSubscriptionVariables,
   APITypes.OnDeleteResourceForGetListWithLimitSubscription
 >;
+export const onCreateResource0ForGetListWithFilter = /* GraphQL */ `subscription OnCreateResource0ForGetListWithFilter(
+  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+) {
+  onCreateResource0ForGetListWithFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResource0ForGetListWithFilterSubscriptionVariables,
+  APITypes.OnCreateResource0ForGetListWithFilterSubscription
+>;
+export const onUpdateResource0ForGetListWithFilter = /* GraphQL */ `subscription OnUpdateResource0ForGetListWithFilter(
+  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+) {
+  onUpdateResource0ForGetListWithFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResource0ForGetListWithFilterSubscriptionVariables,
+  APITypes.OnUpdateResource0ForGetListWithFilterSubscription
+>;
+export const onDeleteResource0ForGetListWithFilter = /* GraphQL */ `subscription OnDeleteResource0ForGetListWithFilter(
+  $filter: ModelSubscriptionResource0ForGetListWithFilterFilterInput
+) {
+  onDeleteResource0ForGetListWithFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResource0ForGetListWithFilterSubscriptionVariables,
+  APITypes.OnDeleteResource0ForGetListWithFilterSubscription
+>;
 export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
   $filter: ModelSubscriptionResourceForCreateFilterInput
 ) {

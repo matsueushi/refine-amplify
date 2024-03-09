@@ -22,6 +22,7 @@ import {
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
 import { Pagination } from "./utils";
+import { generateFilter } from "./utils/handleFilter";
 
 export interface Operations {
     queries: Record<string, string>;
@@ -95,7 +96,7 @@ const dataProvider = (
             // get the next token for the current page
             const nextToken = Pagination.getNextToken(signature, current);
 
-            // console.log("nextToken", nextToken);
+            let amplifyFilter = generateFilter(filters);
 
             if (nextToken === undefined) {
                 return {
@@ -106,8 +107,11 @@ const dataProvider = (
 
             const variables = {
                 limit: pageSize,
+                ...amplifyFilter,
                 nextToken,
             };
+
+            console.log(variables);
 
             const response = await graphql(query, variables);
             const data = response[queryName];
@@ -243,7 +247,7 @@ const dataProvider = (
             meta,
         }: UpdateManyParams<TVariables>): Promise<UpdateManyResponse<TData>> => {
             return { data: [] };
-        }
+        },
     };
 };
 
