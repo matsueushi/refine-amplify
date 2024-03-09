@@ -128,6 +128,46 @@ export const listResourceForGetListWithLogicalFilters = /* GraphQL */ `query Lis
   APITypes.ListResourceForGetListWithLogicalFiltersQueryVariables,
   APITypes.ListResourceForGetListWithLogicalFiltersQuery
 >;
+export const getResourceForGetListWithConditionalFilter = /* GraphQL */ `query GetResourceForGetListWithConditionalFilter($id: ID!) {
+  getResourceForGetListWithConditionalFilter(id: $id) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithConditionalFilterQueryVariables,
+  APITypes.GetResourceForGetListWithConditionalFilterQuery
+>;
+export const listResourceForGetListWithConditionalFilters = /* GraphQL */ `query ListResourceForGetListWithConditionalFilters(
+  $filter: ModelResourceForGetListWithConditionalFilterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithConditionalFilters(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      name
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithConditionalFiltersQueryVariables,
+  APITypes.ListResourceForGetListWithConditionalFiltersQuery
+>;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
     id

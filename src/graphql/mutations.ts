@@ -170,6 +170,66 @@ export const deleteResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation
   APITypes.DeleteResourceForGetListWithLogicalFilterMutationVariables,
   APITypes.DeleteResourceForGetListWithLogicalFilterMutation
 >;
+export const createResourceForGetListWithConditionalFilter = /* GraphQL */ `mutation CreateResourceForGetListWithConditionalFilter(
+  $input: CreateResourceForGetListWithConditionalFilterInput!
+  $condition: ModelResourceForGetListWithConditionalFilterConditionInput
+) {
+  createResourceForGetListWithConditionalFilter(
+    input: $input
+    condition: $condition
+  ) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetListWithConditionalFilterMutationVariables,
+  APITypes.CreateResourceForGetListWithConditionalFilterMutation
+>;
+export const updateResourceForGetListWithConditionalFilter = /* GraphQL */ `mutation UpdateResourceForGetListWithConditionalFilter(
+  $input: UpdateResourceForGetListWithConditionalFilterInput!
+  $condition: ModelResourceForGetListWithConditionalFilterConditionInput
+) {
+  updateResourceForGetListWithConditionalFilter(
+    input: $input
+    condition: $condition
+  ) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetListWithConditionalFilterMutationVariables,
+  APITypes.UpdateResourceForGetListWithConditionalFilterMutation
+>;
+export const deleteResourceForGetListWithConditionalFilter = /* GraphQL */ `mutation DeleteResourceForGetListWithConditionalFilter(
+  $input: DeleteResourceForGetListWithConditionalFilterInput!
+  $condition: ModelResourceForGetListWithConditionalFilterConditionInput
+) {
+  deleteResourceForGetListWithConditionalFilter(
+    input: $input
+    condition: $condition
+  ) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetListWithConditionalFilterMutationVariables,
+  APITypes.DeleteResourceForGetListWithConditionalFilterMutation
+>;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!
   $condition: ModelResourceForCreateConditionInput

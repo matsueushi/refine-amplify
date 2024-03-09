@@ -152,6 +152,54 @@ export const onDeleteResourceForGetListWithLogicalFilter = /* GraphQL */ `subscr
   APITypes.OnDeleteResourceForGetListWithLogicalFilterSubscriptionVariables,
   APITypes.OnDeleteResourceForGetListWithLogicalFilterSubscription
 >;
+export const onCreateResourceForGetListWithConditionalFilter = /* GraphQL */ `subscription OnCreateResourceForGetListWithConditionalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput
+) {
+  onCreateResourceForGetListWithConditionalFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForGetListWithConditionalFilterSubscriptionVariables,
+  APITypes.OnCreateResourceForGetListWithConditionalFilterSubscription
+>;
+export const onUpdateResourceForGetListWithConditionalFilter = /* GraphQL */ `subscription OnUpdateResourceForGetListWithConditionalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput
+) {
+  onUpdateResourceForGetListWithConditionalFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForGetListWithConditionalFilterSubscriptionVariables,
+  APITypes.OnUpdateResourceForGetListWithConditionalFilterSubscription
+>;
+export const onDeleteResourceForGetListWithConditionalFilter = /* GraphQL */ `subscription OnDeleteResourceForGetListWithConditionalFilter(
+  $filter: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput
+) {
+  onDeleteResourceForGetListWithConditionalFilter(filter: $filter) {
+    id
+    name
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscriptionVariables,
+  APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscription
+>;
 export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
   $filter: ModelSubscriptionResourceForCreateFilterInput
 ) {

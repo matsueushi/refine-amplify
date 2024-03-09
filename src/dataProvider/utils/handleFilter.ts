@@ -1,6 +1,12 @@
-import { ConditionalFilter, CrudFilters, CrudOperators, LogicalFilter, keys } from "@refinedev/core";
+import {
+    ConditionalFilter,
+    CrudFilter,
+    CrudFilters,
+    CrudOperators,
+    LogicalFilter,
+} from "@refinedev/core";
 
-export const mapOperator = (operator: CrudOperators) => {
+export const mapOperator = (operator: CrudOperators): string => {
     switch (operator) {
         case "eq":
             return "eq";
@@ -19,40 +25,40 @@ export const mapOperator = (operator: CrudOperators) => {
         default:
             throw new Error("Invalid operator");
     }
-}
+};
 
-export const generateLogicalFilter = (filter: LogicalFilter) => {
+export const generateLogicalFilter = (
+    filter: LogicalFilter,
+): Record<string, Record<string, any>> => {
     const { field, operator, value } = filter;
 
     const mappedOperator = mapOperator(operator);
     return {
-        [field]: { [mappedOperator]: value, }
+        [field]: { [mappedOperator]: value },
     };
-}
+};
 
 export const generateConditionalFilter = (filter: ConditionalFilter) => {
     const { operator, value } = filter;
-    return "bb";
+    const rawFilters: any[] = value.map(generateRawFilter);
+    return { [operator]: rawFilters };
+};
+
+export const generateRawFilter = (filter: CrudFilter) => {
+    if (
+        filter.operator !== "or" &&
+        filter.operator !== "and" &&
+        "field" in filter
+    ) {
+        return generateLogicalFilter(filter);
+    } else {
+        return generateConditionalFilter(filter);
+    }
 }
 
 export const generateFilter = (filters?: CrudFilters) => {
-    let rawFilters: any[] = []; // 暫定的にany型にしている
-
     if (filters) {
-        filters.map((filter) => {
-            if (
-                filter.operator !== "or" &&
-                filter.operator !== "and" &&
-                "field" in filter
-            ) {
-                rawFilters.push(generateLogicalFilter(filter));
-            } else {
-                rawFilters.push(generateConditionalFilter(filter));
-            }
-        });
-
-        console.log(rawFilters);
-
+        const rawFilters = filters.map(generateRawFilter);
         if (filters.length === 1) {
             return { filter: rawFilters[0] };
         } else {

@@ -20,6 +20,12 @@ type ResourceForGetListWithLogicalFilter @model {
   priority: Int!
 }
 
+type ResourceForGetListWithConditionalFilter @model {
+  id: ID!
+  name: String!
+  priority: Int!
+}
+
 type ResourceForCreate @model {
   id: ID!
   name: String!

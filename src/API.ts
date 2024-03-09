@@ -153,6 +153,39 @@ export type DeleteResourceForGetListWithLogicalFilterInput = {
   id: string,
 };
 
+export type CreateResourceForGetListWithConditionalFilterInput = {
+  id?: string | null,
+  name: string,
+  priority: number,
+};
+
+export type ModelResourceForGetListWithConditionalFilterConditionInput = {
+  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithConditionalFilterConditionInput | null > | null,
+  or?: Array< ModelResourceForGetListWithConditionalFilterConditionInput | null > | null,
+  not?: ModelResourceForGetListWithConditionalFilterConditionInput | null,
+};
+
+export type ResourceForGetListWithConditionalFilter = {
+  __typename: "ResourceForGetListWithConditionalFilter",
+  id: string,
+  name: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForGetListWithConditionalFilterInput = {
+  id: string,
+  name?: string | null,
+  priority?: number | null,
+};
+
+export type DeleteResourceForGetListWithConditionalFilterInput = {
+  id: string,
+};
+
 export type CreateResourceForCreateInput = {
   id?: string | null,
   name: string,
@@ -363,6 +396,21 @@ export type ModelResourceForGetListWithLogicalFilterConnection = {
   nextToken?: string | null,
 };
 
+export type ModelResourceForGetListWithConditionalFilterFilterInput = {
+  id?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithConditionalFilterFilterInput | null > | null,
+  or?: Array< ModelResourceForGetListWithConditionalFilterFilterInput | null > | null,
+  not?: ModelResourceForGetListWithConditionalFilterFilterInput | null,
+};
+
+export type ModelResourceForGetListWithConditionalFilterConnection = {
+  __typename: "ModelResourceForGetListWithConditionalFilterConnection",
+  items:  Array<ResourceForGetListWithConditionalFilter | null >,
+  nextToken?: string | null,
+};
+
 export type ModelResourceForCreateFilterInput = {
   id?: ModelIDInput | null,
   name?: ModelStringInput | null,
@@ -498,6 +546,14 @@ export type ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput = {
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForCreateFilterInput = {
@@ -672,6 +728,54 @@ export type DeleteResourceForGetListWithLogicalFilterMutationVariables = {
 export type DeleteResourceForGetListWithLogicalFilterMutation = {
   deleteResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForGetListWithConditionalFilterMutationVariables = {
+  input: CreateResourceForGetListWithConditionalFilterInput,
+  condition?: ModelResourceForGetListWithConditionalFilterConditionInput | null,
+};
+
+export type CreateResourceForGetListWithConditionalFilterMutation = {
+  createResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForGetListWithConditionalFilterMutationVariables = {
+  input: UpdateResourceForGetListWithConditionalFilterInput,
+  condition?: ModelResourceForGetListWithConditionalFilterConditionInput | null,
+};
+
+export type UpdateResourceForGetListWithConditionalFilterMutation = {
+  updateResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForGetListWithConditionalFilterMutationVariables = {
+  input: DeleteResourceForGetListWithConditionalFilterInput,
+  condition?: ModelResourceForGetListWithConditionalFilterConditionInput | null,
+};
+
+export type DeleteResourceForGetListWithConditionalFilterMutation = {
+  deleteResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
     name: string,
     priority: number,
@@ -1016,6 +1120,42 @@ export type ListResourceForGetListWithLogicalFiltersQuery = {
   } | null,
 };
 
+export type GetResourceForGetListWithConditionalFilterQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForGetListWithConditionalFilterQuery = {
+  getResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForGetListWithConditionalFiltersQueryVariables = {
+  filter?: ModelResourceForGetListWithConditionalFilterFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithConditionalFiltersQuery = {
+  listResourceForGetListWithConditionalFilters?:  {
+    __typename: "ModelResourceForGetListWithConditionalFilterConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithConditionalFilter",
+      id: string,
+      name: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetResourceForCreateQueryVariables = {
   id: string,
 };
@@ -1315,6 +1455,51 @@ export type OnDeleteResourceForGetListWithLogicalFilterSubscriptionVariables = {
 export type OnDeleteResourceForGetListWithLogicalFilterSubscription = {
   onDeleteResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForGetListWithConditionalFilterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null,
+};
+
+export type OnCreateResourceForGetListWithConditionalFilterSubscription = {
+  onCreateResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForGetListWithConditionalFilterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null,
+};
+
+export type OnUpdateResourceForGetListWithConditionalFilterSubscription = {
+  onUpdateResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
+    id: string,
+    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForGetListWithConditionalFilterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null,
+};
+
+export type OnDeleteResourceForGetListWithConditionalFilterSubscription = {
+  onDeleteResourceForGetListWithConditionalFilter?:  {
+    __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
     name: string,
     priority: number,

@@ -168,6 +168,60 @@ describe("dataProvider", () => {
         });
     });
 
+    test("getList - conditional filter", async () => {
+        const client = generateClient();
+
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        for (let i = 0; i < 5; i++) {
+            await provider.create({
+                resource: "ResourceForGetListWithConditionalFilters",
+                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+            });
+        }
+
+        const result = await provider.getList({
+            resource: "ResourceForGetListWithConditionalFilters",
+            filters: [
+                {
+                    operator: "or",
+                    value: [{
+                        field: "priority",
+                        operator: "eq",
+                        value: 1,
+                    }, {
+                        field: "priority",
+                        operator: "eq",
+                        value: 2,
+                    }],
+                }
+            ],
+        });
+
+        expect(result).toEqual({
+            data: [
+                {
+                    id: "id1",
+                    name: "resource-1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetListWithConditionalFilter",
+                },
+                {
+                    id: "id2",
+                    name: "resource-2",
+                    priority: 2,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    __typename: "ResourceForGetListWithConditionalFilter",
+                },
+            ],
+            total: 2,
+        });
+    });
+
     // test("getList pagination", async () => {
     //     const client = generateClient();
 

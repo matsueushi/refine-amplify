@@ -111,8 +111,6 @@ const dataProvider = (
                 nextToken,
             };
 
-            console.log(variables);
-
             const response = await graphql(query, variables);
             const data = response[queryName];
 
