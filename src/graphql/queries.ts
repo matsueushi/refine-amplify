@@ -11,7 +11,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
 export const getResourceForGetList = /* GraphQL */ `query GetResourceForGetList($id: ID!) {
   getResourceForGetList(id: $id) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -34,7 +33,6 @@ export const listResourceForGetLists = /* GraphQL */ `query ListResourceForGetLi
   ) {
     items {
       id
-      name
       priority
       createdAt
       updatedAt
@@ -51,7 +49,6 @@ export const listResourceForGetLists = /* GraphQL */ `query ListResourceForGetLi
 export const getResourceForGetListWithLimit = /* GraphQL */ `query GetResourceForGetListWithLimit($id: ID!) {
   getResourceForGetListWithLimit(id: $id) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -74,7 +71,6 @@ export const listResourceForGetListWithLimits = /* GraphQL */ `query ListResourc
   ) {
     items {
       id
-      name
       priority
       createdAt
       updatedAt
@@ -91,7 +87,6 @@ export const listResourceForGetListWithLimits = /* GraphQL */ `query ListResourc
 export const getResourceForGetListWithLogicalFilter = /* GraphQL */ `query GetResourceForGetListWithLogicalFilter($id: ID!) {
   getResourceForGetListWithLogicalFilter(id: $id) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -114,7 +109,6 @@ export const listResourceForGetListWithLogicalFilters = /* GraphQL */ `query Lis
   ) {
     items {
       id
-      name
       priority
       createdAt
       updatedAt
@@ -131,7 +125,6 @@ export const listResourceForGetListWithLogicalFilters = /* GraphQL */ `query Lis
 export const getResourceForGetListWithConditionalFilter = /* GraphQL */ `query GetResourceForGetListWithConditionalFilter($id: ID!) {
   getResourceForGetListWithConditionalFilter(id: $id) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -154,7 +147,6 @@ export const listResourceForGetListWithConditionalFilters = /* GraphQL */ `query
   ) {
     items {
       id
-      name
       priority
       createdAt
       updatedAt
@@ -168,10 +160,48 @@ export const listResourceForGetListWithConditionalFilters = /* GraphQL */ `query
   APITypes.ListResourceForGetListWithConditionalFiltersQueryVariables,
   APITypes.ListResourceForGetListWithConditionalFiltersQuery
 >;
+export const getResourceForGetListWithPagination = /* GraphQL */ `query GetResourceForGetListWithPagination($id: ID!) {
+  getResourceForGetListWithPagination(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithPaginationQueryVariables,
+  APITypes.GetResourceForGetListWithPaginationQuery
+>;
+export const listResourceForGetListWithPaginations = /* GraphQL */ `query ListResourceForGetListWithPaginations(
+  $filter: ModelResourceForGetListWithPaginationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithPaginations(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithPaginationsQueryVariables,
+  APITypes.ListResourceForGetListWithPaginationsQuery
+>;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -193,7 +223,7 @@ export const listResourceForCreates = /* GraphQL */ `query ListResourceForCreate
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -209,7 +239,7 @@ export const listResourceForCreates = /* GraphQL */ `query ListResourceForCreate
 export const getResourceForUpdate = /* GraphQL */ `query GetResourceForUpdate($id: ID!) {
   getResourceForUpdate(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -231,7 +261,7 @@ export const listResourceForUpdates = /* GraphQL */ `query ListResourceForUpdate
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -247,7 +277,7 @@ export const listResourceForUpdates = /* GraphQL */ `query ListResourceForUpdate
 export const getResourceForDeleteOne = /* GraphQL */ `query GetResourceForDeleteOne($id: ID!) {
   getResourceForDeleteOne(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -269,7 +299,7 @@ export const listResourceForDeleteOnes = /* GraphQL */ `query ListResourceForDel
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -285,7 +315,7 @@ export const listResourceForDeleteOnes = /* GraphQL */ `query ListResourceForDel
 export const getResourceForGetOne = /* GraphQL */ `query GetResourceForGetOne($id: ID!) {
   getResourceForGetOne(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -307,7 +337,7 @@ export const listResourceForGetOnes = /* GraphQL */ `query ListResourceForGetOne
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -323,7 +353,6 @@ export const listResourceForGetOnes = /* GraphQL */ `query ListResourceForGetOne
 export const getResourceForGetMany = /* GraphQL */ `query GetResourceForGetMany($id: ID!) {
   getResourceForGetMany(id: $id) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -346,7 +375,6 @@ export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetM
   ) {
     items {
       id
-      name
       priority
       createdAt
       updatedAt

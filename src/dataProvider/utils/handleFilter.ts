@@ -1,9 +1,7 @@
 import {
-    ConditionalFilter,
     CrudFilter,
     CrudFilters,
     CrudOperators,
-    LogicalFilter,
 } from "@refinedev/core";
 
 export const mapOperator = (operator: CrudOperators): string => {

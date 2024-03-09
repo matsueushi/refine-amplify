@@ -4,32 +4,26 @@
 
 export type CreateResourceForGetListInput = {
   id?: string | null,
-  name: string,
   priority: number,
 };
 
 export type ModelResourceForGetListConditionInput = {
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListConditionInput | null > | null,
   or?: Array< ModelResourceForGetListConditionInput | null > | null,
   not?: ModelResourceForGetListConditionInput | null,
 };
 
-export type ModelStringInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
 };
 
 export enum ModelAttributeTypes {
@@ -46,32 +40,9 @@ export enum ModelAttributeTypes {
 }
 
 
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type ResourceForGetList = {
   __typename: "ResourceForGetList",
   id: string,
-  name: string,
   priority: number,
   createdAt: string,
   updatedAt: string,
@@ -79,7 +50,6 @@ export type ResourceForGetList = {
 
 export type UpdateResourceForGetListInput = {
   id: string,
-  name?: string | null,
   priority?: number | null,
 };
 
@@ -89,12 +59,10 @@ export type DeleteResourceForGetListInput = {
 
 export type CreateResourceForGetListWithLimitInput = {
   id?: string | null,
-  name: string,
   priority: number,
 };
 
 export type ModelResourceForGetListWithLimitConditionInput = {
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithLimitConditionInput | null > | null,
   or?: Array< ModelResourceForGetListWithLimitConditionInput | null > | null,
@@ -104,7 +72,6 @@ export type ModelResourceForGetListWithLimitConditionInput = {
 export type ResourceForGetListWithLimit = {
   __typename: "ResourceForGetListWithLimit",
   id: string,
-  name: string,
   priority: number,
   createdAt: string,
   updatedAt: string,
@@ -112,7 +79,6 @@ export type ResourceForGetListWithLimit = {
 
 export type UpdateResourceForGetListWithLimitInput = {
   id: string,
-  name?: string | null,
   priority?: number | null,
 };
 
@@ -122,12 +88,10 @@ export type DeleteResourceForGetListWithLimitInput = {
 
 export type CreateResourceForGetListWithLogicalFilterInput = {
   id?: string | null,
-  name: string,
   priority: number,
 };
 
 export type ModelResourceForGetListWithLogicalFilterConditionInput = {
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithLogicalFilterConditionInput | null > | null,
   or?: Array< ModelResourceForGetListWithLogicalFilterConditionInput | null > | null,
@@ -137,7 +101,6 @@ export type ModelResourceForGetListWithLogicalFilterConditionInput = {
 export type ResourceForGetListWithLogicalFilter = {
   __typename: "ResourceForGetListWithLogicalFilter",
   id: string,
-  name: string,
   priority: number,
   createdAt: string,
   updatedAt: string,
@@ -145,7 +108,6 @@ export type ResourceForGetListWithLogicalFilter = {
 
 export type UpdateResourceForGetListWithLogicalFilterInput = {
   id: string,
-  name?: string | null,
   priority?: number | null,
 };
 
@@ -155,12 +117,10 @@ export type DeleteResourceForGetListWithLogicalFilterInput = {
 
 export type CreateResourceForGetListWithConditionalFilterInput = {
   id?: string | null,
-  name: string,
   priority: number,
 };
 
 export type ModelResourceForGetListWithConditionalFilterConditionInput = {
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithConditionalFilterConditionInput | null > | null,
   or?: Array< ModelResourceForGetListWithConditionalFilterConditionInput | null > | null,
@@ -170,7 +130,6 @@ export type ModelResourceForGetListWithConditionalFilterConditionInput = {
 export type ResourceForGetListWithConditionalFilter = {
   __typename: "ResourceForGetListWithConditionalFilter",
   id: string,
-  name: string,
   priority: number,
   createdAt: string,
   updatedAt: string,
@@ -178,7 +137,6 @@ export type ResourceForGetListWithConditionalFilter = {
 
 export type UpdateResourceForGetListWithConditionalFilterInput = {
   id: string,
-  name?: string | null,
   priority?: number | null,
 };
 
@@ -186,13 +144,42 @@ export type DeleteResourceForGetListWithConditionalFilterInput = {
   id: string,
 };
 
+export type CreateResourceForGetListWithPaginationInput = {
+  id?: string | null,
+  priority: number,
+};
+
+export type ModelResourceForGetListWithPaginationConditionInput = {
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
+  or?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
+  not?: ModelResourceForGetListWithPaginationConditionInput | null,
+};
+
+export type ResourceForGetListWithPagination = {
+  __typename: "ResourceForGetListWithPagination",
+  id: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForGetListWithPaginationInput = {
+  id: string,
+  priority?: number | null,
+};
+
+export type DeleteResourceForGetListWithPaginationInput = {
+  id: string,
+};
+
 export type CreateResourceForCreateInput = {
   id?: string | null,
-  name: string,
+  priority: number,
 };
 
 export type ModelResourceForCreateConditionInput = {
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForCreateConditionInput | null > | null,
   or?: Array< ModelResourceForCreateConditionInput | null > | null,
   not?: ModelResourceForCreateConditionInput | null,
@@ -201,14 +188,14 @@ export type ModelResourceForCreateConditionInput = {
 export type ResourceForCreate = {
   __typename: "ResourceForCreate",
   id: string,
-  name: string,
+  priority: number,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateResourceForCreateInput = {
   id: string,
-  name?: string | null,
+  priority?: number | null,
 };
 
 export type DeleteResourceForCreateInput = {
@@ -217,11 +204,11 @@ export type DeleteResourceForCreateInput = {
 
 export type CreateResourceForUpdateInput = {
   id?: string | null,
-  name: string,
+  priority: number,
 };
 
 export type ModelResourceForUpdateConditionInput = {
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForUpdateConditionInput | null > | null,
   or?: Array< ModelResourceForUpdateConditionInput | null > | null,
   not?: ModelResourceForUpdateConditionInput | null,
@@ -230,14 +217,14 @@ export type ModelResourceForUpdateConditionInput = {
 export type ResourceForUpdate = {
   __typename: "ResourceForUpdate",
   id: string,
-  name: string,
+  priority: number,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateResourceForUpdateInput = {
   id: string,
-  name?: string | null,
+  priority?: number | null,
 };
 
 export type DeleteResourceForUpdateInput = {
@@ -246,11 +233,11 @@ export type DeleteResourceForUpdateInput = {
 
 export type CreateResourceForDeleteOneInput = {
   id?: string | null,
-  name: string,
+  priority: number,
 };
 
 export type ModelResourceForDeleteOneConditionInput = {
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForDeleteOneConditionInput | null > | null,
   or?: Array< ModelResourceForDeleteOneConditionInput | null > | null,
   not?: ModelResourceForDeleteOneConditionInput | null,
@@ -259,14 +246,14 @@ export type ModelResourceForDeleteOneConditionInput = {
 export type ResourceForDeleteOne = {
   __typename: "ResourceForDeleteOne",
   id: string,
-  name: string,
+  priority: number,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateResourceForDeleteOneInput = {
   id: string,
-  name?: string | null,
+  priority?: number | null,
 };
 
 export type DeleteResourceForDeleteOneInput = {
@@ -275,11 +262,11 @@ export type DeleteResourceForDeleteOneInput = {
 
 export type CreateResourceForGetOneInput = {
   id?: string | null,
-  name: string,
+  priority: number,
 };
 
 export type ModelResourceForGetOneConditionInput = {
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetOneConditionInput | null > | null,
   or?: Array< ModelResourceForGetOneConditionInput | null > | null,
   not?: ModelResourceForGetOneConditionInput | null,
@@ -288,14 +275,14 @@ export type ModelResourceForGetOneConditionInput = {
 export type ResourceForGetOne = {
   __typename: "ResourceForGetOne",
   id: string,
-  name: string,
+  priority: number,
   createdAt: string,
   updatedAt: string,
 };
 
 export type UpdateResourceForGetOneInput = {
   id: string,
-  name?: string | null,
+  priority?: number | null,
 };
 
 export type DeleteResourceForGetOneInput = {
@@ -304,12 +291,10 @@ export type DeleteResourceForGetOneInput = {
 
 export type CreateResourceForGetManyInput = {
   id?: string | null,
-  name: string,
   priority: number,
 };
 
 export type ModelResourceForGetManyConditionInput = {
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetManyConditionInput | null > | null,
   or?: Array< ModelResourceForGetManyConditionInput | null > | null,
@@ -319,7 +304,6 @@ export type ModelResourceForGetManyConditionInput = {
 export type ResourceForGetMany = {
   __typename: "ResourceForGetMany",
   id: string,
-  name: string,
   priority: number,
   createdAt: string,
   updatedAt: string,
@@ -327,7 +311,6 @@ export type ResourceForGetMany = {
 
 export type UpdateResourceForGetManyInput = {
   id: string,
-  name?: string | null,
   priority?: number | null,
 };
 
@@ -337,7 +320,6 @@ export type DeleteResourceForGetManyInput = {
 
 export type ModelResourceForGetListFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListFilterInput | null > | null,
   or?: Array< ModelResourceForGetListFilterInput | null > | null,
@@ -360,6 +342,16 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
 export type ModelResourceForGetListConnection = {
   __typename: "ModelResourceForGetListConnection",
   items:  Array<ResourceForGetList | null >,
@@ -368,7 +360,6 @@ export type ModelResourceForGetListConnection = {
 
 export type ModelResourceForGetListWithLimitFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithLimitFilterInput | null > | null,
   or?: Array< ModelResourceForGetListWithLimitFilterInput | null > | null,
@@ -383,7 +374,6 @@ export type ModelResourceForGetListWithLimitConnection = {
 
 export type ModelResourceForGetListWithLogicalFilterFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithLogicalFilterFilterInput | null > | null,
   or?: Array< ModelResourceForGetListWithLogicalFilterFilterInput | null > | null,
@@ -398,7 +388,6 @@ export type ModelResourceForGetListWithLogicalFilterConnection = {
 
 export type ModelResourceForGetListWithConditionalFilterFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetListWithConditionalFilterFilterInput | null > | null,
   or?: Array< ModelResourceForGetListWithConditionalFilterFilterInput | null > | null,
@@ -411,9 +400,23 @@ export type ModelResourceForGetListWithConditionalFilterConnection = {
   nextToken?: string | null,
 };
 
+export type ModelResourceForGetListWithPaginationFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
+  or?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
+  not?: ModelResourceForGetListWithPaginationFilterInput | null,
+};
+
+export type ModelResourceForGetListWithPaginationConnection = {
+  __typename: "ModelResourceForGetListWithPaginationConnection",
+  items:  Array<ResourceForGetListWithPagination | null >,
+  nextToken?: string | null,
+};
+
 export type ModelResourceForCreateFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForCreateFilterInput | null > | null,
   or?: Array< ModelResourceForCreateFilterInput | null > | null,
   not?: ModelResourceForCreateFilterInput | null,
@@ -427,7 +430,7 @@ export type ModelResourceForCreateConnection = {
 
 export type ModelResourceForUpdateFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForUpdateFilterInput | null > | null,
   or?: Array< ModelResourceForUpdateFilterInput | null > | null,
   not?: ModelResourceForUpdateFilterInput | null,
@@ -441,7 +444,7 @@ export type ModelResourceForUpdateConnection = {
 
 export type ModelResourceForDeleteOneFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForDeleteOneFilterInput | null > | null,
   or?: Array< ModelResourceForDeleteOneFilterInput | null > | null,
   not?: ModelResourceForDeleteOneFilterInput | null,
@@ -455,7 +458,7 @@ export type ModelResourceForDeleteOneConnection = {
 
 export type ModelResourceForGetOneFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
+  priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetOneFilterInput | null > | null,
   or?: Array< ModelResourceForGetOneFilterInput | null > | null,
   not?: ModelResourceForGetOneFilterInput | null,
@@ -469,7 +472,6 @@ export type ModelResourceForGetOneConnection = {
 
 export type ModelResourceForGetManyFilterInput = {
   id?: ModelIDInput | null,
-  name?: ModelStringInput | null,
   priority?: ModelIntInput | null,
   and?: Array< ModelResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelResourceForGetManyFilterInput | null > | null,
@@ -484,28 +486,12 @@ export type ModelResourceForGetManyConnection = {
 
 export type ModelSubscriptionResourceForGetListFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListFilterInput | null > | null,
 };
 
 export type ModelSubscriptionIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  in?: Array< string | null > | null,
-  notIn?: Array< string | null > | null,
-};
-
-export type ModelSubscriptionStringInput = {
   ne?: string | null,
   eq?: string | null,
   le?: string | null,
@@ -534,7 +520,6 @@ export type ModelSubscriptionIntInput = {
 
 export type ModelSubscriptionResourceForGetListWithLimitFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithLimitFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithLimitFilterInput | null > | null,
@@ -542,7 +527,6 @@ export type ModelSubscriptionResourceForGetListWithLimitFilterInput = {
 
 export type ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput | null > | null,
@@ -550,43 +534,48 @@ export type ModelSubscriptionResourceForGetListWithLogicalFilterFilterInput = {
 
 export type ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
 };
 
+export type ModelSubscriptionResourceForGetListWithPaginationFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
+};
+
 export type ModelSubscriptionResourceForCreateFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForCreateFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForUpdateFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForUpdateFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForUpdateFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForDeleteOneFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForDeleteOneFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForDeleteOneFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForGetOneFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
+  priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetOneFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetOneFilterInput | null > | null,
 };
 
 export type ModelSubscriptionResourceForGetManyFilterInput = {
   id?: ModelSubscriptionIDInput | null,
-  name?: ModelSubscriptionStringInput | null,
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
@@ -601,7 +590,6 @@ export type CreateResourceForGetListMutation = {
   createResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -617,7 +605,6 @@ export type UpdateResourceForGetListMutation = {
   updateResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -633,7 +620,6 @@ export type DeleteResourceForGetListMutation = {
   deleteResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -649,7 +635,6 @@ export type CreateResourceForGetListWithLimitMutation = {
   createResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -665,7 +650,6 @@ export type UpdateResourceForGetListWithLimitMutation = {
   updateResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -681,7 +665,6 @@ export type DeleteResourceForGetListWithLimitMutation = {
   deleteResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -697,7 +680,6 @@ export type CreateResourceForGetListWithLogicalFilterMutation = {
   createResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -713,7 +695,6 @@ export type UpdateResourceForGetListWithLogicalFilterMutation = {
   updateResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -729,7 +710,6 @@ export type DeleteResourceForGetListWithLogicalFilterMutation = {
   deleteResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -745,7 +725,6 @@ export type CreateResourceForGetListWithConditionalFilterMutation = {
   createResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -761,7 +740,6 @@ export type UpdateResourceForGetListWithConditionalFilterMutation = {
   updateResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -777,7 +755,51 @@ export type DeleteResourceForGetListWithConditionalFilterMutation = {
   deleteResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForGetListWithPaginationMutationVariables = {
+  input: CreateResourceForGetListWithPaginationInput,
+  condition?: ModelResourceForGetListWithPaginationConditionInput | null,
+};
+
+export type CreateResourceForGetListWithPaginationMutation = {
+  createResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForGetListWithPaginationMutationVariables = {
+  input: UpdateResourceForGetListWithPaginationInput,
+  condition?: ModelResourceForGetListWithPaginationConditionInput | null,
+};
+
+export type UpdateResourceForGetListWithPaginationMutation = {
+  updateResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForGetListWithPaginationMutationVariables = {
+  input: DeleteResourceForGetListWithPaginationInput,
+  condition?: ModelResourceForGetListWithPaginationConditionInput | null,
+};
+
+export type DeleteResourceForGetListWithPaginationMutation = {
+  deleteResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -793,7 +815,7 @@ export type CreateResourceForCreateMutation = {
   createResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -808,7 +830,7 @@ export type UpdateResourceForCreateMutation = {
   updateResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -823,7 +845,7 @@ export type DeleteResourceForCreateMutation = {
   deleteResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -838,7 +860,7 @@ export type CreateResourceForUpdateMutation = {
   createResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -853,7 +875,7 @@ export type UpdateResourceForUpdateMutation = {
   updateResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -868,7 +890,7 @@ export type DeleteResourceForUpdateMutation = {
   deleteResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -883,7 +905,7 @@ export type CreateResourceForDeleteOneMutation = {
   createResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -898,7 +920,7 @@ export type UpdateResourceForDeleteOneMutation = {
   updateResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -913,7 +935,7 @@ export type DeleteResourceForDeleteOneMutation = {
   deleteResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -928,7 +950,7 @@ export type CreateResourceForGetOneMutation = {
   createResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -943,7 +965,7 @@ export type UpdateResourceForGetOneMutation = {
   updateResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -958,7 +980,7 @@ export type DeleteResourceForGetOneMutation = {
   deleteResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -973,7 +995,6 @@ export type CreateResourceForGetManyMutation = {
   createResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -989,7 +1010,6 @@ export type UpdateResourceForGetManyMutation = {
   updateResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1005,7 +1025,6 @@ export type DeleteResourceForGetManyMutation = {
   deleteResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1020,7 +1039,6 @@ export type GetResourceForGetListQuery = {
   getResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1039,7 +1057,6 @@ export type ListResourceForGetListsQuery = {
     items:  Array< {
       __typename: "ResourceForGetList",
       id: string,
-      name: string,
       priority: number,
       createdAt: string,
       updatedAt: string,
@@ -1056,7 +1073,6 @@ export type GetResourceForGetListWithLimitQuery = {
   getResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1075,7 +1091,6 @@ export type ListResourceForGetListWithLimitsQuery = {
     items:  Array< {
       __typename: "ResourceForGetListWithLimit",
       id: string,
-      name: string,
       priority: number,
       createdAt: string,
       updatedAt: string,
@@ -1092,7 +1107,6 @@ export type GetResourceForGetListWithLogicalFilterQuery = {
   getResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1111,7 +1125,6 @@ export type ListResourceForGetListWithLogicalFiltersQuery = {
     items:  Array< {
       __typename: "ResourceForGetListWithLogicalFilter",
       id: string,
-      name: string,
       priority: number,
       createdAt: string,
       updatedAt: string,
@@ -1128,7 +1141,6 @@ export type GetResourceForGetListWithConditionalFilterQuery = {
   getResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1147,7 +1159,40 @@ export type ListResourceForGetListWithConditionalFiltersQuery = {
     items:  Array< {
       __typename: "ResourceForGetListWithConditionalFilter",
       id: string,
-      name: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResourceForGetListWithPaginationQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForGetListWithPaginationQuery = {
+  getResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForGetListWithPaginationsQueryVariables = {
+  filter?: ModelResourceForGetListWithPaginationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithPaginationsQuery = {
+  listResourceForGetListWithPaginations?:  {
+    __typename: "ModelResourceForGetListWithPaginationConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithPagination",
+      id: string,
       priority: number,
       createdAt: string,
       updatedAt: string,
@@ -1164,7 +1209,7 @@ export type GetResourceForCreateQuery = {
   getResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1182,7 +1227,7 @@ export type ListResourceForCreatesQuery = {
     items:  Array< {
       __typename: "ResourceForCreate",
       id: string,
-      name: string,
+      priority: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1198,7 +1243,7 @@ export type GetResourceForUpdateQuery = {
   getResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1216,7 +1261,7 @@ export type ListResourceForUpdatesQuery = {
     items:  Array< {
       __typename: "ResourceForUpdate",
       id: string,
-      name: string,
+      priority: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1232,7 +1277,7 @@ export type GetResourceForDeleteOneQuery = {
   getResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1250,7 +1295,7 @@ export type ListResourceForDeleteOnesQuery = {
     items:  Array< {
       __typename: "ResourceForDeleteOne",
       id: string,
-      name: string,
+      priority: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1266,7 +1311,7 @@ export type GetResourceForGetOneQuery = {
   getResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1284,7 +1329,7 @@ export type ListResourceForGetOnesQuery = {
     items:  Array< {
       __typename: "ResourceForGetOne",
       id: string,
-      name: string,
+      priority: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1300,7 +1345,6 @@ export type GetResourceForGetManyQuery = {
   getResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1319,7 +1363,6 @@ export type ListResourceForGetManiesQuery = {
     items:  Array< {
       __typename: "ResourceForGetMany",
       id: string,
-      name: string,
       priority: number,
       createdAt: string,
       updatedAt: string,
@@ -1336,7 +1379,6 @@ export type OnCreateResourceForGetListSubscription = {
   onCreateResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1351,7 +1393,6 @@ export type OnUpdateResourceForGetListSubscription = {
   onUpdateResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1366,7 +1407,6 @@ export type OnDeleteResourceForGetListSubscription = {
   onDeleteResourceForGetList?:  {
     __typename: "ResourceForGetList",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1381,7 +1421,6 @@ export type OnCreateResourceForGetListWithLimitSubscription = {
   onCreateResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1396,7 +1435,6 @@ export type OnUpdateResourceForGetListWithLimitSubscription = {
   onUpdateResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1411,7 +1449,6 @@ export type OnDeleteResourceForGetListWithLimitSubscription = {
   onDeleteResourceForGetListWithLimit?:  {
     __typename: "ResourceForGetListWithLimit",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1426,7 +1463,6 @@ export type OnCreateResourceForGetListWithLogicalFilterSubscription = {
   onCreateResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1441,7 +1477,6 @@ export type OnUpdateResourceForGetListWithLogicalFilterSubscription = {
   onUpdateResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1456,7 +1491,6 @@ export type OnDeleteResourceForGetListWithLogicalFilterSubscription = {
   onDeleteResourceForGetListWithLogicalFilter?:  {
     __typename: "ResourceForGetListWithLogicalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1471,7 +1505,6 @@ export type OnCreateResourceForGetListWithConditionalFilterSubscription = {
   onCreateResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1486,7 +1519,6 @@ export type OnUpdateResourceForGetListWithConditionalFilterSubscription = {
   onUpdateResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1501,7 +1533,48 @@ export type OnDeleteResourceForGetListWithConditionalFilterSubscription = {
   onDeleteResourceForGetListWithConditionalFilter?:  {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
-    name: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForGetListWithPaginationSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithPaginationFilterInput | null,
+};
+
+export type OnCreateResourceForGetListWithPaginationSubscription = {
+  onCreateResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForGetListWithPaginationSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithPaginationFilterInput | null,
+};
+
+export type OnUpdateResourceForGetListWithPaginationSubscription = {
+  onUpdateResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForGetListWithPaginationSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithPaginationFilterInput | null,
+};
+
+export type OnDeleteResourceForGetListWithPaginationSubscription = {
+  onDeleteResourceForGetListWithPagination?:  {
+    __typename: "ResourceForGetListWithPagination",
+    id: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1516,7 +1589,7 @@ export type OnCreateResourceForCreateSubscription = {
   onCreateResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1530,7 +1603,7 @@ export type OnUpdateResourceForCreateSubscription = {
   onUpdateResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1544,7 +1617,7 @@ export type OnDeleteResourceForCreateSubscription = {
   onDeleteResourceForCreate?:  {
     __typename: "ResourceForCreate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1558,7 +1631,7 @@ export type OnCreateResourceForUpdateSubscription = {
   onCreateResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1572,7 +1645,7 @@ export type OnUpdateResourceForUpdateSubscription = {
   onUpdateResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1586,7 +1659,7 @@ export type OnDeleteResourceForUpdateSubscription = {
   onDeleteResourceForUpdate?:  {
     __typename: "ResourceForUpdate",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1600,7 +1673,7 @@ export type OnCreateResourceForDeleteOneSubscription = {
   onCreateResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1614,7 +1687,7 @@ export type OnUpdateResourceForDeleteOneSubscription = {
   onUpdateResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1628,7 +1701,7 @@ export type OnDeleteResourceForDeleteOneSubscription = {
   onDeleteResourceForDeleteOne?:  {
     __typename: "ResourceForDeleteOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1642,7 +1715,7 @@ export type OnCreateResourceForGetOneSubscription = {
   onCreateResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1656,7 +1729,7 @@ export type OnUpdateResourceForGetOneSubscription = {
   onUpdateResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1670,7 +1743,7 @@ export type OnDeleteResourceForGetOneSubscription = {
   onDeleteResourceForGetOne?:  {
     __typename: "ResourceForGetOne",
     id: string,
-    name: string,
+    priority: number,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1684,7 +1757,6 @@ export type OnCreateResourceForGetManySubscription = {
   onCreateResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1699,7 +1771,6 @@ export type OnUpdateResourceForGetManySubscription = {
   onUpdateResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,
@@ -1714,7 +1785,6 @@ export type OnDeleteResourceForGetManySubscription = {
   onDeleteResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
     id: string,
-    name: string,
     priority: number,
     createdAt: string,
     updatedAt: string,

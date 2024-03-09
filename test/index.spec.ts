@@ -23,12 +23,12 @@ describe("dataProvider", () => {
 
         const result = await provider.create({
             resource: "ResourceForCreates",
-            variables: { id: "id0", name: "resource-0" },
+            variables: { id: "id0", priority: 0 },
         });
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "resource-0",
+                priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForCreate",
@@ -45,7 +45,7 @@ describe("dataProvider", () => {
         for (let i = 0; i < 3; i++) {
             await provider.create({
                 resource: "ResourceForGetLists",
-                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+                variables: { id: `id${i}`, priority: i },
             });
         }
 
@@ -56,7 +56,6 @@ describe("dataProvider", () => {
         ).toEqual([
             {
                 id: "id0",
-                name: "resource-0",
                 priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -64,7 +63,6 @@ describe("dataProvider", () => {
             },
             {
                 id: "id1",
-                name: "resource-1",
                 priority: 1,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -72,7 +70,6 @@ describe("dataProvider", () => {
             },
             {
                 id: "id2",
-                name: "resource-2",
                 priority: 2,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -90,7 +87,7 @@ describe("dataProvider", () => {
         for (let i = 0; i < 5; i++) {
             await provider.create({
                 resource: "ResourceForGetListWithLimits",
-                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+                variables: { id: `id${i}`, priority: i },
             });
         }
 
@@ -104,7 +101,6 @@ describe("dataProvider", () => {
         ).toEqual([
             {
                 id: "id0",
-                name: "resource-0",
                 priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -112,7 +108,6 @@ describe("dataProvider", () => {
             },
             {
                 id: "id1",
-                name: "resource-1",
                 priority: 1,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -120,7 +115,6 @@ describe("dataProvider", () => {
             },
             {
                 id: "id2",
-                name: "resource-2",
                 priority: 2,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -138,7 +132,7 @@ describe("dataProvider", () => {
         for (let i = 0; i < 5; i++) {
             await provider.create({
                 resource: "ResourceForGetListWithLogicalFilters",
-                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+                variables: { id: `id${i}`, priority: i },
             });
         }
 
@@ -157,7 +151,6 @@ describe("dataProvider", () => {
             data: [
                 {
                     id: "id1",
-                    name: "resource-1",
                     priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
@@ -177,7 +170,7 @@ describe("dataProvider", () => {
         for (let i = 0; i < 5; i++) {
             await provider.create({
                 resource: "ResourceForGetListWithConditionalFilters",
-                variables: { id: `id${i}`, name: `resource-${i}`, priority: i },
+                variables: { id: `id${i}`, priority: i },
             });
         }
 
@@ -203,7 +196,6 @@ describe("dataProvider", () => {
             data: [
                 {
                     id: "id1",
-                    name: "resource-1",
                     priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
@@ -211,7 +203,6 @@ describe("dataProvider", () => {
                 },
                 {
                     id: "id2",
-                    name: "resource-2",
                     priority: 2,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
@@ -222,60 +213,6 @@ describe("dataProvider", () => {
         });
     });
 
-    // test("getList pagination", async () => {
-    //     const client = generateClient();
-
-    //     const provider = dataProvider(client, { queries, mutations });
-
-    //     const result1 = await provider.getList({
-    //         resource: "Todos",
-    //         pagination: { current: 1, pageSize: 1 },
-    //     });
-
-    //     expect(result1).toEqual({
-    //         data: [
-    //             {
-    //                 id: "id1",
-    //                 name: "Todo 1",
-    //                 priority: 1,
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "Todo",
-    //             },
-    //         ],
-    //         total: 2,
-    //     });
-
-    //     const result2 = await provider.getList({
-    //         resource: "Todos",
-    //         pagination: { current: 2, pageSize: 1 },
-    //     });
-
-    //     expect(result2).toEqual({
-    //         data: [
-    //             {
-    //                 id: "id0",
-    //                 name: "Todo 0",
-    //                 priority: 0,
-    //                 createdAt: expect.any(String),
-    //                 updatedAt: expect.any(String),
-    //                 __typename: "Todo",
-    //             },
-    //         ],
-    //         total: 3, // why?
-    //     });
-
-    //     const result3 = await provider.getList({
-    //         resource: "Todos",
-    //         pagination: { current: 3, pageSize: 1 },
-    //     });
-
-    //     expect(result3).toEqual({
-    //         data: [],
-    //         total: 0,
-    //     });
-    // });
-
     test("update", async () => {
         const client = generateClient();
         const provider = dataProvider(client, { queries, mutations });
@@ -283,20 +220,20 @@ describe("dataProvider", () => {
         // create resource
         await provider.create({
             resource: "ResourceForUpdates",
-            variables: { id: "id0", name: "Original name" },
+            variables: { id: "id0", priority: 0 },
         });
 
         // update resource
         const result = await provider.update({
             resource: "ResourceForUpdates",
             id: "id0",
-            variables: { name: "Modified name" },
+            variables: { priority: 100 },
         });
 
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "Modified name",
+                priority: 100,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForUpdate",
@@ -311,7 +248,7 @@ describe("dataProvider", () => {
         // create resource
         await provider.create({
             resource: "ResourceForDeleteOnes",
-            variables: { id: "id0", name: "resource-0" },
+            variables: { id: "id0", priority: 0 },
         });
 
         // delete resource
@@ -323,7 +260,7 @@ describe("dataProvider", () => {
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "resource-0",
+                priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForDeleteOne",
@@ -354,7 +291,7 @@ describe("dataProvider", () => {
         // create resource
         await provider.create({
             resource: "ResourceForGetOnes",
-            variables: { id: "id0", name: "resource-0" },
+            variables: { id: "id0", priority: 0 },
         });
 
         // get resource
@@ -365,7 +302,7 @@ describe("dataProvider", () => {
         expect(result).toEqual({
             data: {
                 id: "id0",
-                name: "resource-0",
+                priority: 0,
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
                 __typename: "ResourceForGetOne",
@@ -381,7 +318,7 @@ describe("dataProvider", () => {
             // create resource
             await provider.create({
                 resource: "ResourceForGetManys",
-                variables: { id: `id${i}`, name: `a-${i}`, priority: i },
+                variables: { id: `id${i}`, priority: i },
             });
         }
 
@@ -394,7 +331,6 @@ describe("dataProvider", () => {
             data: [
                 {
                     id: "id0",
-                    name: "a-0",
                     priority: 0,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
@@ -402,7 +338,6 @@ describe("dataProvider", () => {
                 },
                 {
                     id: "id1",
-                    name: "a-1",
                     priority: 1,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
@@ -410,7 +345,6 @@ describe("dataProvider", () => {
                 },
                 {
                     id: "id2",
-                    name: "a-2",
                     priority: 2,
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),

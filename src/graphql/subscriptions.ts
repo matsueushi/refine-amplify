@@ -13,7 +13,6 @@ export const onCreateResourceForGetList = /* GraphQL */ `subscription OnCreateRe
 ) {
   onCreateResourceForGetList(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -29,7 +28,6 @@ export const onUpdateResourceForGetList = /* GraphQL */ `subscription OnUpdateRe
 ) {
   onUpdateResourceForGetList(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -45,7 +43,6 @@ export const onDeleteResourceForGetList = /* GraphQL */ `subscription OnDeleteRe
 ) {
   onDeleteResourceForGetList(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -61,7 +58,6 @@ export const onCreateResourceForGetListWithLimit = /* GraphQL */ `subscription O
 ) {
   onCreateResourceForGetListWithLimit(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -77,7 +73,6 @@ export const onUpdateResourceForGetListWithLimit = /* GraphQL */ `subscription O
 ) {
   onUpdateResourceForGetListWithLimit(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -93,7 +88,6 @@ export const onDeleteResourceForGetListWithLimit = /* GraphQL */ `subscription O
 ) {
   onDeleteResourceForGetListWithLimit(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -109,7 +103,6 @@ export const onCreateResourceForGetListWithLogicalFilter = /* GraphQL */ `subscr
 ) {
   onCreateResourceForGetListWithLogicalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -125,7 +118,6 @@ export const onUpdateResourceForGetListWithLogicalFilter = /* GraphQL */ `subscr
 ) {
   onUpdateResourceForGetListWithLogicalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -141,7 +133,6 @@ export const onDeleteResourceForGetListWithLogicalFilter = /* GraphQL */ `subscr
 ) {
   onDeleteResourceForGetListWithLogicalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -157,7 +148,6 @@ export const onCreateResourceForGetListWithConditionalFilter = /* GraphQL */ `su
 ) {
   onCreateResourceForGetListWithConditionalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -173,7 +163,6 @@ export const onUpdateResourceForGetListWithConditionalFilter = /* GraphQL */ `su
 ) {
   onUpdateResourceForGetListWithConditionalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -189,7 +178,6 @@ export const onDeleteResourceForGetListWithConditionalFilter = /* GraphQL */ `su
 ) {
   onDeleteResourceForGetListWithConditionalFilter(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -200,12 +188,57 @@ export const onDeleteResourceForGetListWithConditionalFilter = /* GraphQL */ `su
   APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscriptionVariables,
   APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscription
 >;
+export const onCreateResourceForGetListWithPagination = /* GraphQL */ `subscription OnCreateResourceForGetListWithPagination(
+  $filter: ModelSubscriptionResourceForGetListWithPaginationFilterInput
+) {
+  onCreateResourceForGetListWithPagination(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForGetListWithPaginationSubscriptionVariables,
+  APITypes.OnCreateResourceForGetListWithPaginationSubscription
+>;
+export const onUpdateResourceForGetListWithPagination = /* GraphQL */ `subscription OnUpdateResourceForGetListWithPagination(
+  $filter: ModelSubscriptionResourceForGetListWithPaginationFilterInput
+) {
+  onUpdateResourceForGetListWithPagination(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForGetListWithPaginationSubscriptionVariables,
+  APITypes.OnUpdateResourceForGetListWithPaginationSubscription
+>;
+export const onDeleteResourceForGetListWithPagination = /* GraphQL */ `subscription OnDeleteResourceForGetListWithPagination(
+  $filter: ModelSubscriptionResourceForGetListWithPaginationFilterInput
+) {
+  onDeleteResourceForGetListWithPagination(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForGetListWithPaginationSubscriptionVariables,
+  APITypes.OnDeleteResourceForGetListWithPaginationSubscription
+>;
 export const onCreateResourceForCreate = /* GraphQL */ `subscription OnCreateResourceForCreate(
   $filter: ModelSubscriptionResourceForCreateFilterInput
 ) {
   onCreateResourceForCreate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -220,7 +253,7 @@ export const onUpdateResourceForCreate = /* GraphQL */ `subscription OnUpdateRes
 ) {
   onUpdateResourceForCreate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -235,7 +268,7 @@ export const onDeleteResourceForCreate = /* GraphQL */ `subscription OnDeleteRes
 ) {
   onDeleteResourceForCreate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -250,7 +283,7 @@ export const onCreateResourceForUpdate = /* GraphQL */ `subscription OnCreateRes
 ) {
   onCreateResourceForUpdate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -265,7 +298,7 @@ export const onUpdateResourceForUpdate = /* GraphQL */ `subscription OnUpdateRes
 ) {
   onUpdateResourceForUpdate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -280,7 +313,7 @@ export const onDeleteResourceForUpdate = /* GraphQL */ `subscription OnDeleteRes
 ) {
   onDeleteResourceForUpdate(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -295,7 +328,7 @@ export const onCreateResourceForDeleteOne = /* GraphQL */ `subscription OnCreate
 ) {
   onCreateResourceForDeleteOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -310,7 +343,7 @@ export const onUpdateResourceForDeleteOne = /* GraphQL */ `subscription OnUpdate
 ) {
   onUpdateResourceForDeleteOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -325,7 +358,7 @@ export const onDeleteResourceForDeleteOne = /* GraphQL */ `subscription OnDelete
 ) {
   onDeleteResourceForDeleteOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -340,7 +373,7 @@ export const onCreateResourceForGetOne = /* GraphQL */ `subscription OnCreateRes
 ) {
   onCreateResourceForGetOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -355,7 +388,7 @@ export const onUpdateResourceForGetOne = /* GraphQL */ `subscription OnUpdateRes
 ) {
   onUpdateResourceForGetOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -370,7 +403,7 @@ export const onDeleteResourceForGetOne = /* GraphQL */ `subscription OnDeleteRes
 ) {
   onDeleteResourceForGetOne(filter: $filter) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -385,7 +418,6 @@ export const onCreateResourceForGetMany = /* GraphQL */ `subscription OnCreateRe
 ) {
   onCreateResourceForGetMany(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -401,7 +433,6 @@ export const onUpdateResourceForGetMany = /* GraphQL */ `subscription OnUpdateRe
 ) {
   onUpdateResourceForGetMany(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -417,7 +448,6 @@ export const onDeleteResourceForGetMany = /* GraphQL */ `subscription OnDeleteRe
 ) {
   onDeleteResourceForGetMany(filter: $filter) {
     id
-    name
     priority
     createdAt
     updatedAt

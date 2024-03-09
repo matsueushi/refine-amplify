@@ -14,7 +14,6 @@ export const createResourceForGetList = /* GraphQL */ `mutation CreateResourceFo
 ) {
   createResourceForGetList(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -31,7 +30,6 @@ export const updateResourceForGetList = /* GraphQL */ `mutation UpdateResourceFo
 ) {
   updateResourceForGetList(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -48,7 +46,6 @@ export const deleteResourceForGetList = /* GraphQL */ `mutation DeleteResourceFo
 ) {
   deleteResourceForGetList(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -65,7 +62,6 @@ export const createResourceForGetListWithLimit = /* GraphQL */ `mutation CreateR
 ) {
   createResourceForGetListWithLimit(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -82,7 +78,6 @@ export const updateResourceForGetListWithLimit = /* GraphQL */ `mutation UpdateR
 ) {
   updateResourceForGetListWithLimit(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -99,7 +94,6 @@ export const deleteResourceForGetListWithLimit = /* GraphQL */ `mutation DeleteR
 ) {
   deleteResourceForGetListWithLimit(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -119,7 +113,6 @@ export const createResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -139,7 +132,6 @@ export const updateResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -159,7 +151,6 @@ export const deleteResourceForGetListWithLogicalFilter = /* GraphQL */ `mutation
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -179,7 +170,6 @@ export const createResourceForGetListWithConditionalFilter = /* GraphQL */ `muta
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -199,7 +189,6 @@ export const updateResourceForGetListWithConditionalFilter = /* GraphQL */ `muta
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -219,7 +208,6 @@ export const deleteResourceForGetListWithConditionalFilter = /* GraphQL */ `muta
     condition: $condition
   ) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -230,13 +218,61 @@ export const deleteResourceForGetListWithConditionalFilter = /* GraphQL */ `muta
   APITypes.DeleteResourceForGetListWithConditionalFilterMutationVariables,
   APITypes.DeleteResourceForGetListWithConditionalFilterMutation
 >;
+export const createResourceForGetListWithPagination = /* GraphQL */ `mutation CreateResourceForGetListWithPagination(
+  $input: CreateResourceForGetListWithPaginationInput!
+  $condition: ModelResourceForGetListWithPaginationConditionInput
+) {
+  createResourceForGetListWithPagination(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetListWithPaginationMutationVariables,
+  APITypes.CreateResourceForGetListWithPaginationMutation
+>;
+export const updateResourceForGetListWithPagination = /* GraphQL */ `mutation UpdateResourceForGetListWithPagination(
+  $input: UpdateResourceForGetListWithPaginationInput!
+  $condition: ModelResourceForGetListWithPaginationConditionInput
+) {
+  updateResourceForGetListWithPagination(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetListWithPaginationMutationVariables,
+  APITypes.UpdateResourceForGetListWithPaginationMutation
+>;
+export const deleteResourceForGetListWithPagination = /* GraphQL */ `mutation DeleteResourceForGetListWithPagination(
+  $input: DeleteResourceForGetListWithPaginationInput!
+  $condition: ModelResourceForGetListWithPaginationConditionInput
+) {
+  deleteResourceForGetListWithPagination(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetListWithPaginationMutationVariables,
+  APITypes.DeleteResourceForGetListWithPaginationMutation
+>;
 export const createResourceForCreate = /* GraphQL */ `mutation CreateResourceForCreate(
   $input: CreateResourceForCreateInput!
   $condition: ModelResourceForCreateConditionInput
 ) {
   createResourceForCreate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -252,7 +288,7 @@ export const updateResourceForCreate = /* GraphQL */ `mutation UpdateResourceFor
 ) {
   updateResourceForCreate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -268,7 +304,7 @@ export const deleteResourceForCreate = /* GraphQL */ `mutation DeleteResourceFor
 ) {
   deleteResourceForCreate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -284,7 +320,7 @@ export const createResourceForUpdate = /* GraphQL */ `mutation CreateResourceFor
 ) {
   createResourceForUpdate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -300,7 +336,7 @@ export const updateResourceForUpdate = /* GraphQL */ `mutation UpdateResourceFor
 ) {
   updateResourceForUpdate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -316,7 +352,7 @@ export const deleteResourceForUpdate = /* GraphQL */ `mutation DeleteResourceFor
 ) {
   deleteResourceForUpdate(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -332,7 +368,7 @@ export const createResourceForDeleteOne = /* GraphQL */ `mutation CreateResource
 ) {
   createResourceForDeleteOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -348,7 +384,7 @@ export const updateResourceForDeleteOne = /* GraphQL */ `mutation UpdateResource
 ) {
   updateResourceForDeleteOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -364,7 +400,7 @@ export const deleteResourceForDeleteOne = /* GraphQL */ `mutation DeleteResource
 ) {
   deleteResourceForDeleteOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -380,7 +416,7 @@ export const createResourceForGetOne = /* GraphQL */ `mutation CreateResourceFor
 ) {
   createResourceForGetOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -396,7 +432,7 @@ export const updateResourceForGetOne = /* GraphQL */ `mutation UpdateResourceFor
 ) {
   updateResourceForGetOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -412,7 +448,7 @@ export const deleteResourceForGetOne = /* GraphQL */ `mutation DeleteResourceFor
 ) {
   deleteResourceForGetOne(input: $input, condition: $condition) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -428,7 +464,6 @@ export const createResourceForGetMany = /* GraphQL */ `mutation CreateResourceFo
 ) {
   createResourceForGetMany(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -445,7 +480,6 @@ export const updateResourceForGetMany = /* GraphQL */ `mutation UpdateResourceFo
 ) {
   updateResourceForGetMany(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt
@@ -462,7 +496,6 @@ export const deleteResourceForGetMany = /* GraphQL */ `mutation DeleteResourceFo
 ) {
   deleteResourceForGetMany(input: $input, condition: $condition) {
     id
-    name
     priority
     createdAt
     updatedAt

@@ -4,50 +4,50 @@ input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING
 
 type ResourceForGetList @model {
   id: ID!
-  name: String!
   priority: Int!
 }
 
 type ResourceForGetListWithLimit @model {
   id: ID!
-  name: String!
   priority: Int!
 }
 
 type ResourceForGetListWithLogicalFilter @model {
   id: ID!
-  name: String!
   priority: Int!
 }
 
 type ResourceForGetListWithConditionalFilter @model {
   id: ID!
-  name: String!
+  priority: Int!
+}
+
+type ResourceForGetListWithPagination @model {
+  id: ID!
   priority: Int!
 }
 
 type ResourceForCreate @model {
   id: ID!
-  name: String!
+  priority: Int!
 }
 
 type ResourceForUpdate @model {
   id: ID!
-  name: String!
+  priority: Int!
 }
 
 type ResourceForDeleteOne @model {
   id: ID!
-  name: String!
+  priority: Int!
 }
 
 type ResourceForGetOne @model {
   id: ID!
-  name: String!
+  priority: Int!
 }
 
 type ResourceForGetMany @model {
   id: ID!
-  name: String!
   priority: Int!
 }
