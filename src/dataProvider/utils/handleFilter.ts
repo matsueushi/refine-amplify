@@ -27,34 +27,25 @@ export const mapOperator = (operator: CrudOperators): string => {
     }
 };
 
-export const generateLogicalFilter = (
-    filter: LogicalFilter,
-): Record<string, Record<string, any>> => {
-    const { field, operator, value } = filter;
-
-    const mappedOperator = mapOperator(operator);
-    return {
-        [field]: { [mappedOperator]: value },
-    };
-};
-
-export const generateConditionalFilter = (filter: ConditionalFilter) => {
-    const { operator, value } = filter;
-    const rawFilters: any[] = value.map(generateRawFilter);
-    return { [operator]: rawFilters };
-};
-
 export const generateRawFilter = (filter: CrudFilter) => {
     if (
         filter.operator !== "or" &&
         filter.operator !== "and" &&
         "field" in filter
     ) {
-        return generateLogicalFilter(filter);
+        // logical filter
+        const { field, operator, value } = filter;
+        const mappedOperator = mapOperator(operator);
+        return {
+            [field]: { [mappedOperator]: value },
+        };
     } else {
-        return generateConditionalFilter(filter);
+        // conditional filter
+        const { operator, value } = filter;
+        const rawFilters: any[] = value.map(generateRawFilter);
+        return { [operator]: rawFilters };
     }
-}
+};
 
 export const generateFilter = (filters?: CrudFilters) => {
     if (filters) {
