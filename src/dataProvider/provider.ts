@@ -11,9 +11,18 @@ import {
     UpdateResponse,
     DeleteOneResponse,
     GetOneResponse,
+    GetManyParams,
+    GetManyResponse,
+    CreateManyParams,
+    CreateManyResponse,
+    DeleteManyParams,
+    DeleteManyResponse,
+    UpdateManyParams,
+    UpdateManyResponse,
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
 import { Pagination } from "./utils";
+import { generateFilter } from "./utils/handleFilter";
 
 export interface Operations {
     queries: Record<string, string>;
@@ -23,7 +32,7 @@ export interface Operations {
 const dataProvider = (
     client: Client,
     operations: Operations,
-): DataProviderInterface => {
+): Omit<Required<DataProviderInterface>, "custom"> => {
     const graphql = async (
         query: string,
         variables: Record<string, unknown>,
@@ -64,6 +73,7 @@ const dataProvider = (
     };
 
     return {
+        // required methods
         getList: async <TData extends BaseRecord = BaseRecord>({
             resource,
             pagination,
@@ -73,7 +83,7 @@ const dataProvider = (
         }: GetListParams): Promise<GetListResponse<TData>> => {
             const { current = 1, pageSize = 10 } = pagination ?? {};
 
-            const queryName = getQueryName("list", resource);
+            const queryName = meta?.operation ?? getQueryName("list", resource);
             const query = getQuery(queryName);
 
             // identifier for the pagination token
@@ -83,10 +93,15 @@ const dataProvider = (
                 pageSize,
             });
 
+            let sorterArguments = sorters ? {
+                type: resource.charAt(0).toUpperCase() + resource.slice(1, -1),
+                sortDirection: sorters[0].order === "asc" ? "ASC" : "DESC"
+            } : {};
+
             // get the next token for the current page
             const nextToken = Pagination.getNextToken(signature, current);
 
-            // console.log("nextToken", nextToken);
+            let amplifyFilter = generateFilter(filters);
 
             if (nextToken === undefined) {
                 return {
@@ -96,6 +111,8 @@ const dataProvider = (
             }
 
             const variables = {
+                ...amplifyFilter,
+                ...sorterArguments,
                 limit: pageSize,
                 nextToken,
             };
@@ -108,7 +125,7 @@ const dataProvider = (
 
             let total = (current - 1) * pageSize + data.items.length;
             if (data.nextToken) {
-                total++;
+                total++; // there is at least one more page
             }
 
             return {
@@ -187,6 +204,54 @@ const dataProvider = (
             return { data };
         },
         getApiUrl: () => "",
+        // optional methods
+        getMany: async <TData extends BaseRecord = BaseRecord>({
+            resource,
+            ids,
+            meta,
+        }: GetManyParams): Promise<GetManyResponse<TData>> => {
+            const queryName = getQueryName("get", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const id of ids) {
+                const response = await graphql(query, { id });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
+        },
+        createMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
+            resource,
+            variables,
+            meta,
+        }: CreateManyParams<TVariables>): Promise<CreateManyResponse<TData>> => {
+            return { data: [] };
+        },
+        deleteMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
+            resource,
+            ids,
+            variables,
+            meta,
+        }: DeleteManyParams<TVariables>): Promise<DeleteManyResponse<TData>> => {
+            return { data: [] };
+        },
+        updateMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
+            resource,
+            ids,
+            variables,
+            meta,
+        }: UpdateManyParams<TVariables>): Promise<UpdateManyResponse<TData>> => {
+            return { data: [] };
+        },
     };
 };
 

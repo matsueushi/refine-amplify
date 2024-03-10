@@ -8,10 +8,240 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
+export const getResourceForGetList = /* GraphQL */ `query GetResourceForGetList($id: ID!) {
+  getResourceForGetList(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListQueryVariables,
+  APITypes.GetResourceForGetListQuery
+>;
+export const listResourceForGetLists = /* GraphQL */ `query ListResourceForGetLists(
+  $filter: ModelResourceForGetListFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetLists(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListsQueryVariables,
+  APITypes.ListResourceForGetListsQuery
+>;
+export const getResourceForGetListWithLimit = /* GraphQL */ `query GetResourceForGetListWithLimit($id: ID!) {
+  getResourceForGetListWithLimit(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithLimitQueryVariables,
+  APITypes.GetResourceForGetListWithLimitQuery
+>;
+export const listResourceForGetListWithLimits = /* GraphQL */ `query ListResourceForGetListWithLimits(
+  $filter: ModelResourceForGetListWithLimitFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithLimits(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithLimitsQueryVariables,
+  APITypes.ListResourceForGetListWithLimitsQuery
+>;
+export const getResourceForGetListWithLogicalFilter = /* GraphQL */ `query GetResourceForGetListWithLogicalFilter($id: ID!) {
+  getResourceForGetListWithLogicalFilter(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithLogicalFilterQueryVariables,
+  APITypes.GetResourceForGetListWithLogicalFilterQuery
+>;
+export const listResourceForGetListWithLogicalFilters = /* GraphQL */ `query ListResourceForGetListWithLogicalFilters(
+  $filter: ModelResourceForGetListWithLogicalFilterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithLogicalFilters(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithLogicalFiltersQueryVariables,
+  APITypes.ListResourceForGetListWithLogicalFiltersQuery
+>;
+export const getResourceForGetListWithConditionalFilter = /* GraphQL */ `query GetResourceForGetListWithConditionalFilter($id: ID!) {
+  getResourceForGetListWithConditionalFilter(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithConditionalFilterQueryVariables,
+  APITypes.GetResourceForGetListWithConditionalFilterQuery
+>;
+export const listResourceForGetListWithConditionalFilters = /* GraphQL */ `query ListResourceForGetListWithConditionalFilters(
+  $filter: ModelResourceForGetListWithConditionalFilterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithConditionalFilters(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithConditionalFiltersQueryVariables,
+  APITypes.ListResourceForGetListWithConditionalFiltersQuery
+>;
+export const getResourceForGetListWithSorter = /* GraphQL */ `query GetResourceForGetListWithSorter($id: ID!) {
+  getResourceForGetListWithSorter(id: $id) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithSorterQueryVariables,
+  APITypes.GetResourceForGetListWithSorterQuery
+>;
+export const listResourceForGetListWithSorters = /* GraphQL */ `query ListResourceForGetListWithSorters(
+  $filter: ModelResourceForGetListWithSorterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithSorters(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithSortersQueryVariables,
+  APITypes.ListResourceForGetListWithSortersQuery
+>;
+export const getResourceForGetListWithPagination = /* GraphQL */ `query GetResourceForGetListWithPagination($id: ID!) {
+  getResourceForGetListWithPagination(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithPaginationQueryVariables,
+  APITypes.GetResourceForGetListWithPaginationQuery
+>;
+export const listResourceForGetListWithPaginations = /* GraphQL */ `query ListResourceForGetListWithPaginations(
+  $filter: ModelResourceForGetListWithPaginationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithPaginations(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithPaginationsQueryVariables,
+  APITypes.ListResourceForGetListWithPaginationsQuery
+>;
 export const getResourceForCreate = /* GraphQL */ `query GetResourceForCreate($id: ID!) {
   getResourceForCreate(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -33,7 +263,7 @@ export const listResourceForCreates = /* GraphQL */ `query ListResourceForCreate
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -49,7 +279,7 @@ export const listResourceForCreates = /* GraphQL */ `query ListResourceForCreate
 export const getResourceForUpdate = /* GraphQL */ `query GetResourceForUpdate($id: ID!) {
   getResourceForUpdate(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -71,7 +301,7 @@ export const listResourceForUpdates = /* GraphQL */ `query ListResourceForUpdate
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -87,7 +317,7 @@ export const listResourceForUpdates = /* GraphQL */ `query ListResourceForUpdate
 export const getResourceForDeleteOne = /* GraphQL */ `query GetResourceForDeleteOne($id: ID!) {
   getResourceForDeleteOne(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -109,7 +339,7 @@ export const listResourceForDeleteOnes = /* GraphQL */ `query ListResourceForDel
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -125,7 +355,7 @@ export const listResourceForDeleteOnes = /* GraphQL */ `query ListResourceForDel
 export const getResourceForGetOne = /* GraphQL */ `query GetResourceForGetOne($id: ID!) {
   getResourceForGetOne(id: $id) {
     id
-    name
+    priority
     createdAt
     updatedAt
     __typename
@@ -147,7 +377,7 @@ export const listResourceForGetOnes = /* GraphQL */ `query ListResourceForGetOne
   ) {
     items {
       id
-      name
+      priority
       createdAt
       updatedAt
       __typename
@@ -159,4 +389,74 @@ export const listResourceForGetOnes = /* GraphQL */ `query ListResourceForGetOne
 ` as GeneratedQuery<
   APITypes.ListResourceForGetOnesQueryVariables,
   APITypes.ListResourceForGetOnesQuery
+>;
+export const getResourceForGetMany = /* GraphQL */ `query GetResourceForGetMany($id: ID!) {
+  getResourceForGetMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetManyQueryVariables,
+  APITypes.GetResourceForGetManyQuery
+>;
+export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetManies(
+  $filter: ModelResourceForGetManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetManiesQueryVariables,
+  APITypes.ListResourceForGetManiesQuery
+>;
+export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithSortersByCreatedAt(
+  $type: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResourceForGetListWithSorterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithSortersByCreatedAt(
+    type: $type
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithSortersByCreatedAtQueryVariables,
+  APITypes.ListResourceForGetListWithSortersByCreatedAtQuery
 >;

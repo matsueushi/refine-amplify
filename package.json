@@ -7,7 +7,7 @@
     "clean": "rimraf amplify/mock-data/dynamodb",
     "mock": "amplify mock api",
     "test": "jest --silent=false",
-    "ci": "start-server-and-test 'yarn clean && yarn mock' http://localhost:20002 'yarn test'"
+    "mock-and-test": "start-server-and-test 'yarn clean && yarn mock' http://localhost:20002 'yarn test'"
   },
   "repository": {
     "type": "git",
