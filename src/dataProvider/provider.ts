@@ -21,6 +21,8 @@ import {
     UpdateManyResponse,
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
+import pluralize from "pluralize";
+import camelCase from "camelcase";
 import { Pagination } from "./utils";
 import { generateFilter } from "./utils/handleFilter";
 
@@ -66,10 +68,12 @@ const dataProvider = (
     const getQueryName = (operation: string, resource: string): string => {
         const pluralOperations = ["list"];
         if (pluralOperations.includes(operation)) {
-            return `${operation}${resource.charAt(0).toUpperCase() + resource.slice(1)}`;
+            const pluralResource = pluralize.plural(resource);
+            return camelCase(`${operation}-${pluralResource}`);
         }
         // else singular operations ["create", "delete", "get", "update"]
-        return `${operation}${resource.charAt(0).toUpperCase() + resource.slice(1, -1)}`;
+        const singularResource = pluralize.singular(resource);
+        return camelCase(`${operation}-${singularResource}`);
     };
 
     return {
@@ -94,7 +98,7 @@ const dataProvider = (
             });
 
             let sorterArguments = sorters ? {
-                type: resource.charAt(0).toUpperCase() + resource.slice(1, -1),
+                type: pluralize.singular(resource),
                 sortDirection: sorters[0].order === "asc" ? "ASC" : "DESC"
             } : {};
 
