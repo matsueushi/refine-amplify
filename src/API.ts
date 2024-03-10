@@ -144,6 +144,68 @@ export type DeleteResourceForGetListWithConditionalFilterInput = {
   id: string,
 };
 
+export type CreateResourceForGetListWithSorterInput = {
+  id?: string | null,
+  priority: number,
+  type: string,
+  createdAt?: string | null,
+};
+
+export type ModelResourceForGetListWithSorterConditionInput = {
+  priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelResourceForGetListWithSorterConditionInput | null > | null,
+  or?: Array< ModelResourceForGetListWithSorterConditionInput | null > | null,
+  not?: ModelResourceForGetListWithSorterConditionInput | null,
+};
+
+export type ModelStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type ResourceForGetListWithSorter = {
+  __typename: "ResourceForGetListWithSorter",
+  id: string,
+  priority: number,
+  type: string,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForGetListWithSorterInput = {
+  id: string,
+  priority?: number | null,
+  type?: string | null,
+  createdAt?: string | null,
+};
+
+export type DeleteResourceForGetListWithSorterInput = {
+  id: string,
+};
+
 export type CreateResourceForGetListWithPaginationInput = {
   id?: string | null,
   priority: number,
@@ -342,16 +404,6 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
 export type ModelResourceForGetListConnection = {
   __typename: "ModelResourceForGetListConnection",
   items:  Array<ResourceForGetList | null >,
@@ -397,6 +449,22 @@ export type ModelResourceForGetListWithConditionalFilterFilterInput = {
 export type ModelResourceForGetListWithConditionalFilterConnection = {
   __typename: "ModelResourceForGetListWithConditionalFilterConnection",
   items:  Array<ResourceForGetListWithConditionalFilter | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForGetListWithSorterFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  and?: Array< ModelResourceForGetListWithSorterFilterInput | null > | null,
+  or?: Array< ModelResourceForGetListWithSorterFilterInput | null > | null,
+  not?: ModelResourceForGetListWithSorterFilterInput | null,
+};
+
+export type ModelResourceForGetListWithSorterConnection = {
+  __typename: "ModelResourceForGetListWithSorterConnection",
+  items:  Array<ResourceForGetListWithSorter | null >,
   nextToken?: string | null,
 };
 
@@ -484,6 +552,22 @@ export type ModelResourceForGetManyConnection = {
   nextToken?: string | null,
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
+
 export type ModelSubscriptionResourceForGetListFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   priority?: ModelSubscriptionIntInput | null,
@@ -537,6 +621,30 @@ export type ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput 
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithConditionalFilterFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForGetListWithSorterFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionResourceForGetListWithSorterFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForGetListWithSorterFilterInput | null > | null,
+};
+
+export type ModelSubscriptionStringInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  in?: Array< string | null > | null,
+  notIn?: Array< string | null > | null,
 };
 
 export type ModelSubscriptionResourceForGetListWithPaginationFilterInput = {
@@ -756,6 +864,54 @@ export type DeleteResourceForGetListWithConditionalFilterMutation = {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
     priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForGetListWithSorterMutationVariables = {
+  input: CreateResourceForGetListWithSorterInput,
+  condition?: ModelResourceForGetListWithSorterConditionInput | null,
+};
+
+export type CreateResourceForGetListWithSorterMutation = {
+  createResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForGetListWithSorterMutationVariables = {
+  input: UpdateResourceForGetListWithSorterInput,
+  condition?: ModelResourceForGetListWithSorterConditionInput | null,
+};
+
+export type UpdateResourceForGetListWithSorterMutation = {
+  updateResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForGetListWithSorterMutationVariables = {
+  input: DeleteResourceForGetListWithSorterInput,
+  condition?: ModelResourceForGetListWithSorterConditionInput | null,
+};
+
+export type DeleteResourceForGetListWithSorterMutation = {
+  deleteResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1167,6 +1323,42 @@ export type ListResourceForGetListWithConditionalFiltersQuery = {
   } | null,
 };
 
+export type GetResourceForGetListWithSorterQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForGetListWithSorterQuery = {
+  getResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForGetListWithSortersQueryVariables = {
+  filter?: ModelResourceForGetListWithSorterFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithSortersQuery = {
+  listResourceForGetListWithSorters?:  {
+    __typename: "ModelResourceForGetListWithSorterConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithSorter",
+      id: string,
+      priority: number,
+      type: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetResourceForGetListWithPaginationQueryVariables = {
   id: string,
 };
@@ -1371,6 +1563,30 @@ export type ListResourceForGetManiesQuery = {
   } | null,
 };
 
+export type ListResourceForGetListWithSortersByCreatedAtQueryVariables = {
+  type: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelResourceForGetListWithSorterFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithSortersByCreatedAtQuery = {
+  listResourceForGetListWithSortersByCreatedAt?:  {
+    __typename: "ModelResourceForGetListWithSorterConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithSorter",
+      id: string,
+      priority: number,
+      type: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateResourceForGetListSubscriptionVariables = {
   filter?: ModelSubscriptionResourceForGetListFilterInput | null,
 };
@@ -1534,6 +1750,51 @@ export type OnDeleteResourceForGetListWithConditionalFilterSubscription = {
     __typename: "ResourceForGetListWithConditionalFilter",
     id: string,
     priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForGetListWithSorterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithSorterFilterInput | null,
+};
+
+export type OnCreateResourceForGetListWithSorterSubscription = {
+  onCreateResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForGetListWithSorterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithSorterFilterInput | null,
+};
+
+export type OnUpdateResourceForGetListWithSorterSubscription = {
+  onUpdateResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForGetListWithSorterSubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForGetListWithSorterFilterInput | null,
+};
+
+export type OnDeleteResourceForGetListWithSorterSubscription = {
+  onDeleteResourceForGetListWithSorter?:  {
+    __typename: "ResourceForGetListWithSorter",
+    id: string,
+    priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,

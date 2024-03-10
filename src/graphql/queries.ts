@@ -160,6 +160,46 @@ export const listResourceForGetListWithConditionalFilters = /* GraphQL */ `query
   APITypes.ListResourceForGetListWithConditionalFiltersQueryVariables,
   APITypes.ListResourceForGetListWithConditionalFiltersQuery
 >;
+export const getResourceForGetListWithSorter = /* GraphQL */ `query GetResourceForGetListWithSorter($id: ID!) {
+  getResourceForGetListWithSorter(id: $id) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForGetListWithSorterQueryVariables,
+  APITypes.GetResourceForGetListWithSorterQuery
+>;
+export const listResourceForGetListWithSorters = /* GraphQL */ `query ListResourceForGetListWithSorters(
+  $filter: ModelResourceForGetListWithSorterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithSorters(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithSortersQueryVariables,
+  APITypes.ListResourceForGetListWithSortersQuery
+>;
 export const getResourceForGetListWithPagination = /* GraphQL */ `query GetResourceForGetListWithPagination($id: ID!) {
   getResourceForGetListWithPagination(id: $id) {
     id
@@ -387,4 +427,36 @@ export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetM
 ` as GeneratedQuery<
   APITypes.ListResourceForGetManiesQueryVariables,
   APITypes.ListResourceForGetManiesQuery
+>;
+export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithSortersByCreatedAt(
+  $type: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResourceForGetListWithSorterFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithSortersByCreatedAt(
+    type: $type
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithSortersByCreatedAtQueryVariables,
+  APITypes.ListResourceForGetListWithSortersByCreatedAtQuery
 >;

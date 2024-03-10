@@ -188,6 +188,54 @@ export const onDeleteResourceForGetListWithConditionalFilter = /* GraphQL */ `su
   APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscriptionVariables,
   APITypes.OnDeleteResourceForGetListWithConditionalFilterSubscription
 >;
+export const onCreateResourceForGetListWithSorter = /* GraphQL */ `subscription OnCreateResourceForGetListWithSorter(
+  $filter: ModelSubscriptionResourceForGetListWithSorterFilterInput
+) {
+  onCreateResourceForGetListWithSorter(filter: $filter) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForGetListWithSorterSubscriptionVariables,
+  APITypes.OnCreateResourceForGetListWithSorterSubscription
+>;
+export const onUpdateResourceForGetListWithSorter = /* GraphQL */ `subscription OnUpdateResourceForGetListWithSorter(
+  $filter: ModelSubscriptionResourceForGetListWithSorterFilterInput
+) {
+  onUpdateResourceForGetListWithSorter(filter: $filter) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForGetListWithSorterSubscriptionVariables,
+  APITypes.OnUpdateResourceForGetListWithSorterSubscription
+>;
+export const onDeleteResourceForGetListWithSorter = /* GraphQL */ `subscription OnDeleteResourceForGetListWithSorter(
+  $filter: ModelSubscriptionResourceForGetListWithSorterFilterInput
+) {
+  onDeleteResourceForGetListWithSorter(filter: $filter) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForGetListWithSorterSubscriptionVariables,
+  APITypes.OnDeleteResourceForGetListWithSorterSubscription
+>;
 export const onCreateResourceForGetListWithPagination = /* GraphQL */ `subscription OnCreateResourceForGetListWithPagination(
   $filter: ModelSubscriptionResourceForGetListWithPaginationFilterInput
 ) {

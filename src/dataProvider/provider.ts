@@ -83,7 +83,7 @@ const dataProvider = (
         }: GetListParams): Promise<GetListResponse<TData>> => {
             const { current = 1, pageSize = 10 } = pagination ?? {};
 
-            const queryName = getQueryName("list", resource);
+            const queryName = meta?.operation ?? getQueryName("list", resource);
             const query = getQuery(queryName);
 
             // identifier for the pagination token
@@ -92,6 +92,11 @@ const dataProvider = (
                 filters,
                 pageSize,
             });
+
+            let sorterArguments = sorters ? {
+                type: resource.charAt(0).toUpperCase() + resource.slice(1, -1),
+                sortDirection: sorters[0].order === "asc" ? "ASC" : "DESC"
+            } : {};
 
             // get the next token for the current page
             const nextToken = Pagination.getNextToken(signature, current);
@@ -106,8 +111,9 @@ const dataProvider = (
             }
 
             const variables = {
-                limit: pageSize,
                 ...amplifyFilter,
+                ...sorterArguments,
+                limit: pageSize,
                 nextToken,
             };
 

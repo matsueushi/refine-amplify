@@ -218,6 +218,57 @@ export const deleteResourceForGetListWithConditionalFilter = /* GraphQL */ `muta
   APITypes.DeleteResourceForGetListWithConditionalFilterMutationVariables,
   APITypes.DeleteResourceForGetListWithConditionalFilterMutation
 >;
+export const createResourceForGetListWithSorter = /* GraphQL */ `mutation CreateResourceForGetListWithSorter(
+  $input: CreateResourceForGetListWithSorterInput!
+  $condition: ModelResourceForGetListWithSorterConditionInput
+) {
+  createResourceForGetListWithSorter(input: $input, condition: $condition) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForGetListWithSorterMutationVariables,
+  APITypes.CreateResourceForGetListWithSorterMutation
+>;
+export const updateResourceForGetListWithSorter = /* GraphQL */ `mutation UpdateResourceForGetListWithSorter(
+  $input: UpdateResourceForGetListWithSorterInput!
+  $condition: ModelResourceForGetListWithSorterConditionInput
+) {
+  updateResourceForGetListWithSorter(input: $input, condition: $condition) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForGetListWithSorterMutationVariables,
+  APITypes.UpdateResourceForGetListWithSorterMutation
+>;
+export const deleteResourceForGetListWithSorter = /* GraphQL */ `mutation DeleteResourceForGetListWithSorter(
+  $input: DeleteResourceForGetListWithSorterInput!
+  $condition: ModelResourceForGetListWithSorterConditionInput
+) {
+  deleteResourceForGetListWithSorter(input: $input, condition: $condition) {
+    id
+    priority
+    type
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForGetListWithSorterMutationVariables,
+  APITypes.DeleteResourceForGetListWithSorterMutation
+>;
 export const createResourceForGetListWithPagination = /* GraphQL */ `mutation CreateResourceForGetListWithPagination(
   $input: CreateResourceForGetListWithPaginationInput!
   $condition: ModelResourceForGetListWithPaginationConditionInput

@@ -213,6 +213,63 @@ describe("dataProvider", () => {
         });
     });
 
+    test("getList - sorter", async () => {
+        const client = generateClient();
+
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        for (let i = 0; i < 3; i++) {
+            await provider.create({
+                resource: "ResourceForGetListWithSorters",
+                variables: { id: `id${i}`, type: "ResourceForGetListWithSorter", priority: i },
+            });
+        }
+
+        const result = await provider.getList({
+            resource: "ResourceForGetListWithSorters",
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "desc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithSortersByCreatedAt"
+            }
+        });
+
+        expect(result).toEqual({
+            data: [
+                {
+                    id: "id2",
+                    priority: 2,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    type: "ResourceForGetListWithSorter",
+                    __typename: "ResourceForGetListWithSorter",
+                },
+                {
+                    id: "id1",
+                    priority: 1,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    type: "ResourceForGetListWithSorter",
+                    __typename: "ResourceForGetListWithSorter",
+                },
+                {
+                    id: "id0",
+                    priority: 0,
+                    createdAt: expect.any(String),
+                    updatedAt: expect.any(String),
+                    type: "ResourceForGetListWithSorter",
+                    __typename: "ResourceForGetListWithSorter",
+                },
+            ],
+            total: 3,
+        });
+    });
+
     test("update", async () => {
         const client = generateClient();
         const provider = dataProvider(client, { queries, mutations });
