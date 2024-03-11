@@ -64,3 +64,8 @@ type ResourceForGetMany @model {
   id: ID!
   priority: Int!
 }
+
+type ResourceForCreateMany @model {
+  id: ID!
+  priority: Int!
+}

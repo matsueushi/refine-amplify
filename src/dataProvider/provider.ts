@@ -238,7 +238,24 @@ const dataProvider = (
             variables,
             meta,
         }: CreateManyParams<TVariables>): Promise<CreateManyResponse<TData>> => {
-            return { data: [] };
+            const queryName = getQueryName("create", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const vars of variables) {
+                const response = await graphql(query, { input: vars });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
         },
         deleteMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,

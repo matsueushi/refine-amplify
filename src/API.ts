@@ -380,6 +380,35 @@ export type DeleteResourceForGetManyInput = {
   id: string,
 };
 
+export type CreateResourceForCreateManyInput = {
+  id?: string | null,
+  priority: number,
+};
+
+export type ModelResourceForCreateManyConditionInput = {
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForCreateManyConditionInput | null > | null,
+  or?: Array< ModelResourceForCreateManyConditionInput | null > | null,
+  not?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type ResourceForCreateMany = {
+  __typename: "ResourceForCreateMany",
+  id: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForCreateManyInput = {
+  id: string,
+  priority?: number | null,
+};
+
+export type DeleteResourceForCreateManyInput = {
+  id: string,
+};
+
 export type ModelResourceForGetListFilterInput = {
   id?: ModelIDInput | null,
   priority?: ModelIntInput | null,
@@ -552,6 +581,20 @@ export type ModelResourceForGetManyConnection = {
   nextToken?: string | null,
 };
 
+export type ModelResourceForCreateManyFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForCreateManyFilterInput | null > | null,
+  or?: Array< ModelResourceForCreateManyFilterInput | null > | null,
+  not?: ModelResourceForCreateManyFilterInput | null,
+};
+
+export type ModelResourceForCreateManyConnection = {
+  __typename: "ModelResourceForCreateManyConnection",
+  items:  Array<ResourceForCreateMany | null >,
+  nextToken?: string | null,
+};
+
 export type ModelStringKeyConditionInput = {
   eq?: string | null,
   le?: string | null,
@@ -687,6 +730,13 @@ export type ModelSubscriptionResourceForGetManyFilterInput = {
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForCreateManyFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForCreateManyFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForCreateManyFilterInput | null > | null,
 };
 
 export type CreateResourceForGetListMutationVariables = {
@@ -1187,6 +1237,51 @@ export type DeleteResourceForGetManyMutation = {
   } | null,
 };
 
+export type CreateResourceForCreateManyMutationVariables = {
+  input: CreateResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type CreateResourceForCreateManyMutation = {
+  createResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForCreateManyMutationVariables = {
+  input: UpdateResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type UpdateResourceForCreateManyMutation = {
+  updateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForCreateManyMutationVariables = {
+  input: DeleteResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type DeleteResourceForCreateManyMutation = {
+  deleteResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetResourceForGetListQueryVariables = {
   id: string,
 };
@@ -1554,6 +1649,40 @@ export type ListResourceForGetManiesQuery = {
     __typename: "ModelResourceForGetManyConnection",
     items:  Array< {
       __typename: "ResourceForGetMany",
+      id: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResourceForCreateManyQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForCreateManyQuery = {
+  getResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForCreateManiesQueryVariables = {
+  filter?: ModelResourceForCreateManyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForCreateManiesQuery = {
+  listResourceForCreateManies?:  {
+    __typename: "ModelResourceForCreateManyConnection",
+    items:  Array< {
+      __typename: "ResourceForCreateMany",
       id: string,
       priority: number,
       createdAt: string,
@@ -2045,6 +2174,48 @@ export type OnDeleteResourceForGetManySubscriptionVariables = {
 export type OnDeleteResourceForGetManySubscription = {
   onDeleteResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnCreateResourceForCreateManySubscription = {
+  onCreateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnUpdateResourceForCreateManySubscription = {
+  onUpdateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnDeleteResourceForCreateManySubscription = {
+  onDeleteResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
     id: string,
     priority: number,
     createdAt: string,

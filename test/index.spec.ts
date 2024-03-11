@@ -374,14 +374,14 @@ describe("dataProvider", () => {
         for (let i = 0; i < 5; i++) {
             // create resource
             await provider.create({
-                resource: "ResourceForGetManys",
+                resource: "ResourceForGetManies",
                 variables: { id: `id${i}`, priority: i },
             });
         }
 
         // get resource
         const result = await provider.getMany({
-            resource: "ResourceForGetManys", // Manys? Manies?
+            resource: "ResourceForGetManies", // Manies? Manies?
             ids: ["id0", "id1", "id2"],
         });
         expect(result).toEqual({
@@ -409,5 +409,36 @@ describe("dataProvider", () => {
                 },
             ],
         });
+    });
+
+    test("createMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        await provider.createMany({
+            resource: "ResourceForCreateManies",
+            variables: [{ id: "id0", priority: 0 }, { id: "id1", priority: 1 }],
+        });
+
+        const result = await provider.getList({ resource: "ResourceForCreateManies" });
+        expect(result.total).toEqual(2);
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreateMany",
+            },
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreateMany",
+            },
+        ]);
     });
 });

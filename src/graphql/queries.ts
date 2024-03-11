@@ -428,6 +428,44 @@ export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetM
   APITypes.ListResourceForGetManiesQueryVariables,
   APITypes.ListResourceForGetManiesQuery
 >;
+export const getResourceForCreateMany = /* GraphQL */ `query GetResourceForCreateMany($id: ID!) {
+  getResourceForCreateMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForCreateManyQueryVariables,
+  APITypes.GetResourceForCreateManyQuery
+>;
+export const listResourceForCreateManies = /* GraphQL */ `query ListResourceForCreateManies(
+  $filter: ModelResourceForCreateManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForCreateManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForCreateManiesQueryVariables,
+  APITypes.ListResourceForCreateManiesQuery
+>;
 export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithSortersByCreatedAt(
   $type: String!
   $createdAt: ModelStringKeyConditionInput
