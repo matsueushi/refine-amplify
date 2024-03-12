@@ -441,4 +441,69 @@ describe("dataProvider", () => {
             },
         ]);
     });
+
+    test("deleteMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        for (let i = 0; i < 5; i++) {
+            // create resource
+            await provider.create({
+                resource: "ResourceForDeleteManies",
+                variables: { id: `id${i}`, priority: i },
+            });
+        }
+
+        const result = await provider.deleteMany({
+            resource: "ResourceForDeleteManies",
+            ids: ["id0", "id2", "id4"],
+        });
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id4",
+                priority: 4,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+        ]);
+
+        const getListResult = await provider.getList({ resource: "ResourceForDeleteManies" });
+        expect(getListResult.total).toEqual(2);
+        expect(
+            Array.from(getListResult.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id3",
+                priority: 3,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+        ]);
+
+    });
 });

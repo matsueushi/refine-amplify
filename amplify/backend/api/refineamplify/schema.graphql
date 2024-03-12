@@ -69,3 +69,8 @@ type ResourceForCreateMany @model {
   id: ID!
   priority: Int!
 }
+
+type ResourceForDeleteMany @model {
+  id: ID!
+  priority: Int!
+}

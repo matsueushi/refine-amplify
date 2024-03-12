@@ -551,3 +551,48 @@ export const onDeleteResourceForCreateMany = /* GraphQL */ `subscription OnDelet
   APITypes.OnDeleteResourceForCreateManySubscriptionVariables,
   APITypes.OnDeleteResourceForCreateManySubscription
 >;
+export const onCreateResourceForDeleteMany = /* GraphQL */ `subscription OnCreateResourceForDeleteMany(
+  $filter: ModelSubscriptionResourceForDeleteManyFilterInput
+) {
+  onCreateResourceForDeleteMany(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnCreateResourceForDeleteManySubscriptionVariables,
+  APITypes.OnCreateResourceForDeleteManySubscription
+>;
+export const onUpdateResourceForDeleteMany = /* GraphQL */ `subscription OnUpdateResourceForDeleteMany(
+  $filter: ModelSubscriptionResourceForDeleteManyFilterInput
+) {
+  onUpdateResourceForDeleteMany(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnUpdateResourceForDeleteManySubscriptionVariables,
+  APITypes.OnUpdateResourceForDeleteManySubscription
+>;
+export const onDeleteResourceForDeleteMany = /* GraphQL */ `subscription OnDeleteResourceForDeleteMany(
+  $filter: ModelSubscriptionResourceForDeleteManyFilterInput
+) {
+  onDeleteResourceForDeleteMany(filter: $filter) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedSubscription<
+  APITypes.OnDeleteResourceForDeleteManySubscriptionVariables,
+  APITypes.OnDeleteResourceForDeleteManySubscription
+>;

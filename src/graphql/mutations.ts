@@ -605,3 +605,51 @@ export const deleteResourceForCreateMany = /* GraphQL */ `mutation DeleteResourc
   APITypes.DeleteResourceForCreateManyMutationVariables,
   APITypes.DeleteResourceForCreateManyMutation
 >;
+export const createResourceForDeleteMany = /* GraphQL */ `mutation CreateResourceForDeleteMany(
+  $input: CreateResourceForDeleteManyInput!
+  $condition: ModelResourceForDeleteManyConditionInput
+) {
+  createResourceForDeleteMany(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CreateResourceForDeleteManyMutationVariables,
+  APITypes.CreateResourceForDeleteManyMutation
+>;
+export const updateResourceForDeleteMany = /* GraphQL */ `mutation UpdateResourceForDeleteMany(
+  $input: UpdateResourceForDeleteManyInput!
+  $condition: ModelResourceForDeleteManyConditionInput
+) {
+  updateResourceForDeleteMany(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.UpdateResourceForDeleteManyMutationVariables,
+  APITypes.UpdateResourceForDeleteManyMutation
+>;
+export const deleteResourceForDeleteMany = /* GraphQL */ `mutation DeleteResourceForDeleteMany(
+  $input: DeleteResourceForDeleteManyInput!
+  $condition: ModelResourceForDeleteManyConditionInput
+) {
+  deleteResourceForDeleteMany(input: $input, condition: $condition) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.DeleteResourceForDeleteManyMutationVariables,
+  APITypes.DeleteResourceForDeleteManyMutation
+>;
