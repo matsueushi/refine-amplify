@@ -288,7 +288,33 @@ const dataProvider = (
             variables,
             meta,
         }: UpdateManyParams<TVariables>): Promise<UpdateManyResponse<TData>> => {
-            return { data: [] };
+            const queryName = getQueryName("update", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const id of ids) {
+                const details = { id, ...variables } as BaseRecord;
+
+                delete details.__typename;
+                delete details._deleted;
+                delete details._lastChangedAt;
+                delete details.createdAt;
+                delete details.updatedAt;
+                delete details.owner;
+
+                const response = await graphql(query, { input: details });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
         },
     };
 };

@@ -74,3 +74,8 @@ type ResourceForDeleteMany @model {
   id: ID!
   priority: Int!
 }
+
+type ResourceForUpdateMany @model {
+  id: ID!
+  priority: Int!
+}

@@ -504,6 +504,44 @@ export const listResourceForDeleteManies = /* GraphQL */ `query ListResourceForD
   APITypes.ListResourceForDeleteManiesQueryVariables,
   APITypes.ListResourceForDeleteManiesQuery
 >;
+export const getResourceForUpdateMany = /* GraphQL */ `query GetResourceForUpdateMany($id: ID!) {
+  getResourceForUpdateMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForUpdateManyQueryVariables,
+  APITypes.GetResourceForUpdateManyQuery
+>;
+export const listResourceForUpdateManies = /* GraphQL */ `query ListResourceForUpdateManies(
+  $filter: ModelResourceForUpdateManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForUpdateManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForUpdateManiesQueryVariables,
+  APITypes.ListResourceForUpdateManiesQuery
+>;
 export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithSortersByCreatedAt(
   $type: String!
   $createdAt: ModelStringKeyConditionInput

@@ -504,6 +504,42 @@ describe("dataProvider", () => {
                 __typename: "ResourceForDeleteMany",
             },
         ]);
+    });
 
+    test("updateMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        for (let i = 0; i < 3; i++) {
+            // create resource
+            await provider.create({
+                resource: "ResourceForUpdateManies",
+                variables: { id: `id${i}`, priority: i },
+            });
+        }
+
+        // update resource
+        const result = await provider.updateMany({
+            resource: "ResourceForUpdateManies",
+            ids: ["id0", "id1"],
+            variables: { priority: 100 },
+        });
+
+        expect(result).toEqual({
+            data: [{
+                id: "id0",
+                priority: 100,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdateMany",
+            },
+            {
+                id: "id1",
+                priority: 100,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdateMany",
+            }]
+        });
     });
 });
