@@ -209,10 +209,14 @@ export type DeleteResourceForGetListWithSorterInput = {
 export type CreateResourceForGetListWithPaginationInput = {
   id?: string | null,
   priority: number,
+  type: string,
+  createdAt?: string | null,
 };
 
 export type ModelResourceForGetListWithPaginationConditionInput = {
   priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
   or?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
   not?: ModelResourceForGetListWithPaginationConditionInput | null,
@@ -222,6 +226,7 @@ export type ResourceForGetListWithPagination = {
   __typename: "ResourceForGetListWithPagination",
   id: string,
   priority: number,
+  type: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -229,6 +234,8 @@ export type ResourceForGetListWithPagination = {
 export type UpdateResourceForGetListWithPaginationInput = {
   id: string,
   priority?: number | null,
+  type?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeleteResourceForGetListWithPaginationInput = {
@@ -558,6 +565,8 @@ export type ModelResourceForGetListWithSorterConnection = {
 export type ModelResourceForGetListWithPaginationFilterInput = {
   id?: ModelIDInput | null,
   priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
   or?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
   not?: ModelResourceForGetListWithPaginationFilterInput | null,
@@ -779,6 +788,8 @@ export type ModelSubscriptionStringInput = {
 export type ModelSubscriptionResourceForGetListWithPaginationFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   priority?: ModelSubscriptionIntInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
 };
@@ -1077,6 +1088,7 @@ export type CreateResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1092,6 +1104,7 @@ export type UpdateResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1107,6 +1120,7 @@ export type DeleteResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1653,6 +1667,7 @@ export type GetResourceForGetListWithPaginationQuery = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1671,6 +1686,7 @@ export type ListResourceForGetListWithPaginationsQuery = {
       __typename: "ResourceForGetListWithPagination",
       id: string,
       priority: number,
+      type: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1974,6 +1990,30 @@ export type ListResourceForGetListWithSortersByCreatedAtQuery = {
   } | null,
 };
 
+export type ListResourceForGetListWithPaginationsByCreatedAtQueryVariables = {
+  type: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelResourceForGetListWithPaginationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithPaginationsByCreatedAtQuery = {
+  listResourceForGetListWithPaginationsByCreatedAt?:  {
+    __typename: "ModelResourceForGetListWithPaginationConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithPagination",
+      id: string,
+      priority: number,
+      type: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type OnCreateResourceForGetListSubscriptionVariables = {
   filter?: ModelSubscriptionResourceForGetListFilterInput | null,
 };
@@ -2196,6 +2236,7 @@ export type OnCreateResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2210,6 +2251,7 @@ export type OnUpdateResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2224,6 +2266,7 @@ export type OnDeleteResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,

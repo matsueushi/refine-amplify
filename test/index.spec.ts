@@ -78,7 +78,7 @@ describe("dataProvider", () => {
         ]);
     });
 
-    test("getList with limit", async () => {
+    test("getList - limit", async () => {
         const client = generateClient();
 
         const provider = dataProvider(client, { queries, mutations });
@@ -268,6 +268,119 @@ describe("dataProvider", () => {
             ],
             total: 3,
         });
+    });
+
+    test("getList - pagination", async () => {
+        const client = generateClient();
+
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        for (let i = 0; i < 5; i++) {
+            await provider.create({
+                resource: "ResourceForGetListWithPaginations",
+                variables: { id: `id${i}`, type: "ResourceForGetListWithPagination", priority: i },
+            });
+        }
+
+        const result1 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 1, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+        expect(result1.total).toEqual(3);
+        expect(
+            Array.from(result1.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
+        const result2 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 2, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+        expect(result2.total).toEqual(5);
+        expect(
+            Array.from(result2.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+            {
+                id: "id3",
+                priority: 3,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
+        const result3 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 3, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+
+        expect(result3.total).toEqual(5);
+        expect(
+            Array.from(result3.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id4",
+                priority: 4,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
     });
 
     test("update", async () => {

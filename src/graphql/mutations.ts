@@ -276,6 +276,7 @@ export const createResourceForGetListWithPagination = /* GraphQL */ `mutation Cr
   createResourceForGetListWithPagination(input: $input, condition: $condition) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -292,6 +293,7 @@ export const updateResourceForGetListWithPagination = /* GraphQL */ `mutation Up
   updateResourceForGetListWithPagination(input: $input, condition: $condition) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -308,6 +310,7 @@ export const deleteResourceForGetListWithPagination = /* GraphQL */ `mutation De
   deleteResourceForGetListWithPagination(input: $input, condition: $condition) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename

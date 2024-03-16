@@ -242,6 +242,7 @@ export const onCreateResourceForGetListWithPagination = /* GraphQL */ `subscript
   onCreateResourceForGetListWithPagination(filter: $filter) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -257,6 +258,7 @@ export const onUpdateResourceForGetListWithPagination = /* GraphQL */ `subscript
   onUpdateResourceForGetListWithPagination(filter: $filter) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -272,6 +274,7 @@ export const onDeleteResourceForGetListWithPagination = /* GraphQL */ `subscript
   onDeleteResourceForGetListWithPagination(filter: $filter) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename

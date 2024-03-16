@@ -36,8 +36,15 @@ type ResourceForGetListWithSorter @model {
 }
 
 type ResourceForGetListWithPagination @model {
-  id: ID!
+  id: ID! 
   priority: Int!
+  type: String!
+  @index(
+    name: "byCreatedAt"
+    queryField: "listResourceForGetListWithPaginationsByCreatedAt"
+    sortKeyFields: ["createdAt"]
+  )
+  createdAt: String!
 }
 
 type ResourceForCreate @model {

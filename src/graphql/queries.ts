@@ -204,6 +204,7 @@ export const getResourceForGetListWithPagination = /* GraphQL */ `query GetResou
   getResourceForGetListWithPagination(id: $id) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -226,6 +227,7 @@ export const listResourceForGetListWithPaginations = /* GraphQL */ `query ListRe
     items {
       id
       priority
+      type
       createdAt
       updatedAt
       __typename
@@ -573,4 +575,36 @@ export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query
 ` as GeneratedQuery<
   APITypes.ListResourceForGetListWithSortersByCreatedAtQueryVariables,
   APITypes.ListResourceForGetListWithSortersByCreatedAtQuery
+>;
+export const listResourceForGetListWithPaginationsByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithPaginationsByCreatedAt(
+  $type: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResourceForGetListWithPaginationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithPaginationsByCreatedAt(
+    type: $type
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithPaginationsByCreatedAtQueryVariables,
+  APITypes.ListResourceForGetListWithPaginationsByCreatedAtQuery
 >;
