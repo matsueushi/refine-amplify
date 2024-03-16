@@ -78,7 +78,7 @@ describe("dataProvider", () => {
         ]);
     });
 
-    test("getList with limit", async () => {
+    test("getList - limit", async () => {
         const client = generateClient();
 
         const provider = dataProvider(client, { queries, mutations });
@@ -270,6 +270,119 @@ describe("dataProvider", () => {
         });
     });
 
+    test("getList - pagination", async () => {
+        const client = generateClient();
+
+        const provider = dataProvider(client, { queries, mutations });
+
+        // create resource
+        for (let i = 0; i < 5; i++) {
+            await provider.create({
+                resource: "ResourceForGetListWithPaginations",
+                variables: { id: `id${i}`, type: "ResourceForGetListWithPagination", priority: i },
+            });
+        }
+
+        const result1 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 1, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+        expect(result1.total).toEqual(3);
+        expect(
+            Array.from(result1.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
+        const result2 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 2, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+        expect(result2.total).toEqual(5);
+        expect(
+            Array.from(result2.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+            {
+                id: "id3",
+                priority: 3,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
+        const result3 = await provider.getList({
+            resource: "ResourceForGetListWithPaginations",
+            pagination: { current: 3, pageSize: 2 },
+            sorters: [
+                {
+                    field: "createdAt",
+                    order: "asc",
+                }
+            ],
+            meta: {
+                operation: "listResourceForGetListWithPaginationsByCreatedAt"
+            }
+        });
+
+        expect(result3.total).toEqual(5);
+        expect(
+            Array.from(result3.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id4",
+                priority: 4,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                type: "ResourceForGetListWithPagination",
+                __typename: "ResourceForGetListWithPagination",
+            },
+        ]);
+
+    });
+
     test("update", async () => {
         const client = generateClient();
         const provider = dataProvider(client, { queries, mutations });
@@ -374,14 +487,14 @@ describe("dataProvider", () => {
         for (let i = 0; i < 5; i++) {
             // create resource
             await provider.create({
-                resource: "ResourceForGetManys",
+                resource: "ResourceForGetManies",
                 variables: { id: `id${i}`, priority: i },
             });
         }
 
         // get resource
         const result = await provider.getMany({
-            resource: "ResourceForGetManys", // Manys? Manies?
+            resource: "ResourceForGetManies", // Manies? Manies?
             ids: ["id0", "id1", "id2"],
         });
         expect(result).toEqual({
@@ -408,6 +521,138 @@ describe("dataProvider", () => {
                     __typename: "ResourceForGetMany",
                 },
             ],
+        });
+    });
+
+    test("createMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        await provider.createMany({
+            resource: "ResourceForCreateManies",
+            variables: [{ id: "id0", priority: 0 }, { id: "id1", priority: 1 }],
+        });
+
+        const result = await provider.getList({ resource: "ResourceForCreateManies" });
+        expect(result.total).toEqual(2);
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreateMany",
+            },
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForCreateMany",
+            },
+        ]);
+    });
+
+    test("deleteMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        for (let i = 0; i < 5; i++) {
+            // create resource
+            await provider.create({
+                resource: "ResourceForDeleteManies",
+                variables: { id: `id${i}`, priority: i },
+            });
+        }
+
+        const result = await provider.deleteMany({
+            resource: "ResourceForDeleteManies",
+            ids: ["id0", "id2", "id4"],
+        });
+        expect(
+            Array.from(result.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id0",
+                priority: 0,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id2",
+                priority: 2,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id4",
+                priority: 4,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+        ]);
+
+        const getListResult = await provider.getList({ resource: "ResourceForDeleteManies" });
+        expect(getListResult.total).toEqual(2);
+        expect(
+            Array.from(getListResult.data).sort((a, b) => a.priority - b.priority),
+        ).toEqual([
+            {
+                id: "id1",
+                priority: 1,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+            {
+                id: "id3",
+                priority: 3,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForDeleteMany",
+            },
+        ]);
+    });
+
+    test("updateMany", async () => {
+        const client = generateClient();
+        const provider = dataProvider(client, { queries, mutations });
+
+        for (let i = 0; i < 3; i++) {
+            // create resource
+            await provider.create({
+                resource: "ResourceForUpdateManies",
+                variables: { id: `id${i}`, priority: i },
+            });
+        }
+
+        // update resource
+        const result = await provider.updateMany({
+            resource: "ResourceForUpdateManies",
+            ids: ["id0", "id1"],
+            variables: { priority: 100 },
+        });
+
+        expect(result).toEqual({
+            data: [{
+                id: "id0",
+                priority: 100,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdateMany",
+            },
+            {
+                id: "id1",
+                priority: 100,
+                createdAt: expect.any(String),
+                updatedAt: expect.any(String),
+                __typename: "ResourceForUpdateMany",
+            }]
         });
     });
 });

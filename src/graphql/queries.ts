@@ -204,6 +204,7 @@ export const getResourceForGetListWithPagination = /* GraphQL */ `query GetResou
   getResourceForGetListWithPagination(id: $id) {
     id
     priority
+    type
     createdAt
     updatedAt
     __typename
@@ -226,6 +227,7 @@ export const listResourceForGetListWithPaginations = /* GraphQL */ `query ListRe
     items {
       id
       priority
+      type
       createdAt
       updatedAt
       __typename
@@ -428,6 +430,120 @@ export const listResourceForGetManies = /* GraphQL */ `query ListResourceForGetM
   APITypes.ListResourceForGetManiesQueryVariables,
   APITypes.ListResourceForGetManiesQuery
 >;
+export const getResourceForCreateMany = /* GraphQL */ `query GetResourceForCreateMany($id: ID!) {
+  getResourceForCreateMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForCreateManyQueryVariables,
+  APITypes.GetResourceForCreateManyQuery
+>;
+export const listResourceForCreateManies = /* GraphQL */ `query ListResourceForCreateManies(
+  $filter: ModelResourceForCreateManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForCreateManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForCreateManiesQueryVariables,
+  APITypes.ListResourceForCreateManiesQuery
+>;
+export const getResourceForDeleteMany = /* GraphQL */ `query GetResourceForDeleteMany($id: ID!) {
+  getResourceForDeleteMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForDeleteManyQueryVariables,
+  APITypes.GetResourceForDeleteManyQuery
+>;
+export const listResourceForDeleteManies = /* GraphQL */ `query ListResourceForDeleteManies(
+  $filter: ModelResourceForDeleteManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForDeleteManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForDeleteManiesQueryVariables,
+  APITypes.ListResourceForDeleteManiesQuery
+>;
+export const getResourceForUpdateMany = /* GraphQL */ `query GetResourceForUpdateMany($id: ID!) {
+  getResourceForUpdateMany(id: $id) {
+    id
+    priority
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetResourceForUpdateManyQueryVariables,
+  APITypes.GetResourceForUpdateManyQuery
+>;
+export const listResourceForUpdateManies = /* GraphQL */ `query ListResourceForUpdateManies(
+  $filter: ModelResourceForUpdateManyFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForUpdateManies(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForUpdateManiesQueryVariables,
+  APITypes.ListResourceForUpdateManiesQuery
+>;
 export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithSortersByCreatedAt(
   $type: String!
   $createdAt: ModelStringKeyConditionInput
@@ -459,4 +575,36 @@ export const listResourceForGetListWithSortersByCreatedAt = /* GraphQL */ `query
 ` as GeneratedQuery<
   APITypes.ListResourceForGetListWithSortersByCreatedAtQueryVariables,
   APITypes.ListResourceForGetListWithSortersByCreatedAtQuery
+>;
+export const listResourceForGetListWithPaginationsByCreatedAt = /* GraphQL */ `query ListResourceForGetListWithPaginationsByCreatedAt(
+  $type: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelResourceForGetListWithPaginationFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listResourceForGetListWithPaginationsByCreatedAt(
+    type: $type
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      priority
+      type
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListResourceForGetListWithPaginationsByCreatedAtQueryVariables,
+  APITypes.ListResourceForGetListWithPaginationsByCreatedAtQuery
 >;

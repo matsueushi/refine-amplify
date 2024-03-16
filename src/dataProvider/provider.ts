@@ -21,6 +21,8 @@ import {
     UpdateManyResponse,
 } from "@refinedev/core";
 import { Client, GraphQLResult } from "aws-amplify/api";
+import pluralize from "pluralize";
+import camelCase from "camelcase";
 import { Pagination } from "./utils";
 import { generateFilter } from "./utils/handleFilter";
 
@@ -66,10 +68,12 @@ const dataProvider = (
     const getQueryName = (operation: string, resource: string): string => {
         const pluralOperations = ["list"];
         if (pluralOperations.includes(operation)) {
-            return `${operation}${resource.charAt(0).toUpperCase() + resource.slice(1)}`;
+            const pluralResource = pluralize.plural(resource);
+            return camelCase(`${operation}-${pluralResource}`);
         }
         // else singular operations ["create", "delete", "get", "update"]
-        return `${operation}${resource.charAt(0).toUpperCase() + resource.slice(1, -1)}`;
+        const singularResource = pluralize.singular(resource);
+        return camelCase(`${operation}-${singularResource}`);
     };
 
     return {
@@ -94,7 +98,7 @@ const dataProvider = (
             });
 
             let sorterArguments = sorters ? {
-                type: resource.charAt(0).toUpperCase() + resource.slice(1, -1),
+                type: pluralize.singular(resource),
                 sortDirection: sorters[0].order === "asc" ? "ASC" : "DESC"
             } : {};
 
@@ -234,7 +238,24 @@ const dataProvider = (
             variables,
             meta,
         }: CreateManyParams<TVariables>): Promise<CreateManyResponse<TData>> => {
-            return { data: [] };
+            const queryName = getQueryName("create", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const vars of variables) {
+                const response = await graphql(query, { input: vars });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
         },
         deleteMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,
@@ -242,7 +263,24 @@ const dataProvider = (
             variables,
             meta,
         }: DeleteManyParams<TVariables>): Promise<DeleteManyResponse<TData>> => {
-            return { data: [] };
+            const queryName = getQueryName("delete", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const id of ids) {
+                const response = await graphql(query, { input: { id } });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
         },
         updateMany: async <TData extends BaseRecord = BaseRecord, TVariables = {}>({
             resource,
@@ -250,7 +288,33 @@ const dataProvider = (
             variables,
             meta,
         }: UpdateManyParams<TVariables>): Promise<UpdateManyResponse<TData>> => {
-            return { data: [] };
+            const queryName = getQueryName("update", resource);
+            const query = getQuery(queryName);
+
+            const queriesData = [];
+
+            // Executes the queries
+            for (const id of ids) {
+                const details = { id, ...variables } as BaseRecord;
+
+                delete details.__typename;
+                delete details._deleted;
+                delete details._lastChangedAt;
+                delete details.createdAt;
+                delete details.updatedAt;
+                delete details.owner;
+
+                const response = await graphql(query, { input: details });
+                const data = response[queryName];
+
+                if (data) {
+                    queriesData.push(data);
+                }
+            }
+
+            return {
+                data: queriesData,
+            };
         },
     };
 };

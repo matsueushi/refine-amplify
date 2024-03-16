@@ -209,10 +209,14 @@ export type DeleteResourceForGetListWithSorterInput = {
 export type CreateResourceForGetListWithPaginationInput = {
   id?: string | null,
   priority: number,
+  type: string,
+  createdAt?: string | null,
 };
 
 export type ModelResourceForGetListWithPaginationConditionInput = {
   priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
   or?: Array< ModelResourceForGetListWithPaginationConditionInput | null > | null,
   not?: ModelResourceForGetListWithPaginationConditionInput | null,
@@ -222,6 +226,7 @@ export type ResourceForGetListWithPagination = {
   __typename: "ResourceForGetListWithPagination",
   id: string,
   priority: number,
+  type: string,
   createdAt: string,
   updatedAt: string,
 };
@@ -229,6 +234,8 @@ export type ResourceForGetListWithPagination = {
 export type UpdateResourceForGetListWithPaginationInput = {
   id: string,
   priority?: number | null,
+  type?: string | null,
+  createdAt?: string | null,
 };
 
 export type DeleteResourceForGetListWithPaginationInput = {
@@ -380,6 +387,93 @@ export type DeleteResourceForGetManyInput = {
   id: string,
 };
 
+export type CreateResourceForCreateManyInput = {
+  id?: string | null,
+  priority: number,
+};
+
+export type ModelResourceForCreateManyConditionInput = {
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForCreateManyConditionInput | null > | null,
+  or?: Array< ModelResourceForCreateManyConditionInput | null > | null,
+  not?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type ResourceForCreateMany = {
+  __typename: "ResourceForCreateMany",
+  id: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForCreateManyInput = {
+  id: string,
+  priority?: number | null,
+};
+
+export type DeleteResourceForCreateManyInput = {
+  id: string,
+};
+
+export type CreateResourceForDeleteManyInput = {
+  id?: string | null,
+  priority: number,
+};
+
+export type ModelResourceForDeleteManyConditionInput = {
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForDeleteManyConditionInput | null > | null,
+  or?: Array< ModelResourceForDeleteManyConditionInput | null > | null,
+  not?: ModelResourceForDeleteManyConditionInput | null,
+};
+
+export type ResourceForDeleteMany = {
+  __typename: "ResourceForDeleteMany",
+  id: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForDeleteManyInput = {
+  id: string,
+  priority?: number | null,
+};
+
+export type DeleteResourceForDeleteManyInput = {
+  id: string,
+};
+
+export type CreateResourceForUpdateManyInput = {
+  id?: string | null,
+  priority: number,
+};
+
+export type ModelResourceForUpdateManyConditionInput = {
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForUpdateManyConditionInput | null > | null,
+  or?: Array< ModelResourceForUpdateManyConditionInput | null > | null,
+  not?: ModelResourceForUpdateManyConditionInput | null,
+};
+
+export type ResourceForUpdateMany = {
+  __typename: "ResourceForUpdateMany",
+  id: string,
+  priority: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateResourceForUpdateManyInput = {
+  id: string,
+  priority?: number | null,
+};
+
+export type DeleteResourceForUpdateManyInput = {
+  id: string,
+};
+
 export type ModelResourceForGetListFilterInput = {
   id?: ModelIDInput | null,
   priority?: ModelIntInput | null,
@@ -471,6 +565,8 @@ export type ModelResourceForGetListWithSorterConnection = {
 export type ModelResourceForGetListWithPaginationFilterInput = {
   id?: ModelIDInput | null,
   priority?: ModelIntInput | null,
+  type?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
   and?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
   or?: Array< ModelResourceForGetListWithPaginationFilterInput | null > | null,
   not?: ModelResourceForGetListWithPaginationFilterInput | null,
@@ -549,6 +645,48 @@ export type ModelResourceForGetManyFilterInput = {
 export type ModelResourceForGetManyConnection = {
   __typename: "ModelResourceForGetManyConnection",
   items:  Array<ResourceForGetMany | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForCreateManyFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForCreateManyFilterInput | null > | null,
+  or?: Array< ModelResourceForCreateManyFilterInput | null > | null,
+  not?: ModelResourceForCreateManyFilterInput | null,
+};
+
+export type ModelResourceForCreateManyConnection = {
+  __typename: "ModelResourceForCreateManyConnection",
+  items:  Array<ResourceForCreateMany | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForDeleteManyFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForDeleteManyFilterInput | null > | null,
+  or?: Array< ModelResourceForDeleteManyFilterInput | null > | null,
+  not?: ModelResourceForDeleteManyFilterInput | null,
+};
+
+export type ModelResourceForDeleteManyConnection = {
+  __typename: "ModelResourceForDeleteManyConnection",
+  items:  Array<ResourceForDeleteMany | null >,
+  nextToken?: string | null,
+};
+
+export type ModelResourceForUpdateManyFilterInput = {
+  id?: ModelIDInput | null,
+  priority?: ModelIntInput | null,
+  and?: Array< ModelResourceForUpdateManyFilterInput | null > | null,
+  or?: Array< ModelResourceForUpdateManyFilterInput | null > | null,
+  not?: ModelResourceForUpdateManyFilterInput | null,
+};
+
+export type ModelResourceForUpdateManyConnection = {
+  __typename: "ModelResourceForUpdateManyConnection",
+  items:  Array<ResourceForUpdateMany | null >,
   nextToken?: string | null,
 };
 
@@ -650,6 +788,8 @@ export type ModelSubscriptionStringInput = {
 export type ModelSubscriptionResourceForGetListWithPaginationFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   priority?: ModelSubscriptionIntInput | null,
+  type?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetListWithPaginationFilterInput | null > | null,
 };
@@ -687,6 +827,27 @@ export type ModelSubscriptionResourceForGetManyFilterInput = {
   priority?: ModelSubscriptionIntInput | null,
   and?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
   or?: Array< ModelSubscriptionResourceForGetManyFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForCreateManyFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForCreateManyFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForCreateManyFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForDeleteManyFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForDeleteManyFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForDeleteManyFilterInput | null > | null,
+};
+
+export type ModelSubscriptionResourceForUpdateManyFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  priority?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionResourceForUpdateManyFilterInput | null > | null,
+  or?: Array< ModelSubscriptionResourceForUpdateManyFilterInput | null > | null,
 };
 
 export type CreateResourceForGetListMutationVariables = {
@@ -927,6 +1088,7 @@ export type CreateResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -942,6 +1104,7 @@ export type UpdateResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -957,6 +1120,7 @@ export type DeleteResourceForGetListWithPaginationMutation = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1187,6 +1351,141 @@ export type DeleteResourceForGetManyMutation = {
   } | null,
 };
 
+export type CreateResourceForCreateManyMutationVariables = {
+  input: CreateResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type CreateResourceForCreateManyMutation = {
+  createResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForCreateManyMutationVariables = {
+  input: UpdateResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type UpdateResourceForCreateManyMutation = {
+  updateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForCreateManyMutationVariables = {
+  input: DeleteResourceForCreateManyInput,
+  condition?: ModelResourceForCreateManyConditionInput | null,
+};
+
+export type DeleteResourceForCreateManyMutation = {
+  deleteResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForDeleteManyMutationVariables = {
+  input: CreateResourceForDeleteManyInput,
+  condition?: ModelResourceForDeleteManyConditionInput | null,
+};
+
+export type CreateResourceForDeleteManyMutation = {
+  createResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForDeleteManyMutationVariables = {
+  input: UpdateResourceForDeleteManyInput,
+  condition?: ModelResourceForDeleteManyConditionInput | null,
+};
+
+export type UpdateResourceForDeleteManyMutation = {
+  updateResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForDeleteManyMutationVariables = {
+  input: DeleteResourceForDeleteManyInput,
+  condition?: ModelResourceForDeleteManyConditionInput | null,
+};
+
+export type DeleteResourceForDeleteManyMutation = {
+  deleteResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateResourceForUpdateManyMutationVariables = {
+  input: CreateResourceForUpdateManyInput,
+  condition?: ModelResourceForUpdateManyConditionInput | null,
+};
+
+export type CreateResourceForUpdateManyMutation = {
+  createResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateResourceForUpdateManyMutationVariables = {
+  input: UpdateResourceForUpdateManyInput,
+  condition?: ModelResourceForUpdateManyConditionInput | null,
+};
+
+export type UpdateResourceForUpdateManyMutation = {
+  updateResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteResourceForUpdateManyMutationVariables = {
+  input: DeleteResourceForUpdateManyInput,
+  condition?: ModelResourceForUpdateManyConditionInput | null,
+};
+
+export type DeleteResourceForUpdateManyMutation = {
+  deleteResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetResourceForGetListQueryVariables = {
   id: string,
 };
@@ -1368,6 +1667,7 @@ export type GetResourceForGetListWithPaginationQuery = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1386,6 +1686,7 @@ export type ListResourceForGetListWithPaginationsQuery = {
       __typename: "ResourceForGetListWithPagination",
       id: string,
       priority: number,
+      type: string,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -1563,6 +1864,108 @@ export type ListResourceForGetManiesQuery = {
   } | null,
 };
 
+export type GetResourceForCreateManyQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForCreateManyQuery = {
+  getResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForCreateManiesQueryVariables = {
+  filter?: ModelResourceForCreateManyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForCreateManiesQuery = {
+  listResourceForCreateManies?:  {
+    __typename: "ModelResourceForCreateManyConnection",
+    items:  Array< {
+      __typename: "ResourceForCreateMany",
+      id: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResourceForDeleteManyQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForDeleteManyQuery = {
+  getResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForDeleteManiesQueryVariables = {
+  filter?: ModelResourceForDeleteManyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForDeleteManiesQuery = {
+  listResourceForDeleteManies?:  {
+    __typename: "ModelResourceForDeleteManyConnection",
+    items:  Array< {
+      __typename: "ResourceForDeleteMany",
+      id: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetResourceForUpdateManyQueryVariables = {
+  id: string,
+};
+
+export type GetResourceForUpdateManyQuery = {
+  getResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListResourceForUpdateManiesQueryVariables = {
+  filter?: ModelResourceForUpdateManyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForUpdateManiesQuery = {
+  listResourceForUpdateManies?:  {
+    __typename: "ModelResourceForUpdateManyConnection",
+    items:  Array< {
+      __typename: "ResourceForUpdateMany",
+      id: string,
+      priority: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type ListResourceForGetListWithSortersByCreatedAtQueryVariables = {
   type: string,
   createdAt?: ModelStringKeyConditionInput | null,
@@ -1577,6 +1980,30 @@ export type ListResourceForGetListWithSortersByCreatedAtQuery = {
     __typename: "ModelResourceForGetListWithSorterConnection",
     items:  Array< {
       __typename: "ResourceForGetListWithSorter",
+      id: string,
+      priority: number,
+      type: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ListResourceForGetListWithPaginationsByCreatedAtQueryVariables = {
+  type: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelResourceForGetListWithPaginationFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListResourceForGetListWithPaginationsByCreatedAtQuery = {
+  listResourceForGetListWithPaginationsByCreatedAt?:  {
+    __typename: "ModelResourceForGetListWithPaginationConnection",
+    items:  Array< {
+      __typename: "ResourceForGetListWithPagination",
       id: string,
       priority: number,
       type: string,
@@ -1809,6 +2236,7 @@ export type OnCreateResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1823,6 +2251,7 @@ export type OnUpdateResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -1837,6 +2266,7 @@ export type OnDeleteResourceForGetListWithPaginationSubscription = {
     __typename: "ResourceForGetListWithPagination",
     id: string,
     priority: number,
+    type: string,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -2045,6 +2475,132 @@ export type OnDeleteResourceForGetManySubscriptionVariables = {
 export type OnDeleteResourceForGetManySubscription = {
   onDeleteResourceForGetMany?:  {
     __typename: "ResourceForGetMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnCreateResourceForCreateManySubscription = {
+  onCreateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnUpdateResourceForCreateManySubscription = {
+  onUpdateResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForCreateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForCreateManyFilterInput | null,
+};
+
+export type OnDeleteResourceForCreateManySubscription = {
+  onDeleteResourceForCreateMany?:  {
+    __typename: "ResourceForCreateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForDeleteManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForDeleteManyFilterInput | null,
+};
+
+export type OnCreateResourceForDeleteManySubscription = {
+  onCreateResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForDeleteManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForDeleteManyFilterInput | null,
+};
+
+export type OnUpdateResourceForDeleteManySubscription = {
+  onUpdateResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForDeleteManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForDeleteManyFilterInput | null,
+};
+
+export type OnDeleteResourceForDeleteManySubscription = {
+  onDeleteResourceForDeleteMany?:  {
+    __typename: "ResourceForDeleteMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateResourceForUpdateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateManyFilterInput | null,
+};
+
+export type OnCreateResourceForUpdateManySubscription = {
+  onCreateResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateResourceForUpdateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateManyFilterInput | null,
+};
+
+export type OnUpdateResourceForUpdateManySubscription = {
+  onUpdateResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
+    id: string,
+    priority: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteResourceForUpdateManySubscriptionVariables = {
+  filter?: ModelSubscriptionResourceForUpdateManyFilterInput | null,
+};
+
+export type OnDeleteResourceForUpdateManySubscription = {
+  onDeleteResourceForUpdateMany?:  {
+    __typename: "ResourceForUpdateMany",
     id: string,
     priority: number,
     createdAt: string,
